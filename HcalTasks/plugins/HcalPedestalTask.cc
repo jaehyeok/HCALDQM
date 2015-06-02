@@ -1,4 +1,4 @@
-i//	cmssw includes
+//	cmssw includes
 #include "DQM/HcalTasks/interface/HcalPedestalTask.h"
 
 //	system includes
@@ -10,7 +10,7 @@ HcalPedestalTask::HcalPedestalTask(edm::ParameterSet const&ps):
 {	
 	_packager[0] = hcaldqm::packaging::Packager(
 			hcaldqm::constants::STD_HB_MINIPHI,
-			hcaldqm:;constants::STD_HB_MAXIPHI,
+			hcaldqm::constants::STD_HB_MAXIPHI,
 			hcaldqm::constants::STD_HB_STEPIPHI,
 			hcaldqm::constants::STD_HB_MINIETA,
 			hcaldqm::constants::STD_HB_MAXIETA,
@@ -19,7 +19,7 @@ HcalPedestalTask::HcalPedestalTask(edm::ParameterSet const&ps):
 	);
 	_packager[1] = hcaldqm::packaging::Packager(
 			hcaldqm::constants::STD_HE_MINIPHI,
-			hcaldqm:;constants::STD_HE_MAXIPHI,
+			hcaldqm::constants::STD_HE_MAXIPHI,
 			hcaldqm::constants::STD_HE_STEPIPHI,
 			hcaldqm::constants::STD_HE_MINIETA,
 			hcaldqm::constants::STD_HE_MAXIETA,
@@ -28,7 +28,7 @@ HcalPedestalTask::HcalPedestalTask(edm::ParameterSet const&ps):
 	);
 	_packager[2] = hcaldqm::packaging::Packager(
 			hcaldqm::constants::STD_HO_MINIPHI,
-			hcaldqm:;constants::STD_HO_MAXIPHI,
+			hcaldqm::constants::STD_HO_MAXIPHI,
 			hcaldqm::constants::STD_HO_STEPIPHI,
 			hcaldqm::constants::STD_HO_MINIETA,
 			hcaldqm::constants::STD_HO_MAXIETA,
@@ -37,7 +37,7 @@ HcalPedestalTask::HcalPedestalTask(edm::ParameterSet const&ps):
 	);
 	_packager[3] = hcaldqm::packaging::Packager(
 			hcaldqm::constants::STD_HF_MINIPHI,
-			hcaldqm:;constants::STD_HF_MAXIPHI,
+			hcaldqm::constants::STD_HF_MAXIPHI,
 			hcaldqm::constants::STD_HF_STEPIPHI,
 			hcaldqm::constants::STD_HF_MINIETA,
 			hcaldqm::constants::STD_HF_MAXIETA,
@@ -51,13 +51,13 @@ HcalPedestalTask::HcalPedestalTask(edm::ParameterSet const&ps):
 }
 
 /* virtual */ void HcalPedestalTask::beginLuminosityBlock(
-		edm::LuminosityBlock const&, edm::EventSetup const& es)
+		edm::LuminosityBlock const& lb, edm::EventSetup const& es)
 {
 	HcalDQSource::beginLuminosityBlock(lb, es);
 }
 
 /* virtual */ void HcalPedestalTask::endLuminosityBlock(
-		edm::LuminosityBlock const&, edm::EventSetup const& es)
+		edm::LuminosityBlock const& lb, edm::EventSetup const& es)
 {
 	HcalDQSource::endLuminosityBlock(lb, es);
 }
@@ -121,7 +121,7 @@ void HcalPedestalTask::specialize(Hit const& hit, std::string const& nameRes)
 	else
 		_mes["HBHEHFD" + 
 			boost::lexical_cast<std::string>(depth) +
-			"PedestalsMap"].Fill(ieat, iphi, aveP);
+			"PedestalsMap"].Fill(ieta, iphi, aveP);
 }
 
 

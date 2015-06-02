@@ -32,7 +32,7 @@ hcalPedestalTask = cms.EDAnalyzer(
 		#	TH1D Pedestals recorded per each event. For Online Mon
 		#--------------------------------------------------------
 		HB_Pedestals			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" moduleName),
+			path		= cms.untracked.string("Hcal/%s" % moduleName),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string(
 				"HB 4Caps-averaged Pedestals." + strdesc),
@@ -41,11 +41,11 @@ hcalPedestalTask = cms.EDAnalyzer(
 				nbins		= cms.untracked.int32(50),
 				min			= cms.untracked.double(0),
 				max			= cms.untracked.double(5),
-				title		= cms.untrakced.string("Ped. (Unlin. ADC)")
+				title		= cms.untracked.string("Ped. (Unlin. ADC)")
 			)
 		),
 		HE_Pedestals			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" moduleName),
+			path		= cms.untracked.string("Hcal/%s" % moduleName),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string(
 				"HE 4Caps-averaged Pedestals." + strdesc),
@@ -54,11 +54,11 @@ hcalPedestalTask = cms.EDAnalyzer(
 				nbins		= cms.untracked.int32(50),
 				min			= cms.untracked.double(0),
 				max			= cms.untracked.double(5),
-				title		= cms.untrakced.string("Ped. (Unlin. ADC)")
+				title		= cms.untracked.string("Ped. (Unlin. ADC)")
 			)
 		),
 		HO_Pedestals			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" moduleName),
+			path		= cms.untracked.string("Hcal/%s" % moduleName),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string(
 				"HO 4Caps-averaged Pedestals." + strdesc),
@@ -67,11 +67,11 @@ hcalPedestalTask = cms.EDAnalyzer(
 				nbins		= cms.untracked.int32(100),
 				min			= cms.untracked.double(0),
 				max			= cms.untracked.double(16),
-				title		= cms.untrakced.string("Ped. (Unlin. ADC)")
+				title		= cms.untracked.string("Ped. (Unlin. ADC)")
 			)
 		),
 		HF_Pedestals			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" moduleName),
+			path		= cms.untracked.string("Hcal/%s" % moduleName),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string(
 				"HF 4Caps-averaged Pedestals." + strdesc),
@@ -84,49 +84,49 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 
-		HBHEHFD1_PedestalsMap		= cms.untrakced.PSet(
+		HBHEHFD1_PedestalsMap		= cms.untracked.PSet(
 			path		= cms.untracked.string("Hcal/%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
-			desc		= cms.untracked.strign(
+			desc		= cms.untracked.string(
 				"HBHEHF D1 4Caps-averaged Pedestals" + strdesc),
 			xaxis		= StandardSet.ietaAxis.clone(),
 			yaxis		= StandardSet.iphiAxis.clone(),
-			zaxis		= cms.untrakced.PSet(
+			zaxis		= cms.untracked.PSet(
 				wnbins		= cms.untracked.bool(False),
 				min			= cms.untracked.double(0),
 				max			= cms.untracked.double(5)
 			)
 		),
-		HBHEHFD2_PedestalsMap		= cms.untrakced.PSet(
+		HBHEHFD2_PedestalsMap		= cms.untracked.PSet(
 			path		= cms.untracked.string("Hcal/%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
-			desc		= cms.untracked.strign(
+			desc		= cms.untracked.string(
 				"HBHEHF D2 4Caps-averaged Pedestals" + strdesc),
 			xaxis		= StandardSet.ietaAxis.clone(),
 			yaxis		= StandardSet.iphiAxis.clone(),
-			zaxis		= cms.untrakced.PSet(
+			zaxis		= cms.untracked.PSet(
 				wnbins		= cms.untracked.bool(False),
 				min			= cms.untracked.double(0),
 				max			= cms.untracked.double(5)
 			)
 		),
-		HBHEHFD3_PedestalsMap		= cms.untrakced.PSet(
+		HBHEHFD3_PedestalsMap		= cms.untracked.PSet(
 			path		= cms.untracked.string("Hcal/%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
-			desc		= cms.untracked.strign(
+			desc		= cms.untracked.string(
 				"HBHEHF D3 4Caps-averaged Pedestals" + strdesc),
 			xaxis		= StandardSet.ietaAxis.clone(),
 			yaxis		= StandardSet.iphiAxis.clone(),
-			zaxis		= cms.untrakced.PSet(
+			zaxis		= cms.untracked.PSet(
 				wnbins		= cms.untracked.bool(False),
 				min			= cms.untracked.double(0),
 				max			= cms.untracked.double(5)
 			)
 		),
-		HOD4_PedestalsMap		= cms.untrakced.PSet(
+		HOD4_PedestalsMap		= cms.untracked.PSet(
 			path		= cms.untracked.string("Hcal/%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
-			desc		= cms.untracked.strign(
+			desc		= cms.untracked.string(
 				"HO D4 4Caps-averaged Pedestals" + strdesc),
 			xaxis		= cms.untracked.PSet(
 				edges		= cms.untracked.bool(False),
@@ -136,7 +136,7 @@ hcalPedestalTask = cms.EDAnalyzer(
 				title		= cms.untracked.string("ieta")
 			),
 			yaxis		= StandardSet.iphiAxis.clone(),
-			zaxis		= cms.untrakced.PSet(
+			zaxis		= cms.untracked.PSet(
 				wnbins		= cms.untracked.bool(False),
 				min			= cms.untracked.double(0),
 				max			= cms.untracked.double(16)

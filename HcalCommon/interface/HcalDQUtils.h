@@ -41,18 +41,19 @@ namespace hcaldqm
 	{
 		struct Packager
 		{
+			Packager() {}
 			Packager(int iphimin, int iphimax, int iphistep,
 					int ietamin, int ietamax, int dmin, int dmax) :
 				_iphimin(iphimin), _iphimax(iphimax), _iphistep(iphistep),
 				_ietamin(ietamin), _ietamax(ietamax),
-				_dmin(dmin), dmax(dmax)
+				_dmin(dmin), _dmax(dmax)
 			{
 				//	ieta step is the same for all subsystems
 				_ietastep = hcaldqm::constants::STD_HF_STEPIETA;
 				_ietanum = 2*((_ietamax-_ietamin)+1);
 				_iphinum = (_iphimax-_iphimin)/_iphistep+1;
 				_dstep = hcaldqm::constants::STD_HF_STEPDEPTH;
-				_dnum = (_idmax-_idmin)/_idstep+1;
+				_dnum = (_dmax-_dmin)/_dstep+1;
 			}
 			~Packager(){}
 	
@@ -74,7 +75,7 @@ namespace hcaldqm
 
 			int iphi(int iiphi)
 			{
-				return _iphimin+_iphistep*iiphi
+				return _iphimin+_iphistep*iiphi;
 			}
 
 			int iiphi(int iphi)
@@ -131,6 +132,8 @@ namespace hcaldqm
 					imax = ii;
 					max = arr[ii];
 				}
+
+			return imax;
 		}
 
 		template<typename intdouble>
@@ -198,19 +201,26 @@ namespace hcaldqm
 	{
 		public:
 			HcalDQData() :
-				reset(),
-				_isRef(false),
 				_status(0),
-				_entries(0),
+				_mean(-1), _rms(-1), _refmean(-1), _refrms(-1),	
 				_overflow(0),
 				_underflow(0),
-				_refmean(-1),_mean(-1),_refrms(-1),_rms(-1)
+				_isRef(false),
+				_entries(0)
 			{}
 			virtual ~HcalDQData() {}
 
-			virtual void reset() = 0;
-			virtual void push(double *arr, int n) = 0;
-			virtual void push(unsigned int v) = 0;
+			virtual void reset()
+			{
+				_mean = -1;
+				_rms = -1;
+				_refmean = -1;
+				_rms = -1;
+				_overflow = 0;
+				_underflow = 0;
+				_entries = 0;
+				_status = 0;
+			};
 			virtual void setRef(double mean, double rms) 
 			{
 				_refmean=mean; 
@@ -220,7 +230,7 @@ namespace hcaldqm
 			virtual int getStatus() {return _status;}
 			virtual std::pair<double, double> average() = 0;
 			virtual int getEntries() {return _entries;}
-			virtual int setEntries(int n) {_entries=n;}
+			virtual void setEntries(int n) {_entries=n;}
 			virtual int getOverflow() {return _overflow;}
 			virtual int getUnderflow() {return _underflow;}
 	
@@ -233,6 +243,7 @@ namespace hcaldqm
 			int			_overflow;
 			int			_underflow;
 			bool		_isRef;
+			int			_entries;
 	};
 
 	/*
@@ -241,11 +252,12 @@ namespace hcaldqm
 	class HcalDQLedData : public HcalDQData
 	{
 		public:
-			HcalDQLedData();
-			virtual ~HcalDQLedData();
+			HcalDQLedData() {}
+			virtual ~HcalDQLedData() {}
 
 			virtual void reset()
 			{
+				HcalDQData::reset();
 				_sumAmp=0;
 				_sumAmp2=0;
 				_sumTime=0;
@@ -259,7 +271,7 @@ namespace hcaldqm
 			{
 				double aveT = hcaldqm::math::aveT(hit, ped);
 				double sumQ = hcaldqm::math::sum(hit, 
-						hcaldqm::math::maxTS(hit, ped)-1; 
+						hcaldqm::math::maxTS(hit, ped)-1, 
 						hcaldqm::math::maxTS(hit, ped)+1, ped);
 
 				if (sumQ<hcaldqm::constants::STD_MINLEDQ)
@@ -274,26 +286,26 @@ namespace hcaldqm
 					_sumTime	+= aveT;
 					_sumTime2	+= aveT*aveT;
 				}
+			}
 
-				virtual std::pair<double, double> average()
-				{
-					if (_entries<=0)
-						return std::pair<double, double>(_mean, _rms);
-
-					_mean = _sumAmp/_entries;
-					_rms = sqrt(_sumAmp2/_entries - _mean*_mean);
+			virtual std::pair<double, double> average()
+			{
+				if (_entries<=0)
 					return std::pair<double, double>(_mean, _rms);
-				}
 
-				virtual std::pair<double, double> averageTiming()
-				{
-					if (_entries<=0)
-						return std::pair<double, double>(_meanTime, _rmsTime);
+				_mean = _sumAmp/_entries;
+				_rms = sqrt(_sumAmp2/_entries - _mean*_mean);
+				return std::pair<double, double>(_mean, _rms);
+			}
 
-					_meanTime = _sumTime/_entries;
-					_rmsTime = sqrt(_sumTime2/_entries - _meanTime*_meanTime);
+			virtual std::pair<double, double> averageTiming()
+			{
+				if (_entries<=0)
 					return std::pair<double, double>(_meanTime, _rmsTime);
-				}
+
+				_meanTime = _sumTime/_entries;
+				_rmsTime = sqrt(_sumTime2/_entries - _meanTime*_meanTime);
+				return std::pair<double, double>(_meanTime, _rmsTime);	
 			}
 
 		protected:
@@ -311,20 +323,19 @@ namespace hcaldqm
 	class HcalDQPedData : public HcalDQData
 	{
 		public:
-			HcalDQPedData();
-			virtual ~HcalDQPedData();
+			HcalDQPedData() {}
+			virtual ~HcalDQPedData(){}
 
 			virtual void reset()
 			{
+				HcalDQData::reset();
 				for (int i=0; i<hcaldqm::constants::STD_NUMADC; i++)
 					_adc[i]=0;
 			}
 
 			virtual void push(unsigned int v)
 			{
-				if (v<0)
-					_underflow++;
-				else if (v>=hcaldqm::constants::STD_NUMADC)
+				if (v>=hcaldqm::constants::STD_NUMADC)
 					_overflow++;
 				else
 				{
