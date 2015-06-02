@@ -1,4 +1,4 @@
-//	cmssw includes
+i//	cmssw includes
 #include "DQM/HcalTasks/interface/HcalPedestalTask.h"
 
 //	system includes
@@ -7,16 +7,124 @@
 
 HcalPedestalTask::HcalPedestalTask(edm::ParameterSet const&ps):
 	hcaldqm::HcalDQSource(ps)
-{}
+{	
+	_packager[0] = hcaldqm::packaging::Packager(
+			hcaldqm::constants::STD_HB_MINIPHI,
+			hcaldqm:;constants::STD_HB_MAXIPHI,
+			hcaldqm::constants::STD_HB_STEPIPHI,
+			hcaldqm::constants::STD_HB_MINIETA,
+			hcaldqm::constants::STD_HB_MAXIETA,
+			hcaldqm::constants::STD_HB_MINDEPTH,
+			hcaldqm::constants::STD_HB_MAXDEPTH
+	);
+	_packager[1] = hcaldqm::packaging::Packager(
+			hcaldqm::constants::STD_HE_MINIPHI,
+			hcaldqm:;constants::STD_HE_MAXIPHI,
+			hcaldqm::constants::STD_HE_STEPIPHI,
+			hcaldqm::constants::STD_HE_MINIETA,
+			hcaldqm::constants::STD_HE_MAXIETA,
+			hcaldqm::constants::STD_HE_MINDEPTH,
+			hcaldqm::constants::STD_HE_MAXDEPTH
+	);
+	_packager[2] = hcaldqm::packaging::Packager(
+			hcaldqm::constants::STD_HO_MINIPHI,
+			hcaldqm:;constants::STD_HO_MAXIPHI,
+			hcaldqm::constants::STD_HO_STEPIPHI,
+			hcaldqm::constants::STD_HO_MINIETA,
+			hcaldqm::constants::STD_HO_MAXIETA,
+			hcaldqm::constants::STD_HO_MINDEPTH,
+			hcaldqm::constants::STD_HO_MAXDEPTH
+	);
+	_packager[3] = hcaldqm::packaging::Packager(
+			hcaldqm::constants::STD_HF_MINIPHI,
+			hcaldqm:;constants::STD_HF_MAXIPHI,
+			hcaldqm::constants::STD_HF_STEPIPHI,
+			hcaldqm::constants::STD_HF_MINIETA,
+			hcaldqm::constants::STD_HF_MAXIETA,
+			hcaldqm::constants::STD_HF_MINDEPTH,
+			hcaldqm::constants::STD_HF_MAXDEPTH
+	);
+}
 
 /* virtual */ HcalPedestalTask::~HcalPedestalTask()
 {
 }
 
+/* virtual */ void HcalPedestalTask::beginLuminosityBlock(
+		edm::LuminosityBlock const&, edm::EventSetup const& es)
+{
+	HcalDQSource::beginLuminosityBlock(lb, es);
+}
+
+/* virtual */ void HcalPedestalTask::endLuminosityBlock(
+		edm::LuminosityBlock const&, edm::EventSetup const& es)
+{
+	HcalDQSource::endLuminosityBlock(lb, es);
+}
+
+/* virtual */ void HcalPedestalTask::reset(int const periodflag)
+{
+	HcalDQSource::reset(periodflag);
+	if (periodflag==0)
+	{
+		// for Event
+	}
+	else if (periodflag==1)
+	{
+		//	 for LS
+	}
+}
+
 /* virtual */ void HcalPedestalTask::doWork(edm::Event const& e,
 		edm::EventSetup const& es)
 {
+	edm::Handle<HBHEDigiCollection>			chbhe;
+	edm::Handle<HODigiCollection>			cho;
+	edm::Handle<HFDigiCollection>			chf;
+
+	INITCOLL(_labels["HBHEDigi"], chbhe);
+	INITCOLL(_labels["HODigi"], cho);
+	INITCOLL(_labels["HFDigi"], chf);
+
+	this->process(*chbhe, std::string("HB"));
+	this->process(*chbhe, std::string("HE"));
+	this->process(*cho, std::string("HO"));
+	this->process(*chf, std::string("HF"));
 }
+
+template<typename Hit>
+void HcalPedestalTask::specialize(Hit const& hit, std::string const& nameRes)
+{
+	int iphi = hit.id().iphi();
+	int ieta = hit.id().ieta();
+	int depth = hit.id().depth();
+	int subdet = hit.id().subdet()-1;
+	int digisize = hit.size();
+	//	if digisize is 4(global runs as of 01/06/2015), you get 4
+	//	if digisize is 10(local runs as of 01/06/2015), you get 8
+	int digisizeToUse = floor(digisize/hcaldqm::constants::STD_NUMCAPS)*
+		hcaldqm::constants::STD_NUMCAPS;
+
+	//	Fills up Prioprietary Class for Pedestals Monitoring
+	for (int i=0; i<hit.size(); i++)
+		_pedData[subdet][_packager[subdet].iieta(ieta)]
+			[_packager[subdet].iiphi(iphi)]
+			[_packager[subdet].idepth(depth)]
+			[hit.sample(i).capid()].push(
+					hit.sample(i).adc());
+
+	//	Fill up Online Plots
+	double aveP = hcaldqm::math::sum(hit, 0, digisizeToUse-1)/digisizeToUse;
+	_mes[nameRes + "Pedestals"].Fill(aveP);
+	if (subdet==hcaldqm::constants::STD_SUBDET_HO)
+		_mes["HOD4_PedestalsMap"].Fill(ieta, iphi, aveP);
+	else
+		_mes["HBHEHFD" + 
+			boost::lexical_cast<std::string>(depth) +
+			"PedestalsMap"].Fill(ieat, iphi, aveP);
+}
+
+
 
 DEFINE_FWK_MODULE(HcalPedestalTask);
 

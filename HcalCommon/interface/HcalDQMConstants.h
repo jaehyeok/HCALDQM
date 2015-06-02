@@ -15,9 +15,26 @@ namespace hcaldqm
 	
 		//	Hcal Specific Constants (not SubSystem specific)
 		int const STD_NUMSUBS						=		4;
+		int const STD_NUMADC						= 128;
+		int const STD_NUMBINSFORPED					= 6;
+		double const STD_MINLEDQ					= 20.;
+		double const STD_MAXLEDQ					= 10000.;
+		int const STD_NUMCAPS						= 4;
+		int const STD_NUMIPHIS						= 72;
+		int const STD_NUMIETAS						= 83;
+		int const STD_NUMDEPTHS						= 4;
 	
 		//	HF Specific Constants
 		int const STD_SUBDET_HF						=	3;
+		int const STD_HF_MINIPHI					= 1;
+		int const STD_HF_STEPIPHI					= 2;
+		int const STD_HF_MAXIPHI					= 72;
+		int const STD_HF_MINIETA					= 29;
+		int const STD_HF_STEPIETA					= 1;
+		int const STD_HF_MAXIETA					= 41;
+		int const STD_HF_MINDEPTH					= 1;
+		int const STD_HF_STEPDEPTH					= 1;
+		int const STD_HF_MAXDEPTH					= 2;
 		double const STD_HF_PED						=		2.5;
 		int const STD_HF_DIGISIZE_GLOBAL			=		4;
 		int const STD_HF_DIGISIZE_LOCAL				=	10;
@@ -30,6 +47,15 @@ namespace hcaldqm
 	
 		//	HB Specific
 		int const STD_SUBDET_HB						=	0;
+		int const STD_HB_MINIPHI					= 1;
+		int const STD_HB_STEPIPHI					= 1;
+		int const STD_HB_MAXIPHI					= 72;
+		int const STD_HB_MINIETA					= 1;
+		int const STD_HB_STEPIETA					= 1;
+		int const STD_HB_MAXIETA					= 16;
+		int const STD_HB_MINDEPTH					= 1;
+		int const STD_HB_STEPDEPTH					= 1;
+		int const STD_HB_MAXDEPTH					= 2;
 		int const STD_HB_DIGISIZE_GLOBAL			=		10;
 		double const STD_HB_PED						=		0;
 		double const STD_HB_DIGI_CUT_3TSQg20		=		20.;
@@ -41,6 +67,15 @@ namespace hcaldqm
 	
 		//	HE Specific
 		int const STD_SUBDET_HE						=	1;
+		int const STD_HE_MINIPHI					= 1;
+		int const STD_HE_STEPIPHI					= 1;
+		int const STD_HE_MAXIPHI					= 72;
+		int const STD_HE_MINIETA					= 16;
+		int const STD_HE_STEPIETA					= 1;
+		int const STD_HE_MAXIETA					= 29;
+		int const STD_HE_MINDEPTH					= 1;
+		int const STD_HE_STEPDEPTH					= 1;
+		int const STD_HE_MAXDEPTH					= 3;
 		int const STD_HE_DIGISIZE_GLOBAL			=		10;
 		double const STD_HE_PED						=		0;
 		double const STD_HE_DIGI_CUT_3TSQg20		=		20.;
@@ -52,6 +87,15 @@ namespace hcaldqm
 	
 		//	HO Specific Constants
 		int const STD_SUBDET_HO						=	2;
+		int const STD_HO_MINIPHI					= 1;
+		int const STD_HO_STEPIPHI					= 1;
+		int const STD_HO_MAXIPHI					= 72;
+		int const STD_HO_MINIETA					= 1;
+		int const STD_HO_STEPIETA					= 1;
+		int const STD_HO_MAXIETA					= 15;
+		int const STD_HO_MINDEPTH					= 4;
+		int const STD_HO_STEPDEPTH					= 1;
+		int const STD_HO_MAXDEPTH					= 4;
 		int const STD_HO_DIGISIZE_GLOBAL			=		10;
 		double const STD_HO_PED						=		8.5;
 		double const STD_HO_DIGI_CUT_3TSQg30		=		30.;
