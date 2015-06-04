@@ -69,7 +69,7 @@ process.load("Configuration.StandardSequences.RawToDigi_Data_cff")
 #	-> cmssw version
 #	-> Turn off default blocking of dead channels from rechit collection
 #	-> Drop Channel Status Bits (had benn 'HcalCellOff', "HcalCellDead")
-#	-> For Trigger Primitives
+#	-> For Trigger Primitives Emulation
 #	-> L1 GT setting
 #	-> Rename the hbheprereco to hbhereco
 #-------------------------------------
@@ -83,15 +83,15 @@ process.essourceSev = cms.ESSource(
 		iovIsRunNotTime	= cms.bool(True)
 )
 process.hcalRecAlgos.DropChannelStatusBits = cms.vstring('')
-process.valHcalTriggerPrimitiveDigis = \
+process.emulTPDigis = \
 		process.simHcalTriggerPrimitiveDigis.clone()
-process.valHcalTriggerPrimitiveDigis.inputLabel = \
+process.emulTPDigis.inputLabel = \
 		cms.VInputTag("hcalDigis", 'hcalDigis')
-process.valHcalTriggerPrimitiveDigis.FrontEndFormatError = \
+process.emulTPDigis.FrontEndFormatError = \
 		cms.bool(True)
 process.HcalTPGCoderULUT.LUTGenerationMode = cms.bool(False)
-process.valHcalTriggerPrimitiveDigis.FG_threshold = cms.uint32(2)
-process.valHcalTriggerPrimitiveDigis.InputTagFEDRaw = rawTag
+process.emulTPDigis.FG_threshold = cms.uint32(2)
+process.emulTPDigis.InputTagFEDRaw = rawTag
 process.l1GtUnpack.DaqGtInputTag = rawTag
 process.hbhereco = process.hbheprereco.clone()
 
@@ -167,7 +167,7 @@ process.tasksSequence = cms.Sequence(
 process.p = cms.Path(
 					process.hcalDigis
 #					*process.vmeDigis
-                    *process.valHcalTriggerPrimitiveDigis
+                    *process.emulTPDigis
                     *process.l1GtUnpack
                     *process.horeco
                     *process.hfreco

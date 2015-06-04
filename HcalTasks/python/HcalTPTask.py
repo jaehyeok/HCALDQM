@@ -16,7 +16,7 @@ StandardSet.EventsProcessedPerLS.path	= cms.untracked.string(
 StandardSet.Standard2DMap.path			= cms.untracked.string(
 	"Hcal/%s/" % moduleName)
 StandardSet.Standard2DMap.desc			= cms.untracked.string(
-	"Some TP Task 2D Map")
+	"TP Digi Size")
 
 #	Main Task Description
 hcalTPTask = cms.EDAnalyzer(
@@ -26,10 +26,13 @@ hcalTPTask = cms.EDAnalyzer(
 		EventsProcessed			= StandardSet.EventsProcessed,
 		EventsProcessedPerLS	= StandardSet.EventsProcessedPerLS,
 		
-		HETPShape				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+		#	???????????????????????????????????????????//
+		#	Do we need these 2 histos???
+		#	???????????????????????????????????????????//
+		HBHE_EtShape_Data				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
-			desc	= cms.untracked.string("HE TP Shape"),
+			desc	= cms.untracked.string("HBHE Compressed Et Shape Data"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(10),
@@ -38,10 +41,22 @@ hcalTPTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("TS")
 			)
 		),
-		HFTPShape				= cms.untracked.PSet(
+		HBHE_EtShape_Emul				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HBHE Compressed Et Shape Emulator"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(10),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10.),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HF_EtShape_Data				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
-			desc	= cms.untracked.string("HF TP Shape"),
+			desc	= cms.untracked.string("HF Compressed Et Shape Data"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(10),
@@ -50,37 +65,201 @@ hcalTPTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("TS")
 			)
 		),
-		HOTPShape				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+		HF_EtShape_Emul				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
-			desc	= cms.untracked.string("HO TP Shape"),
+			desc	= cms.untracked.string("HF Compressed Et Shape Emulator"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(10),
 				min		= cms.untracked.double(0.),
 				max		= cms.untracked.double(10.),
 				title	= cms.untracked.string("TS")
-			)	
+			)
 		),
-		TPSizeCheck			= StandardSet.Standard2DMap 
-#		me4			= cms.untracked.PSet(
-#			path	= cms.untracked.string("Hcal/%s/" % moduleName),
-#			kind	= cms.untracked.string("PROF"),
-#			desc	= cms.untracked.string("Example ME4"),
-#			xaxis	= cms.untracked.PSet(
-#				edges	= cms.untracked.bool(False),
-#				nbins	= cms.untracked.int32(200),
-#				min		= cms.untracked.double(-100),
-#				max		= cms.untracked.double(100),
-#				title	= cms.untracked.string("me4-X")
-#			),
-#			yaxis	= cms.untracked.PSet(
-#				wnbins	= cms.untracked.bool(True),
-#				nbins	= cms.untracked.int32(100),
-#				min		= cms.untracked.double(-50),
-#				max		= cms.untracked.double(50),
-#				title	= cms.untracked.string("me4-Y")
-#			)
-#		)
+
+		#------------------------------------------------------
+		#	SOI Et and FG
+		#------------------------------------------------------
+		HBHE_SOI_Et_Data				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HBHE Compressed Et Distribution Data"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(256),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(256.),
+				title	= cms.untracked.string("SOI Compressed Et")
+			)
+		),
+		HBHE_SOI_Et_Emul				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string(
+				"HBHE Compressed Et Distribution Emulator"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(256),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(256.),
+				title	= cms.untracked.string("SOI Compressed Et")
+			)
+		),
+		HF_SOI_Et_Data				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HF Compressed Et Distribution Data"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(256),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(256.),
+				title	= cms.untracked.string("SOI Compressed Et")
+			)
+		),
+		HF_SOI_Et_Emul				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string(
+				"HF Compressed Et Distribution Emulator"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(256),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(256.),
+				title	= cms.untracked.string("SOI Compressed Et")
+			)
+		),
+
+		#------------------------------------------------------
+		#	Number of Presamples
+		#------------------------------------------------------
+		HF_Presamples_Data				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HF Number of Presamples Data"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(10),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10.),
+				title	= cms.untracked.string("# Presamples")
+			)
+		),
+		HBHE_Presamples_Data				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HBHE Number of Presamples Data"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(10),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10.),
+				title	= cms.untracked.string("# Presamples")
+			)
+		),
+		HF_Presamples_Emul				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HF Number of Presamples Emul"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(10),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10.),
+				title	= cms.untracked.string("# Presamples")
+			)
+		),
+		HBHE_Presamples_Emul				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HBHE Number of Presamples Emul"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(10),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10.),
+				title	= cms.untracked.string("# Presamples")
+			)
+		),
+
+
+		#------------------------------------------------------
+		#	TP Digi Size
+		#------------------------------------------------------
+		HBHEHF_TPSize			= StandardSet.Standard2DMap 
+
+		#------------------------------------------------------
+		#	Occupancy Maps
+		#------------------------------------------------------
+		HBHEHF_TPOccupancyVSieta				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HBHEHF TP Occupancy vs ieta"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(83),
+				min		= cms.untracked.double(-41.5),
+				max		= cms.untracked.double(41.5),
+				title	= cms.untracked.string("ieta")
+			)
+		), 
+		HBHEHF_TPOccupancyVSiphi				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HBHEHF TP Occupancy vs iphi"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(72),
+				min		= cms.untracked.double(0.5),
+				max		= cms.untracked.double(72.5),
+				title	= cms.untracked.string("iphi")
+			)
+		), 
+		HF_TPOccupancyVSiphi				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HF TP Occupancy vs iphi"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(72),
+				min		= cms.untracked.double(0.5),
+				max		= cms.untracked.double(72.5),
+				title	= cms.untracked.string("iphi")
+			)
+		), 
+		HBHE_TPOccupancyVSiphi				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HBHE TP Occupancy vs iphi"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(72),
+				min		= cms.untracked.double(0.5),
+				max		= cms.untracked.double(72.5),
+				title	= cms.untracked.string("iphi")
+			)
+		), 
+		
+		HBHEHF_TPOccupancy				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string("HBHEHF TP Occupancy"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(83),
+				min		= cms.untracked.double(-41.5),
+				max		= cms.untracked.double(41.5),
+				title	= cms.untracked.string("ieta")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(72),
+				min		= cms.untracked.double(0.5),
+				max		= cms.untracked.double(72.5),
+				title	= cms.untracked.string("iphi")
+			)
+		), 
 	)
 )

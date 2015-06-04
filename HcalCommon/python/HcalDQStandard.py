@@ -5,18 +5,21 @@ lFEDs = [x+700 for x in range(32)] + [1118, 1120, 1122]
 
 StandardSet		= cms.untracked.PSet(
 	moduleParameters	= cms.untracked.PSet(
-			name			= cms.untracked.string("HcalDQStandard"),
+		name			= cms.untracked.string("HcalDQStandard"),
 		debug			= cms.untracked.int32(10),
 		calibTypes		= cms.untracked.vint32(0),
 		runType			= cms.untracked.string("TEST"),
 		mtype			= cms.untracked.string("SOURCE"),
-		FEDs			= cms.untracked.vint32(lFEDs)
+		FEDs			= cms.untracked.vint32(lFEDs),
+		isGlobal		= cms.untracked.bool(True)
 	),
 	
 	Labels				= cms.untracked.PSet(
 		HBHEDigi		= cms.untracked.InputTag("hcalDigis"),
 		HFDigi			= cms.untracked.InputTag("hcalDigis"),
 		HODigi			= cms.untracked.InputTag("hcalDigis"),
+		HCALTPD			= cms.untracked.InputTag("hcalDigis"),
+		HCALTPE			= cms.untracked.InputTag("emulTPDigis")
 		HFDigiVME		= cms.untracked.InputTag("vmeDigis"),
 		RAW				= cms.untracked.InputTag("rawDataCollector"),
 		HBHERecHit		= cms.untracked.InputTag("hbhereco"),

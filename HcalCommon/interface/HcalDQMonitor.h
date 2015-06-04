@@ -52,6 +52,7 @@ namespace hcaldqm
 		std::vector<int>	feds;
 		std::string			name;
 		int					debug;
+		bool				isGlobal;
 
 		int					currentCalibType;
 		int					evsTotal;

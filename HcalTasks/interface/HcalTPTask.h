@@ -19,9 +19,28 @@ class HcalTPTask : public hcaldqm::HcalDQSource
 		virtual void doWork(edm::Event const&e,
 				edm::EventSetup const& es);
 
-//	private:
+		virtual void beginLuminosityBlock(edm::LuminosityBlock const&,
+				edm::EventSetup const&);
+		virtual void endLuminosityBlock(edm::LuminosityBlock const&,
+				edm::EventSetup const&);
+		virtual void reset(int const);
+
+	private:
 		//	MEs Collection come from the base class
 		//	Here, we only need module specific parameters
+
+		//	Specializer and checker methods
+		//	wtw = what to what to compare
+		//	wtw=1 Col1 is iterated for ids
+		//	wtw=2 Col2 is iterated for ids
+		template<typename Hit>
+		void specialize(Hit const& hit1, Hit const& hit2, std::string const&,
+				int const);
+		template<typename Hit>
+		void check(Hit const& hit, int const wtw);
+
+		//	Define and Initialize Comparator for TPs
+		DEFTPCOMPARATOR(HcalTrigPrimDigiCollection, HcalTriggerPrimitiveDigi);
 };
 
 #endif

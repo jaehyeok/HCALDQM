@@ -124,6 +124,31 @@ namespace hcaldqm
 		}	\
 	}
 
+//	The use of this macro must be properly controlled!
+//	Becaue the COLLECTIONTYPE and HITTYPE must go in accord with each other
+//	
+//	Desc:	We deliberately separate HF from HBHE
+#define DEFTPCOMPARATOR(COLLECTIONTYPE, HITTYPE) \
+	void process(COLLECTIONTYPE const& c1, COLLECTIONTYPE const& c2, \
+			std::string const& nameRes, int const wtw) \
+	{	\
+		for (COLLECTIONTYPE::const_iterator it1=c1.begin();		\
+				it1!=c1.end(); ++it1)	\
+		{	\
+			const HITTYPE hit1 = (const HITTYPE)(*it1);	\
+			COLLECTIONTYPE::const_iterator it2=c2.find(hit1.id());	\
+			if (it2==c2.end())	\
+			{	\
+				check<HITTYPE>(hit1, wtw);	\
+				continue;	\
+			}	\
+			if ((nameRes=="HF" && hit1.id().subdet()!=HcalForward))	\
+				continue;	\
+			const HITTYPE hit2 = (const HITTYPE)*it2;	\
+			specialize<HITTYPE>(hit1, hit2, wtw);	\
+		}	\
+	}
+
 
 //	Define a specializer
 //#define DEFSPECIALIZER()
