@@ -106,12 +106,22 @@ void HcalTPTask::specialize(Hit const& hit1, Hit const& hit2,
 	//	get all the info we need
 	int iphi = hit1.id().iphi();
 	int ieta = hit1.id().ieta();
+	int subdet = hcaldqm::packaging::isHFTrigTower(hit1.id().ietaAbs()) ? 1 : 0;
 	int soi_cEt_1 = hit1.SOI_compressedEt();
 	int soi_cEt_2 = hit2.SOI_compressedEt();
 	int soi_fg_1 = hit1.SOI_fineGrain() ? 1 : 0;
 	int soi_fg_2 = hit2.SOI_fineGrain() ? 1 : 0;
 	int ps_1 = hit1.presamples();
 	int ps_2 = hit2.presamples();
+	int digisize_1 = hit1.size();
+	int digisize_2 = hit2.size();
+
+	bool matched_SOI_Et = abs(soi_cEt_1-soi_cEt_2)==0 ? true : false;
+	if (!matched_SOI_Et)
+		_mes["HBHEHF_ErrorFlags"].Fill(0, subdet);
+	bool matched_SOI_FG = soi_fg_1 == soi_fg_2;
+	if (!matched_SOI_FG)
+		_mes["HBHEHF_ErrorFlags"].Fill(1, subdet);
 
 	//	SOI plots + presamples
 	_mes[nameRes + "_SOI_Et_Data"].Fill(soi_cEt_1);
@@ -120,6 +130,8 @@ void HcalTPTask::specialize(Hit const& hit1, Hit const& hit2,
 	_mes[nameRes + "_SOI_FG_Correlation"].Fill(soi_fg_1, soi_fg_2);
 	_mes[nameRes + "_Presamples_Data"].Fill(ps_1);
 	_mes[nameRes + "_Presamples_Emul"].Fill(ps_2);
+	_mes["HBHEHF_TPDigiSize_Data"].Fill(subdet, digisize_1);
+	_mes["HBHEHF_TPDigiSize_Emul"].Fill(subdet, digisize_2);
 
 	for (int i=0; i<hit1.size(); i++)
 	{
@@ -127,42 +139,35 @@ void HcalTPTask::specialize(Hit const& hit1, Hit const& hit2,
 		int cEt_2 = hit2.sample(i).compressedEt();
 		bool fg_1 = hit1.sample(i).fineGrain();
 		bool fg_2 = hit2.sample(i).fineGrain();
+		bool matched_nonSOI_Et = abs(cEt_1-cEt_2)==0 ? true : false;
+		bool matched_nonSOI_FG = fg_1==fg_2;
 //		int diff = abs(cEt_1-cEt_2);
 
 		_mes[nameRes + "_EtShape_Data"].Fill(i, cEt_1);
 		_mes[nameRes + "_EtShape_Emul"].Fill(i, cEt_2);
 
-		//	Out Of Time 
+		//	If this is not a Sample of Interest
 		if (i!=ps_1)
 		{
-			_mes[nameRes + "_Et_Correlation_OOT"].Fill(cEt_1, cEt_2);
-			_mes[nameRes + "_FG_Correlation_OOT"].Fill(fg_1, fg_2);
-		}
-		
-		/*
-		//	if cEts are the same for this TS
-		if (diff==0)
-		{
-			//	if Fine Grain bits aren't the same
-			if (fg_1!=fg_2)
-			{
-				//	have mismatch in FG bitOB
-			}
-		}
-		else 
-		{
+			_mes[nameRes + "_nonSOI_Et_Correlation"].Fill(cEt_1, cEt_2);
+			_mes[nameRes + "_nonSOI_FG_Correlation"].Fill(fg_1, fg_2);
 
+			if (!matched_nonSOI_Et)
+				_mes["HBHEHF_nonSOI_ErrorFlags"].Fill(0, subdet);
+			if (!matched_nonSOI_FG)
+				_mes["HBHEHF_nonSOI_ErrorFlags"].Fill(1, subdet);
 		}
-		*/
 	}
 	
 	//	Occupancy Maps
 	_mes[nameRes + "_TPOccupancyVSiphi_Data"].Fill(iphi);
+	_mes[nameRes + "_TPOccupancyVSieta_Data"].Fill(ieta);
 	_mes["HBHEHF_TPOccupancyVSiphi_Data"].Fill(iphi);
 	_mes["HBHEHF_TPOccupancyVSieta_Data"].Fill(ieta);
 	_mes["HBHEHF_TPOccupancy_Data"].Fill(ieta, iphi);
 	
 	_mes[nameRes + "_TPOccupancyVSiphi_Emul"].Fill(iphi);
+	_mes[nameRes + "_TPOccupancyVSieta_Emul"].Fill(ieta);
 	_mes["HBHEHF_TPOccupancyVSiphi_Emul"].Fill(iphi);
 	_mes["HBHEHF_TPOccupancyVSieta_Emul"].Fill(ieta);
 	_mes["HBHEHF_TPOccupancy_Emul"].Fill(ieta, iphi);
@@ -171,7 +176,8 @@ void HcalTPTask::specialize(Hit const& hit1, Hit const& hit2,
 //	Performed if hit2(hit1.id()) isn't found in the collection.
 template<typename Hit>
 void HcalTPTask::check(Hit const& hit, std::string const& nameRes, int const wtw)
-{	
+{
+	
 	//	Data or Emul
 	std::string tpRes = wtw==1 ? "Data" : "Emul";
 	std::string misRes = wtw==1 ? "Emul" : "Data";
@@ -199,11 +205,13 @@ void HcalTPTask::check(Hit const& hit, std::string const& nameRes, int const wtw
 	_mes[nameRes + "_TPOccupancyVSiphi_" + tpRes].Fill(iphi);
 	_mes["HBHEHF_TPOccupancyVSiphi_" + tpRes].Fill(iphi);
 	_mes["HBHEHF_TPOccupancyVSieta_" + tpRes].Fill(ieta);
+	_mes[nameRes + "_TPOccupancyVSieta_" + tpRes].Fill(ieta);
 	_mes["HBHEHF_TPOccupancy_" + tpRes].Fill(ieta, iphi);
 
 	//	Fill out maps to show which detid is missing
 	_mes["HBHEHF_Missing_" + misRes].Fill(ieta, iphi);
 	_mes["HBHEHF_ErrorFlags"].Fill(missWhat, subdet);
+	
 }
 
 DEFINE_FWK_MODULE(HcalTPTask);

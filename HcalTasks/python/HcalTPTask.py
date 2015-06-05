@@ -276,6 +276,58 @@ hcalTPTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("ieta")
 			)
 		), 
+		HBHE_TPOccupancyVSieta_Data				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string(
+				"HBHE TP Occupancy vs ieta Data"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(83),
+				min		= cms.untracked.double(-41.5),
+				max		= cms.untracked.double(41.5),
+				title	= cms.untracked.string("ieta")
+			)
+		), 
+		HBHE_TPOccupancyVSieta_Emul				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string(
+				"HBHE TP Occupancy vs ieta Emulator"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(83),
+				min		= cms.untracked.double(-41.5),
+				max		= cms.untracked.double(41.5),
+				title	= cms.untracked.string("ieta")
+			)
+		), 
+		HF_TPOccupancyVSieta_Data				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string(
+				"HF TP Occupancy vs ieta Data"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(83),
+				min		= cms.untracked.double(-41.5),
+				max		= cms.untracked.double(41.5),
+				title	= cms.untracked.string("ieta")
+			)
+		), 
+		HF_TPOccupancyVSieta_Emul				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string(
+				"HF TP Occupancy vs ieta Emulator"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(83),
+				min		= cms.untracked.double(-41.5),
+				max		= cms.untracked.double(41.5),
+				title	= cms.untracked.string("ieta")
+			)
+		), 
 		HBHEHF_TPOccupancyVSiphi_Emul			= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
@@ -457,11 +509,11 @@ hcalTPTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("SOI FG Emul")
 			),
 		),
-		HF_Et_Correlation_OOT				= cms.untracked.PSet(
+		HF_nonSOI_Et_Correlation				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
-				"Correlation for HF Compressed Et OOT"),
+				"Correlation for HF nonSOI Compressed Et"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(50),
@@ -477,11 +529,11 @@ hcalTPTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("Et Emul")
 			),
 		),
-		HBHE_Et_Correlation_OOT				= cms.untracked.PSet(
+		HBHE_nonSOI_Et_Correlation				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
-				"Correlation for HBHE Compressed Et OOT"),
+				"Correlation for HBHE nonSOI Compressed Et"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(50),
@@ -497,11 +549,11 @@ hcalTPTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("Et Emul")
 			),
 		),
-		HF_FG_Correlation_OOT				= cms.untracked.PSet(
+		HF_nonSOI_FG_Correlation				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
-				"Correlation for HF FG OOT"),
+				"Correlation for HF nonSOI FG"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(2),
@@ -517,11 +569,11 @@ hcalTPTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("FG Emul")
 			),
 		),
-		HBHE_FG_Correlation_OOT				= cms.untracked.PSet(
+		HBHE_nonSOI_FG_Correlation				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
-				"Correlation for HBHE FG OOT"),
+				"Correlation for HBHE nonSOI FG"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(2),
@@ -535,6 +587,50 @@ hcalTPTask = cms.EDAnalyzer(
 				min		= cms.untracked.double(0.5),
 				max		= cms.untracked.double(1.5),
 				title	= cms.untracked.string("FG Emul")
+			),
+		),
+
+		#------------------------------------------------------
+		#	TP Digi Sizes
+		#------------------------------------------------------
+		HBHEHF_TPDigiSize_Data				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string(
+				"TP Digi Size Data"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(2),
+				min		= cms.untracked.double(-0.5),
+				max		= cms.untracked.double(1.5),
+				title	= cms.untracked.string("Subsystem")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(10),
+				min		= cms.untracked.double(-0.5),
+				max		= cms.untracked.double(9.5),
+				title	= cms.untracked.string("#TS")
+			),
+		),
+		HBHEHF_TPDigiSize_Emul				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string(
+				"TP Digi Size Emulator"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(2),
+				min		= cms.untracked.double(-0.5),
+				max		= cms.untracked.double(1.5),
+				title	= cms.untracked.string("Subsystem")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(10),
+				min		= cms.untracked.double(-0.5),
+				max		= cms.untracked.double(9.5),
+				title	= cms.untracked.string("#TS")
 			),
 		),
 
@@ -561,11 +657,11 @@ hcalTPTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("Subsystem")
 			),
 		),
-		HBHEHF_ErrorFlags_OOT				= cms.untracked.PSet(
+		HBHEHF_nonSOI_ErrorFlags				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
-				"Error Flags OOT"),
+				"nonSOI Error Flags"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(4),

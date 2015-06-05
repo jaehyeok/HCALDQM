@@ -146,6 +146,11 @@ namespace hcaldqm
 		{	\
 			this->debug_("We have TPs");	\
 			const HITTYPE hit1 = (const HITTYPE)(*it1);	\
+			if ((nameRes=="HF" && \
+						!hcaldqm::packaging::isHFTrigTower(hit1.id().ietaAbs()))	\
+					|| (nameRes=="HBHE" &&	\
+						!hcaldqm::packaging::isHBHETrigTower(hit1.id().ietaAbs())))	\
+				continue;	\
 			COLLECTIONTYPE::const_iterator it2=c2.find(hit1.id());	\
 			if (it2==c2.end())	\
 			{	\
@@ -153,11 +158,6 @@ namespace hcaldqm
 				this->debug_("Didn't find a matching Tower");	\
 				continue;	\
 			}	\
-			if ((nameRes=="HF" && \
-						!hcaldqm::packaging::isHFTrigTower(hit1.id().ietaAbs()))	\
-					|| (nameRes=="HBHE" &&	\
-						!hcaldqm::packaging::isHBHETrigTower(hit1.id().ietaAbs())))	\
-				continue;	\
 			const HITTYPE hit2 = (const HITTYPE)*it2;	\
 			specialize<HITTYPE>(hit1, hit2, nameRes, wtw);	\
 		}	\
