@@ -41,7 +41,8 @@ class HcalDigiTask : public hcaldqm::HcalDQSource
 		//	Here, we only need module specific parameters
 		int				_ornMsgTime;
 		//	number of digis for HB(0), HE(1), HO(2), HF(3) for an event
-		int				_numDigis[hcaldqm::constants::STD_NUMSUBS];
+		int				_numDigis_wZSCut[hcaldqm::constants::STD_NUMSUBS];
+		int				_numDigis_NoZSCut[hcaldqm::constants::STD_NUMSUBS];
 };
 
 #endif

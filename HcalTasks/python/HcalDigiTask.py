@@ -626,7 +626,7 @@ hcalDigiTask = cms.EDAnalyzer(
                 title   = cms.untracked.string("iphi")
             )
         ),
-		HB_OccupancyVSls          = cms.untracked.PSet(
+		HB_OccupancyVSls_wZSCut          = cms.untracked.PSet(
 			path    = cms.untracked.string("Hcal/%s/HB" % moduleName),
             kind    = cms.untracked.string("PROF"),
             desc    = cms.untracked.string( "HB Occupancy vs LS" + 
@@ -646,7 +646,7 @@ hcalDigiTask = cms.EDAnalyzer(
                 title   = cms.untracked.string("# Channels")
             )
         ),
-		HE_OccupancyVSls          = cms.untracked.PSet(
+		HE_OccupancyVSls_wZSCut          = cms.untracked.PSet(
 			path    = cms.untracked.string("Hcal/%s/HE" % moduleName),
             kind    = cms.untracked.string("PROF"),
             desc    = cms.untracked.string( "HE Occupancy vs LS" + 
@@ -666,7 +666,7 @@ hcalDigiTask = cms.EDAnalyzer(
                 title   = cms.untracked.string("# Channels")
             )
         ),
-		HF_OccupancyVSls          = cms.untracked.PSet(
+		HF_OccupancyVSls_wZSCut          = cms.untracked.PSet(
 			path    = cms.untracked.string("Hcal/%s/HF" % moduleName),
             kind    = cms.untracked.string("PROF"),
             desc    = cms.untracked.string( "HF Occupancy vs LS" + 
@@ -686,7 +686,7 @@ hcalDigiTask = cms.EDAnalyzer(
                 title   = cms.untracked.string("# Channels")
             )
         ),
-		HO_OccupancyVSls          = cms.untracked.PSet(
+		HO_OccupancyVSls_wZSCut          = cms.untracked.PSet(
 			path    = cms.untracked.string("Hcal/%s/HO" % moduleName),
             kind    = cms.untracked.string("PROF"),
             desc    = cms.untracked.string( "HO Occupancy vs LS" + 
@@ -706,6 +706,86 @@ hcalDigiTask = cms.EDAnalyzer(
                 title   = cms.untracked.string("# Channels")
             )
         ),
+		HB_OccupancyVSls_NoZSCut          = cms.untracked.PSet(
+			path    = cms.untracked.string("Hcal/%s/HB" % moduleName),
+            kind    = cms.untracked.string("PROF"),
+            desc    = cms.untracked.string( "HB Occupancy vs LS" + 
+				noCutsStr),
+            xaxis   = cms.untracked.PSet(
+            edges   = cms.untracked.bool(False),
+            nbins   = cms.untracked.int32(1000),
+				min     = cms.untracked.double(0),
+                max     = cms.untracked.double(1000),
+                title   = cms.untracked.string("LS")
+			),
+            yaxis   = cms.untracked.PSet(
+				wnbins	= cms.untracked.bool(True),
+                nbins   = cms.untracked.int32(2000),
+                min     = cms.untracked.double(0),
+                max      = cms.untracked.double(5000),
+                title   = cms.untracked.string("# Channels")
+            )
+		),
+		HE_OccupancyVSls_NoZSCut          = cms.untracked.PSet(
+			path    = cms.untracked.string("Hcal/%s/HE" % moduleName),
+            kind    = cms.untracked.string("PROF"),
+            desc    = cms.untracked.string( "HE Occupancy vs LS" + 
+				noCutsStr),
+            xaxis   = cms.untracked.PSet(
+            edges   = cms.untracked.bool(False),
+            nbins   = cms.untracked.int32(1000),
+				min     = cms.untracked.double(0),
+                max     = cms.untracked.double(1000),
+                title   = cms.untracked.string("LS")
+			),
+            yaxis   = cms.untracked.PSet(
+				wnbins	= cms.untracked.bool(True),
+                nbins   = cms.untracked.int32(2000),
+                min     = cms.untracked.double(0),
+                max      = cms.untracked.double(5000),
+                title   = cms.untracked.string("# Channels")
+            )
+		),
+		HO_OccupancyVSls_NoZSCut          = cms.untracked.PSet(
+			path    = cms.untracked.string("Hcal/%s/HO" % moduleName),
+            kind    = cms.untracked.string("PROF"),
+            desc    = cms.untracked.string( "HO Occupancy vs LS" + 
+				noCutsStr),
+            xaxis   = cms.untracked.PSet(
+            edges   = cms.untracked.bool(False),
+            nbins   = cms.untracked.int32(1000),
+				min     = cms.untracked.double(0),
+                max     = cms.untracked.double(1000),
+                title   = cms.untracked.string("LS")
+			),
+            yaxis   = cms.untracked.PSet(
+				wnbins	= cms.untracked.bool(True),
+                nbins   = cms.untracked.int32(2000),
+                min     = cms.untracked.double(0),
+                max      = cms.untracked.double(5000),
+                title   = cms.untracked.string("# Channels")
+            )
+		),
+		HF_OccupancyVSls_NoZSCut          = cms.untracked.PSet(
+			path    = cms.untracked.string("Hcal/%s/HF" % moduleName),
+            kind    = cms.untracked.string("PROF"),
+            desc    = cms.untracked.string( "HF Occupancy vs LS" + 
+				noCutsStr),
+            xaxis   = cms.untracked.PSet(
+            edges   = cms.untracked.bool(False),
+            nbins   = cms.untracked.int32(1000),
+				min     = cms.untracked.double(0),
+                max     = cms.untracked.double(1000),
+                title   = cms.untracked.string("LS")
+			),
+            yaxis   = cms.untracked.PSet(
+				wnbins	= cms.untracked.bool(True),
+                nbins   = cms.untracked.int32(2000),
+                min     = cms.untracked.double(0),
+                max      = cms.untracked.double(5000),
+                title   = cms.untracked.string("# Channels")
+            )
+		),
 
 		#	Problem Maps and Valid/Invalid 
 		ValidInvalid			= cms.untracked.PSet(

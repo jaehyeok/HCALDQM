@@ -81,6 +81,8 @@ void HcalRecHitTask::specialize(Hit const& hit, std::string const& nameRes,
 			boost::lexical_cast<std::string>(depth) + 
 			"_RecHitOccupancy"].Fill(ieta, iphi);
 
+	_mes[nameRes + "_RecHitEnergyVSls"].Fill(_mi.currentLS, en);
+
 	//	TODO:
 	//	Put the Cut Class in place
 	if (en<hcaldqm::constants::RECHIT_ZSCUT[subdet])

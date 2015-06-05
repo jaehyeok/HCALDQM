@@ -10,7 +10,10 @@ HcalDigiTask::HcalDigiTask(edm::ParameterSet const&ps):
 {
 	_ornMsgTime = ps.getUntrackedParameter<int>("OrnMsgTime", 3559);
 	for (int i=0; i<hcaldqm::constants::STD_NUMSUBS; i++)
-		_numDigis[i] = 0;
+	{
+		_numDigis_wZSCut[i] = 0;
+		_numDigis_NoZSCut[i] = 0;
+	}
 }
 
 /* virtual */ HcalDigiTask::~HcalDigiTask()
@@ -52,10 +55,14 @@ HcalDigiTask::HcalDigiTask(edm::ParameterSet const&ps):
 	this->process(*chf, std::string("HF"));	
 
 	//	Fill Plots
-	_mes["HB_OccupancyVSls"].Fill(_mi.currentLS, _numDigis[0]);
-	_mes["HE_OccupancyVSls"].Fill(_mi.currentLS, _numDigis[1]);
-	_mes["HO_OccupancyVSls"].Fill(_mi.currentLS, _numDigis[2]);
-	_mes["HF_OccupancyVSls"].Fill(_mi.currentLS, _numDigis[3]);
+	_mes["HB_OccupancyVSls_wZSCut"].Fill(_mi.currentLS, _numDigis_wZSCut[0]);
+	_mes["HE_OccupancyVSls_wZSCut"].Fill(_mi.currentLS, _numDigis_wZSCut[1]);
+	_mes["HO_OccupancyVSls_wZSCut"].Fill(_mi.currentLS, _numDigis_wZSCut[2]);
+	_mes["HF_OccupancyVSls_wZSCut"].Fill(_mi.currentLS, _numDigis_wZSCut[3]);
+	_mes["HB_OccupancyVSls_NoZSCut"].Fill(_mi.currentLS, _numDigis_NoZSCut[0]);
+	_mes["HE_OccupancyVSls_NoZSCut"].Fill(_mi.currentLS, _numDigis_NoZSCut[1]);
+	_mes["HO_OccupancyVSls_NoZSCut"].Fill(_mi.currentLS, _numDigis_NoZSCut[2]);
+	_mes["HF_OccupancyVSls_NoZSCut"].Fill(_mi.currentLS, _numDigis_NoZSCut[3]);
 }
 
 /* virtual */ void HcalDigiTask::reset(int const periodflag)
@@ -65,7 +72,10 @@ HcalDigiTask::HcalDigiTask(edm::ParameterSet const&ps):
 	{
 		// each events reset
 		for (unsigned int i=0; i<hcaldqm::constants::STD_NUMSUBS; i++)
-			_numDigis[i]=0;
+		{
+			_numDigis_wZSCut[i]=0;
+			_numDigis_NoZSCut[i]=0;
+		}
 	}
 	else if (periodflag==1)
 	{
@@ -99,6 +109,8 @@ void HcalDigiTask::specialize(Hit const& hit, std::string const& nameRes,
 
 	_mes["DigiSize"].Fill(subdet, hit.size());
 	_mes["DigiSizeExp"].Fill(subdet, digisize);
+	if (subdet<4)
+		_numDigis_NoZSCut[subdet]++;
 
 	//	Extract per digi Information
 	for (int i=0; i<hit.size(); i++)
@@ -124,7 +136,7 @@ void HcalDigiTask::specialize(Hit const& hit, std::string const& nameRes,
 	_mes[nameRes + "_Timing"].Fill(aveT);
 	_mes[nameRes + "_TimingVSieta"].Fill(ieta, aveT);
 	if (subdet<4)
-		_numDigis[subdet]++;
+		_numDigis_wZSCut[subdet]++;
 	if (subdet==hcaldqm::constants::STD_SUBDET_HO)
 	{
 		_mes["HO_OccupancyMapD" + 

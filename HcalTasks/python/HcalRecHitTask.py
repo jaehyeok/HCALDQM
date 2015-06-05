@@ -368,6 +368,88 @@ hcalRecHitTask = cms.EDAnalyzer(
 			)
 		),
 
+		#	Plots took from FSQ meeting. Energy vs LS
+		HB_RecHitEnergyVSls			= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string("HB RecHit Energy vs LS" + 
+				cutstr_no),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(250),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(250),
+				title	= cms.untracked.string("LS")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(100),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(200),
+				title	= cms.untracked.string("Energy (GeV)")
+			)
+		),
+		HE_RecHitEnergyVSls			= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string("HE RecHit Energy vs LS" + 
+				cutstr_no),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(250),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(250),
+				title	= cms.untracked.string("LS")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(100),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(200),
+				title	= cms.untracked.string("Energy (GeV)")
+			)
+		),
+		HO_RecHitEnergyVSls			= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string("HO RecHit Energy vs LS" + 
+				cutstr_no),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(250),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(250),
+				title	= cms.untracked.string("LS")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(100),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(200),
+				title	= cms.untracked.string("Energy (GeV)")
+			)
+		),
+		HF_RecHitEnergyVSls			= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string("HF RecHit Energy vs LS" + 
+				cutstr_no),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(250),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(250),
+				title	= cms.untracked.string("LS")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(100),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(200),
+				title	= cms.untracked.string("Energy (GeV)")
+			)
+		),
+
 		HBHEHFD1_RecHitOccupancy			= cms.untracked.PSet(
 				path	= cms.untracked.string("Hcal/%s" % moduleName),
 				kind	= cms.untracked.string("TH2D"),
