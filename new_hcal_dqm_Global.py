@@ -17,9 +17,9 @@ cmssw			= os.getenv("CMSSW_VERSION").split("_")
 debugstr		= "### HcalDQM::cfg::DEBUG: "
 warnstr			= "### HcalDQM::cfg::WARN: "
 errorstr		= "### HcalDQM::cfg::ERROR:"
-useOfflineGT	= False
-useFileInput	= False
-useMap		= False
+useOfflineGT	= True
+useFileInput	= True
+useMap		= True
 
 #-------------------------------------
 #	Central DQM Stuff imports
@@ -27,6 +27,7 @@ useMap		= False
 from DQM.Integration.test.online_customizations_cfi import *
 if useOfflineGT:
 	process.load('DQM.Integration.test.FrontierCondition_GT_Offline_cfi')
+	process.GlobalTag.globaltag = 'GR_E_V42::All'
 else:
 	process.load('DQM.Integration.test.FrontierCondition_GT_cfi')
 if useFileInput:
@@ -117,7 +118,6 @@ process.load("DQM.HcalTasks.HcalPhaseScanTask")
 #	Will not be here for Online DQM
 #-------------------------------------
 if useMap:
-	process.GlobalTag.globaltag = 'GR_E_V42::All'
 	process.es_pool = cms.ESSource("PoolDBESSource",
 			process.CondDBSetup,
 			timetype = cms.string('runnumber'),
@@ -127,7 +127,8 @@ if useMap:
 						"HcalElectronicsMapRcd"
 					),
 					tag = cms.string(
-						"HcalElectronicsMap_v7.00_offline"					  )
+						"HcalElectronicsMap_v7.05_hlt"
+					)
 				)
 			),
 			connect = cms.string(
@@ -143,6 +144,11 @@ process.vmeDigis = process.hcalDigis.clone()
 process.vmeDigis.FEDs = cms.untracked.vint32(719, 720)
 
 #-------------------------------------
+#	For Debugginb
+#-------------------------------------
+process.hcalTPTask.moduleParameters.debug = 0
+
+#-------------------------------------
 #	Hcal DQM Tasks Sequence Definition
 #-------------------------------------
 process.tasksSequence = cms.Sequence(
@@ -152,7 +158,7 @@ process.tasksSequence = cms.Sequence(
 		*process.hcalLEDTask
 		*process.hcalLaserTask
 		*process.hcalNoiseTask
-		*process.hcalPedestalTask
+#		*process.hcalPedestalTask
 		*process.hcalRawTask
 		*process.hcalRecHitTask
 		*process.hcalTPTask

@@ -22,6 +22,19 @@ namespace hcaldqm
 				continue;
 		}
 	}
+
+	namespace packaging
+	{
+		bool isHFTrigTower(int absieta)
+		{
+			return absieta>=29 ? 1 : 0;
+		}
+
+		bool isHBHETrigTower(int absieta)
+		{
+			return !hcaldqm::packaging::isHFTrigTower(absieta);
+		}
+	}
 }
 
 

@@ -29,7 +29,7 @@ class HcalDigiTask : public hcaldqm::HcalDQSource
 	private:
 		//	declare the template for specializing
 		template<typename Hit>
-		void specialize(Hit const& hit, std::string const&);
+		void specialize(Hit const& hit, std::string const&, int const wtw=1);
 		
 		//	define and initialize the collection processors
 		DEFPROCESSOR(HBHEDigiCollection, HBHEDataFrame);

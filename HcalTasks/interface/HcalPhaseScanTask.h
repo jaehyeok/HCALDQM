@@ -29,7 +29,8 @@ class HcalPhaseScanTask : public hcaldqm::HcalDQSource
 		//	MEs Collection come from the base class
 		//	Here, we only need module specific parameters
 		template<typename Hit>
-		void specialize(Hit const& hit, std::string const&);
+		void specialize(Hit const& hit, std::string const&,
+				int const wtw=1);
 
 		//	Define the processors
 		DEFPROCESSOR(HFDigiCollection, HFDataFrame);

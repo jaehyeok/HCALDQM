@@ -93,7 +93,8 @@ HcalPedestalTask::HcalPedestalTask(edm::ParameterSet const&ps):
 }
 
 template<typename Hit>
-void HcalPedestalTask::specialize(Hit const& hit, std::string const& nameRes)
+void HcalPedestalTask::specialize(Hit const& hit, std::string const& nameRes,
+		int const wtw)
 {
 	int iphi = hit.id().iphi();
 	int ieta = hit.id().ieta();

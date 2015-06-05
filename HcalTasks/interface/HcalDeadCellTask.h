@@ -30,7 +30,8 @@ class HcalDeadCellTask : public hcaldqm::HcalDQSource
 //		DEFPROCESSOR(HFDigiCollection, HFDataFrame);
 
 		template<typename Hit>
-		void specialize(Hit const&, std::string const&);
+		void specialize(Hit const&, std::string const&, 
+				int const wtw=1);
 };
 
 #endif

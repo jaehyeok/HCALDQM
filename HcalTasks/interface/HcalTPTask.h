@@ -37,10 +37,14 @@ class HcalTPTask : public hcaldqm::HcalDQSource
 		void specialize(Hit const& hit1, Hit const& hit2, std::string const&,
 				int const);
 		template<typename Hit>
-		void check(Hit const& hit, int const wtw);
+		void specialize(Hit const& hit, std::string const& nameRes,
+				int const wtw=1);
+		template<typename Hit>
+		void check(Hit const& hit, std::string const&, int const wtw);
 
 		//	Define and Initialize Comparator for TPs
 		DEFTPCOMPARATOR(HcalTrigPrimDigiCollection, HcalTriggerPrimitiveDigi);
+		DEFPROCESSOR(HcalTrigPrimDigiCollection, HcalTriggerPrimitiveDigi);
 };
 
 #endif

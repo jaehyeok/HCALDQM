@@ -32,6 +32,8 @@ namespace hcaldqm
 			this->extractCalibType(e);
 			if (this->isAllowedCalibType()==false)
 				return;
+
+			this->debug_(_mi.name + " doing work");
 			this->doWork(e, es);
 		}
 		catch (cms::Exception& exc)

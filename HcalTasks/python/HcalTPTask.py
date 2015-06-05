@@ -84,7 +84,8 @@ hcalTPTask = cms.EDAnalyzer(
 		HBHE_SOI_Et_Data				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
-			desc	= cms.untracked.string("HBHE Compressed Et Distribution Data"),
+			desc	= cms.untracked.string(
+				"HBHE SOI Compressed Et Distribution Data"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(256),
@@ -97,7 +98,7 @@ hcalTPTask = cms.EDAnalyzer(
 			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
-				"HBHE Compressed Et Distribution Emulator"),
+				"HBHE SOI Compressed Et Distribution Emulator"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(256),
@@ -109,7 +110,8 @@ hcalTPTask = cms.EDAnalyzer(
 		HF_SOI_Et_Data				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
-			desc	= cms.untracked.string("HF Compressed Et Distribution Data"),
+			desc	= cms.untracked.string(
+				"HF SOI Compressed Et Distribution Data"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(256),
@@ -122,7 +124,7 @@ hcalTPTask = cms.EDAnalyzer(
 			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
-				"HF Compressed Et Distribution Emulator"),
+				"HF SOI Compressed Et Distribution Emulator"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(256),
@@ -184,19 +186,14 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		),
 
-
 		#------------------------------------------------------
-		#	TP Digi Size
+		#	Occupancy Maps Data
 		#------------------------------------------------------
-		HBHEHF_TPSize			= StandardSet.Standard2DMap 
-
-		#------------------------------------------------------
-		#	Occupancy Maps
-		#------------------------------------------------------
-		HBHEHF_TPOccupancyVSieta				= cms.untracked.PSet(
+		HBHEHF_TPOccupancyVSieta_Data				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
-			desc	= cms.untracked.string("HBHEHF TP Occupancy vs ieta"),
+			desc	= cms.untracked.string(
+				"HBHEHF TP Occupancy vs ieta Data"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(83),
@@ -205,10 +202,11 @@ hcalTPTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("ieta")
 			)
 		), 
-		HBHEHF_TPOccupancyVSiphi				= cms.untracked.PSet(
+		HBHEHF_TPOccupancyVSiphi_Data				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
-			desc	= cms.untracked.string("HBHEHF TP Occupancy vs iphi"),
+			desc	= cms.untracked.string(
+				"HBHEHF TP Occupancy vs iphi Data"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(72),
@@ -217,10 +215,10 @@ hcalTPTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("iphi")
 			)
 		), 
-		HF_TPOccupancyVSiphi				= cms.untracked.PSet(
+		HF_TPOccupancyVSiphi_Data				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
-			desc	= cms.untracked.string("HF TP Occupancy vs iphi"),
+			desc	= cms.untracked.string("HF TP Occupancy vs iphi Data"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(72),
@@ -229,10 +227,10 @@ hcalTPTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("iphi")
 			)
 		), 
-		HBHE_TPOccupancyVSiphi				= cms.untracked.PSet(
+		HBHE_TPOccupancyVSiphi_Data				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
-			desc	= cms.untracked.string("HBHE TP Occupancy vs iphi"),
+			desc	= cms.untracked.string("HBHE TP Occupancy vs iphi Data"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(72),
@@ -242,10 +240,85 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		), 
 		
-		HBHEHF_TPOccupancy				= cms.untracked.PSet(
+		HBHEHF_TPOccupancy_Data				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
-			desc	= cms.untracked.string("HBHEHF TP Occupancy"),
+			desc	= cms.untracked.string("HBHEHF TP Occupancy Data"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(83),
+				min		= cms.untracked.double(-41.5),
+				max		= cms.untracked.double(41.5),
+				title	= cms.untracked.string("ieta")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(72),
+				min		= cms.untracked.double(0.5),
+				max		= cms.untracked.double(72.5),
+				title	= cms.untracked.string("iphi")
+			)
+		),
+
+		#------------------------------------------------------
+		#	Occupancy Maps Emulator
+		#------------------------------------------------------
+		HBHEHF_TPOccupancyVSieta_Emul				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string(
+				"HBHEHF TP Occupancy vs ieta Emulator"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(83),
+				min		= cms.untracked.double(-41.5),
+				max		= cms.untracked.double(41.5),
+				title	= cms.untracked.string("ieta")
+			)
+		), 
+		HBHEHF_TPOccupancyVSiphi_Emul			= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string(
+				"HBHEHF TP Occupancy vs iphi Emulator"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(72),
+				min		= cms.untracked.double(0.5),
+				max		= cms.untracked.double(72.5),
+				title	= cms.untracked.string("iphi")
+			)
+		), 
+		HF_TPOccupancyVSiphi_Emul				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string(
+				"HF TP Occupancy vs iphi Emulator"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(72),
+				min		= cms.untracked.double(0.5),
+				max		= cms.untracked.double(72.5),
+				title	= cms.untracked.string("iphi")
+			)
+		), 
+		HBHE_TPOccupancyVSiphi_Emul				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HBHE TP Occupancy vs iphi Emulator"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(72),
+				min		= cms.untracked.double(0.5),
+				max		= cms.untracked.double(72.5),
+				title	= cms.untracked.string("iphi")
+			)
+		), 
+		
+		HBHEHF_TPOccupancy_Emul				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string("HBHEHF TP Occupancy Emulator"),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(83),
@@ -261,5 +334,252 @@ hcalTPTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("iphi")
 			)
 		), 
+
+		HBHEHF_Missing_Data				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string("HBHEHF TP Missing from Data"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(83),
+				min		= cms.untracked.double(-41.5),
+				max		= cms.untracked.double(41.5),
+				title	= cms.untracked.string("ieta")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(72),
+				min		= cms.untracked.double(0.5),
+				max		= cms.untracked.double(72.5),
+				title	= cms.untracked.string("iphi")
+			)
+		), 
+		HBHEHF_Missing_Emul				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string("HBHEHF TP Missing from Emulator"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(83),
+				min		= cms.untracked.double(-41.5),
+				max		= cms.untracked.double(41.5),
+				title	= cms.untracked.string("ieta")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(72),
+				min		= cms.untracked.double(0.5),
+				max		= cms.untracked.double(72.5),
+				title	= cms.untracked.string("iphi")
+			)
+		), 
+
+		#------------------------------------------------------
+		#	Compressed SOI Et Correlation
+		#------------------------------------------------------
+		HF_SOI_Et_Correlation				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string(
+				"Correlation for HF SOI Compressed Et"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(50),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(256.),
+				title	= cms.untracked.string("SOI Et Data")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(50),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(256.),
+				title	= cms.untracked.string("SOI Et Emul")
+			),
+		),
+		HBHE_SOI_Et_Correlation				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string(
+				"Correlation for HBHE SOI Compressed Et"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(50),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(256.),
+				title	= cms.untracked.string("SOI Et Data")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(50),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(256.),
+				title	= cms.untracked.string("SOI Et Emul")
+			),
+		),
+		HF_SOI_FG_Correlation				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string(
+				"Correlation for HF SOI Fine Grain Bit"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(2),
+				min		= cms.untracked.double(-0.5),
+				max		= cms.untracked.double(1.5),
+				title	= cms.untracked.string("SOI FG Data")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(2),
+				min		= cms.untracked.double(-0.5),
+				max		= cms.untracked.double(1.5),
+				title	= cms.untracked.string("SOI FG Emul")
+			),
+		),
+		HBHE_SOI_FG_Correlation				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string(
+				"Correlation for HBHE SOI Fine Grain Bit"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(2),
+				min		= cms.untracked.double(-0.5),
+				max		= cms.untracked.double(1.5),
+				title	= cms.untracked.string("SOI FG Data")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(2),
+				min		= cms.untracked.double(-0.5),
+				max		= cms.untracked.double(1.5),
+				title	= cms.untracked.string("SOI FG Emul")
+			),
+		),
+		HF_Et_Correlation_OOT				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string(
+				"Correlation for HF Compressed Et OOT"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(50),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(256.),
+				title	= cms.untracked.string("Et Data")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(50),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(256.),
+				title	= cms.untracked.string("Et Emul")
+			),
+		),
+		HBHE_Et_Correlation_OOT				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string(
+				"Correlation for HBHE Compressed Et OOT"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(50),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(256.),
+				title	= cms.untracked.string("Et Data")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(50),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(256.),
+				title	= cms.untracked.string("Et Emul")
+			),
+		),
+		HF_FG_Correlation_OOT				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string(
+				"Correlation for HF FG OOT"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(2),
+				min		= cms.untracked.double(-0.5),
+				max		= cms.untracked.double(1.5),
+				title	= cms.untracked.string("FG Data")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(2),
+				min		= cms.untracked.double(0.5),
+				max		= cms.untracked.double(1.5),
+				title	= cms.untracked.string("FG Emul")
+			),
+		),
+		HBHE_FG_Correlation_OOT				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string(
+				"Correlation for HBHE FG OOT"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(2),
+				min		= cms.untracked.double(-0.5),
+				max		= cms.untracked.double(1.5),
+				title	= cms.untracked.string("FG Data")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(2),
+				min		= cms.untracked.double(0.5),
+				max		= cms.untracked.double(1.5),
+				title	= cms.untracked.string("FG Emul")
+			),
+		),
+
+		#------------------------------------------------------
+		#	Flag Maps	
+		#------------------------------------------------------
+		HBHEHF_ErrorFlags				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string(
+				"Error Flags"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(4),
+				min		= cms.untracked.double(-0.5),
+				max		= cms.untracked.double(3.5),
+				title	= cms.untracked.string("Flags")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(2),
+				min		= cms.untracked.double(-0.5),
+				max		= cms.untracked.double(1.5),
+				title	= cms.untracked.string("Subsystem")
+			),
+		),
+		HBHEHF_ErrorFlags_OOT				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			kind	= cms.untracked.string("TH2D"),
+			desc	= cms.untracked.string(
+				"Error Flags OOT"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(4),
+				min		= cms.untracked.double(-0.5),
+				max		= cms.untracked.double(3.5),
+				title	= cms.untracked.string("Flags")
+			),
+			yaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(2),
+				min		= cms.untracked.double(-0.5),
+				max		= cms.untracked.double(1.5),
+				title	= cms.untracked.string("Subsystem")
+			),
+		),
 	)
 )

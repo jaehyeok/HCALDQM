@@ -75,7 +75,8 @@ HcalDigiTask::HcalDigiTask(edm::ParameterSet const&ps):
 
 //	specializer
 template<typename Hit>
-void HcalDigiTask::specialize(Hit const& hit, std::string const& nameRes)
+void HcalDigiTask::specialize(Hit const& hit, std::string const& nameRes,
+		int const wtw)
 {
 	//	offset of BCN for this channel(digi) relative to the nominal 
 	//	in the unpacker. range(-7, +7), -1000 indicates invalid data

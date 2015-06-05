@@ -30,7 +30,7 @@ class HcalRecHitTask : public hcaldqm::HcalDQSource
 
 		//	declare a specializer
 		template<typename Hit>
-		void specialize(Hit const&, std::string const&);
+		void specialize(Hit const&, std::string const&, int const wtw=1);
 
 		//	Some private Variables
 		int		_numRecHits[hcaldqm::constants::STD_NUMSUBS];

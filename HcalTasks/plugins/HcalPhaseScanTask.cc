@@ -47,7 +47,8 @@ HcalPhaseScanTask::HcalPhaseScanTask(edm::ParameterSet const&ps):
 }
 
 template<typename Hit>
-void HcalPhaseScanTask::specialize(Hit const& hit, std::string const&nameRes)
+void HcalPhaseScanTask::specialize(Hit const& hit, std::string const&nameRes,
+		int const wtw)
 {
 	if (nameRes=="HF")
 		hf(hit);

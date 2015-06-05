@@ -39,6 +39,13 @@ namespace hcaldqm
 	 */
 	namespace packaging
 	{
+		//	Resolve if this Trigger Tower comes from HF or HBHE
+		bool isHFTrigTower(int absieta);
+		bool isHBHETrigTower(int absieta);
+
+		/*
+		 *	Packager struct to package/unupackage coordinates
+		 */
 		struct Packager
 		{
 			Packager() {}

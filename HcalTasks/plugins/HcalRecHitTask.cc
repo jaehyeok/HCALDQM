@@ -60,7 +60,8 @@ HcalRecHitTask::HcalRecHitTask(edm::ParameterSet const&ps):
 
 //	specializer
 template<typename Hit>
-void HcalRecHitTask::specialize(Hit const& hit, std::string const& nameRes)
+void HcalRecHitTask::specialize(Hit const& hit, std::string const& nameRes,
+		int const wtw)
 {
 	//	Obtain variables
 	float en	= hit.energy();

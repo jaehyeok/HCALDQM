@@ -70,16 +70,25 @@ namespace hcaldqm
 
 //	The use of this macro must be properly controlled!
 //	Becaue the COLLECTIONTYPE and HITTYPE must go in accord with each other
+//	
+//	Desc: If this macro is used to look at TPs, wtw=1 means you are iterating 
+//	over Data and wtw=2 means iterating over Emulator
 #define DEFPROCESSOR(COLLECTIONTYPE, HITTYPE) \
-	void process(COLLECTIONTYPE const& c, std::string const& nameRes) \
+	void process(COLLECTIONTYPE const& c, std::string const& nameRes,	\
+			int const wtw=1) \
 	{	\
 		for (COLLECTIONTYPE::const_iterator it=c.begin(); it!=c.end(); ++it)	\
 		{	\
+			this->debug_(" Collection isn't empty");	\
 			const HITTYPE hit = (const HITTYPE)(*it);	\
 			if ((nameRes=="HB" && hit.id().subdet()!=HcalBarrel)	\
-					|| (nameRes=="HE" && hit.id().subdet()!=HcalEndcap))	\
+					|| (nameRes=="HE" && hit.id().subdet()!=HcalEndcap)	\
+					|| (nameRes=="HF" &&	\
+						!hcaldqm::packaging::isHFTrigTower(hit.id().ietaAbs()))	\
+					|| (nameRes=="HBHE" &&	\
+						!hcaldqm::packaging::isHBHETrigTower(hit.id().ietaAbs())))	\
 				continue;	\
-			specialize<HITTYPE>(hit, nameRes);	\
+			specialize<HITTYPE>(hit, nameRes, wtw);	\
 		}	\
 	}
 
@@ -135,17 +144,22 @@ namespace hcaldqm
 		for (COLLECTIONTYPE::const_iterator it1=c1.begin();		\
 				it1!=c1.end(); ++it1)	\
 		{	\
+			this->debug_("We have TPs");	\
 			const HITTYPE hit1 = (const HITTYPE)(*it1);	\
 			COLLECTIONTYPE::const_iterator it2=c2.find(hit1.id());	\
 			if (it2==c2.end())	\
 			{	\
-				check<HITTYPE>(hit1, wtw);	\
+				check<HITTYPE>(hit1, nameRes, wtw);	\
+				this->debug_("Didn't find a matching Tower");	\
 				continue;	\
 			}	\
-			if ((nameRes=="HF" && hit1.id().subdet()!=HcalForward))	\
+			if ((nameRes=="HF" && \
+						!hcaldqm::packaging::isHFTrigTower(hit1.id().ietaAbs()))	\
+					|| (nameRes=="HBHE" &&	\
+						!hcaldqm::packaging::isHBHETrigTower(hit1.id().ietaAbs())))	\
 				continue;	\
 			const HITTYPE hit2 = (const HITTYPE)*it2;	\
-			specialize<HITTYPE>(hit1, hit2, wtw);	\
+			specialize<HITTYPE>(hit1, hit2, nameRes, wtw);	\
 		}	\
 	}
 
