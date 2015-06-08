@@ -48,6 +48,29 @@ HcalPedestalTask::HcalPedestalTask(edm::ParameterSet const&ps):
 
 /* virtual */ HcalPedestalTask::~HcalPedestalTask()
 {
+	this->publish();
+}
+
+void HcalPedestalTask::publish()
+{
+	for (int i=0; i<hcaldqm::constants::STD_NUMSUBS; i++)
+		for (int iieta=0; iieta<hcaldqm::constants::STD_NUMIETAS; iieta++)
+			for (int iiphi=0; iiphi<hcaldqm::constants::STD_NUMIPHIS; iiphi++)
+				for (int id=0; id<hcaldqm::constants::STD_NUMDEPTHS; id++)
+					for (int ic=0; ic<hcaldqm::constants::STD_NUMCAPS)
+					{
+						std::pair<double, double> meanrms = 
+							_pedData[i][iieta][iiphi][id][ic].average();
+						double mean = meanrms.first;
+						double rms = meanrms.second();
+						if (mean==-1 || rms==-1)
+							continue;
+
+						_mes[hcaldqm::constants::SUBNAMES[i] + 
+							"_PedMeans_Summary"].Fill(mean);
+						_mes[hcaldqm::constants::SUBNAMES[i] + 
+							"_PedRMSs_Summary"].Fill(rms);
+					}
 }
 
 /* virtual */ void HcalPedestalTask::beginLuminosityBlock(

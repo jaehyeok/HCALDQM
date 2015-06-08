@@ -34,6 +34,7 @@ class HcalPedestalTask : public hcaldqm::HcalDQSource
 		template<typename Hit>
 		void specialize(Hit const& hit, std::string const&,
 				int const wtw=1);
+		void publish();
 
 		DEFPROCESSOR(HBHEDigiCollection, HBHEDataFrame);
 		DEFPROCESSOR(HODigiCollection, HODataFrame);
