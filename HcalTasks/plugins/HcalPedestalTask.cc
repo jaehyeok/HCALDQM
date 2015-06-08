@@ -116,13 +116,13 @@ void HcalPedestalTask::specialize(Hit const& hit, std::string const& nameRes,
 
 	//	Fill up Online Plots
 	double aveP = hcaldqm::math::sum(hit, 0, digisizeToUse-1)/digisizeToUse;
-	_mes[nameRes + "Pedestals"].Fill(aveP);
+	_mes[nameRes + "_Pedestals"].Fill(aveP);
 	if (subdet==hcaldqm::constants::STD_SUBDET_HO)
 		_mes["HOD4_PedestalsMap"].Fill(ieta, iphi, aveP);
 	else
 		_mes["HBHEHFD" + 
 			boost::lexical_cast<std::string>(depth) +
-			"PedestalsMap"].Fill(ieta, iphi, aveP);
+			"_PedestalsMap"].Fill(ieta, iphi, aveP);
 }
 
 /* virtual bool isApplicable()

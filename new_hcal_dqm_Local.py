@@ -16,7 +16,7 @@ options = VarParsing.VarParsing()
 
 options.register(
 	'inputFiles',
-	"file:inputFile.root", #default
+	"root://eoscms.cern.ch//eos/cms/store/group/dpg_hcal/comm_hcal/LS1/USC_244274.root", #default
 	VarParsing.VarParsing.multiplicity.list,
 	VarParsing.VarParsing.varType.string,
 	"Input Files"
@@ -42,7 +42,6 @@ cmssw			= os.getenv("CMSSW_VERSION").split("_")
 debugstr		= "### HcalDQM::cfg::DEBUG: "
 warnstr			= "### HcalDQM::cfg::WARN: "
 errorstr		= "### HcalDQM::cfg::ERROR:"
-useOfflineGT	= True
 local			= True
 useMap			= True
 
@@ -84,7 +83,7 @@ process.dqmSaver.producer = 'DQM'
 process.dqmSaver.saveByLumiSection = 10
 process.dqmSaver.saveByRun = 1
 process.dqmSaver.saveAtJobEnd = False
-process.DQMStore.verbose = 10
+process.DQMStore.verbose = 0
 process.dqmEnv.subSystemFolder = 'Hcal'
 
 #-------------------------------------
@@ -97,7 +96,6 @@ process.load("EventFilter.HcalRawToDigi.HcalRawToDigi_cfi")
 process.load("RecoLocalCalo.Configuration.hcalLocalReco_cff")
 process.load("SimCalorimetry.HcalTrigPrimProducers.hcaltpdigi_cff")
 process.load("CondCore.DBCommon.CondDBSetup_cfi")
-process.load("L1Trigger.Configuration.L1DummyConfig_cff")
 process.load("EventFilter.L1GlobalTriggerRawToDigi.l1GtUnpack_cfi")
 process.load("Configuration.StandardSequences.RawToDigi_Data_cff")
 
@@ -114,7 +112,7 @@ process.load("Configuration.StandardSequences.RawToDigi_Data_cff")
 #-------------------------------------
 process.GlobalTag.globaltag = 'GR_E_V42::All'
 cmssw			= os.getenv("CMSSW_VERSION").split("_")
-rawTag			= cms.InputTag("rawDataCollector")
+rawTag			= cms.InputTag("source")
 process.essourceSev = cms.ESSource(
 		"EmptyESSource",
 		recordName		= cms.string("HcalSeverityLevelComputerRcd"),
@@ -131,7 +129,6 @@ process.valHcalTriggerPrimitiveDigis.FrontEndFormatError = \
 process.HcalTPGCoderULUT.LUTGenerationMode = cms.bool(False)
 process.valHcalTriggerPrimitiveDigis.FG_threshold = cms.uint32(2)
 process.valHcalTriggerPrimitiveDigis.InputTagFEDRaw = rawTag
-process.l1GtUnpack.DaqGtInputTag = rawTag
 process.hbhereco = process.hbheprereco.clone()
 
 #-------------------------------------
@@ -184,19 +181,16 @@ process.vmeDigis.FEDs = cms.untracked.vint32(719, 720)
 #	Hcal DQM Tasks Sequence Definition
 #-------------------------------------
 process.tasksSequence = cms.Sequence(
-		process.hcalDigiTask
-		*process.hcalDeadCellTask
-		*process.hcalHotCellTask
-		*process.hcalLEDTask
+		process.hcalLEDTask
 		*process.hcalLaserTask
-		*process.hcalNoiseTask
 		*process.hcalPedestalTask
 )
 
 #-------------------------------------
 #	Some Settings for Local(a la DetDiag)
 #-------------------------------------
-process.hcalDigis.InputLabel = cms.InputTag("source")
+process.hcalDigis.InputLabel = rawTag
+process.hcalDigiTask.moduleParameters.debug = cms.untracked.int32(0)
 
 #-------------------------------------
 #	Execution Sequence Definition
@@ -204,7 +198,6 @@ process.hcalDigis.InputLabel = cms.InputTag("source")
 process.p = cms.Path(
 					process.hcalDigis
 					*process.tasksSequence
-                    #*process.qTester
                     *process.dqmEnv
                     *process.dqmSaver)
 

@@ -95,7 +95,7 @@ HcalLEDTask::HcalLEDTask(edm::ParameterSet const&ps):
 template<typename Hit>
 void HcalLEDTask::specialize(Hit const& hit, std::string const& nameRes,
 		int const wtw)
-{
+{/*
 	int iphi = hit.id().iphi();
 	int ieta = hit.id().ieta();
 	int depth = hit.id().depth();
@@ -110,6 +110,7 @@ void HcalLEDTask::specialize(Hit const& hit, std::string const& nameRes,
 			[_packager[subdet].idepth(depth)]
 			[hit.sample(i).capid()].push(hit.sample(i).adc());
 	}
+	*/
 }
 
 DEFINE_FWK_MODULE(HcalLEDTask);

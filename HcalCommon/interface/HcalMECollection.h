@@ -113,6 +113,7 @@ namespace hcaldqm
 			edm::ParameterSet const&						_ps;
 			int												_debug;
 			bool											_wasRetr;
+			bool											_wasBooked;
 	};
 
 }

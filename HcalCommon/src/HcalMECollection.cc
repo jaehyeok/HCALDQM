@@ -8,7 +8,7 @@ namespace hcaldqm
 	{}
 
 	HcalMECollection::HcalMECollection(edm::ParameterSet const& ps, int debug)
-		: _ps(ps), _debug(debug), _wasRetr(false)
+		: _ps(ps), _debug(debug), _wasRetr(false), _wasBooked(false)
 	{}
 
 	HcalMECollection::~HcalMECollection()
@@ -31,6 +31,9 @@ namespace hcaldqm
 	//	for booking Monitor Elements based on PSet
 	void HcalMECollection::book(DQMStore::IBooker &ib)
 	{
+		if (_wasBooked==true)
+			return;
+
 		std::vector<std::string> const& meNames(_ps.getParameterNames());
 		for (std::vector<std::string>::const_iterator it=meNames.begin();
 				it!=meNames.end(); ++it)
@@ -40,6 +43,8 @@ namespace hcaldqm
 			meinfo.setName(meName);
 			doBook(ib, meinfo);
 		}
+
+		_wasBooked = true;
 	}
 
 	void HcalMECollection::doBook(DQMStore::IBooker &ib,
@@ -65,7 +70,7 @@ namespace hcaldqm
 				_namesResetLS.push_back(info.getName());
 		}
 
-		debug(info.getName());
+		debug("Starting Booking " + path + " " + info.getName());
 		ib.setCurrentFolder(path);
 		if  (kind=="INT")
 //			case MonitorElement::DQM_KIND_INT:
@@ -92,10 +97,14 @@ namespace hcaldqm
 			me = NULL;
 
 		std::string key = info.getName();
-		debug(key);
+		debug("Finished Booking " + path + " " + key);
 		std::pair<MEMap::iterator, bool> r = _meMap.insert(key, me);
 		if (r.second)
 			return;
+
+		//	If false, then it means we attempting double booking
+		this->debug("Double Booking!!!");
+		return;
 	}
 
 	//	for retirieving Monitor Elements based on PSet
