@@ -160,7 +160,7 @@ namespace hcaldqm
 				return std::pair<double, double>(mean, rms);
 
 			for (int ii=i; ii<=j; ii++)
-				sum2+=arr[ii]*(i-mean)*(i-mean);
+				sum2+=arr[ii]*(ii-mean)*(ii-mean);
 			rms = sqrt(sum2/sumn);
 			return std::pair<double, double>(mean, rms);
 		}

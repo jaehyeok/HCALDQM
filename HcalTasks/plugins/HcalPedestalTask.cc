@@ -47,6 +47,10 @@ HcalPedestalTask::HcalPedestalTask(edm::ParameterSet const&ps):
 }
 
 /* virtual */ HcalPedestalTask::~HcalPedestalTask()
+{}
+
+/* virtual */ void HcalPedestalTask::endRun(const edm::Run& r,
+		edm::EventSetup const& es)
 {
 	this->publish();
 }
@@ -57,12 +61,12 @@ void HcalPedestalTask::publish()
 		for (int iieta=0; iieta<hcaldqm::constants::STD_NUMIETAS; iieta++)
 			for (int iiphi=0; iiphi<hcaldqm::constants::STD_NUMIPHIS; iiphi++)
 				for (int id=0; id<hcaldqm::constants::STD_NUMDEPTHS; id++)
-					for (int ic=0; ic<hcaldqm::constants::STD_NUMCAPS)
+					for (int ic=0; ic<hcaldqm::constants::STD_NUMCAPS; ic++)
 					{
 						std::pair<double, double> meanrms = 
 							_pedData[i][iieta][iiphi][id][ic].average();
 						double mean = meanrms.first;
-						double rms = meanrms.second();
+						double rms = meanrms.second;
 						if (mean==-1 || rms==-1)
 							continue;
 

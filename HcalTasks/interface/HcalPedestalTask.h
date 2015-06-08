@@ -23,6 +23,7 @@ class HcalPedestalTask : public hcaldqm::HcalDQSource
 				edm::EventSetup const&);
 		virtual void endLuminosityBlock(edm::LuminosityBlock const&,
 				edm::EventSetup const&);
+		virtual void endRun(const edm::Run& r, const edm::EventSetup& es);
 
 		virtual void reset(int const);
 		virtual bool isApplicable(edm::Event const&);
