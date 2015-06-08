@@ -188,15 +188,28 @@ process.tasksSequence = cms.Sequence(
 
 #-------------------------------------
 #	Some Settings for Local(a la DetDiag)
+#	All Modules are muted by default
+#	isGlobal must be set to False!
+#	Get the Local Trigger Information	
 #-------------------------------------
 process.hcalDigis.InputLabel = rawTag
-process.hcalDigiTask.moduleParameters.debug = cms.untracked.int32(0)
+process.hcalLEDTask.moduleParameters.isGlobal = cms.untracked.bool(False)
+process.hcalPedestalTask.moduleParameters.isGlobal = cms.untracked.bool(False)
+process.hcalLaserTask.moduleParameters.isGlobal = cms.untracked.bool(False)
+
+process.tbunpack = cms.EDProducer(
+	"HcalTBObjectUnpacker",
+	IncludeUnmatchedHits	= cms.untracked.bool(False),
+	HcalTriggerFED			= cms.untracked.int32(1)
+)
+process.tbunpack.fedRawDataCollectionTag = rawTag
 
 #-------------------------------------
 #	Execution Sequence Definition
 #-------------------------------------
 process.p = cms.Path(
-					process.hcalDigis
+					process.tbunpack
+					*process.hcalDigis
 					*process.tasksSequence
                     *process.dqmEnv
                     *process.dqmSaver)

@@ -116,7 +116,7 @@ namespace hcaldqm
 			}
 
 			//	To be reimplemented by Tasks. isApplicable is true by default
-			virtual bool isApplicable(edm::Event const& e) const 
+			virtual bool isApplicable(edm::Event const& e)
 			{return _mi.isApplicable;}
 			virtual bool shouldBook() const {return true;}
 

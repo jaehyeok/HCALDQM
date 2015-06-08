@@ -126,7 +126,7 @@ void HcalPedestalTask::specialize(Hit const& hit, std::string const& nameRes,
 }
 
 //	Important!
-/* virtual */ bool isApplicable(edm::Event const& e)
+/* virtual */ bool HcalPedestalTask::isApplicable(edm::Event const& e)
 {
 
 	if (!_mi.isGlobal)
