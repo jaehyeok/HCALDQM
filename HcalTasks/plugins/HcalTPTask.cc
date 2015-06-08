@@ -46,12 +46,6 @@ HcalTPTask::HcalTPTask(edm::ParameterSet const&ps):
 
 	INITCOLL(_labels["HCALTPD"], ctpd);
 	INITCOLL(_labels["HCALTPE"], ctpe);
-//	this->debug_(_mi.name + 
-//			" obtained collections. Processing Data/Emulator TPs");
-//	this->process(*ctpd, std::string("HBHE"), 1);
-//	this->process(*ctpd, std::string("HF"), 1);
-//	this->process(*ctpe, std::string("HBHE"), 2);
-//	this->process(*ctpe, std::string("HF"), 2);
 
 	this->debug_(_mi.name +	" Comparing Data vs Emulator");
 	this->process(*ctpd, *ctpe, std::string("HBHE"), 1);

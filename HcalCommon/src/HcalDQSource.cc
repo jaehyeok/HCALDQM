@@ -22,18 +22,23 @@ namespace hcaldqm
 	{
 		try
 		{
+			//	Virtual Method that determines if we have to run this module 
+			//	for this event
+			if (!(this->isApplicable()))
+				return;
+
+			//	Do event Reset and extract calibtype
 			this->reset(0);
-			//	Update event counters;
-			_mi.evsTotal++; _mes["EventsProcessed"].Fill(_mi.evsTotal);
-			_mi.evsGood++;
-			_mi.evsPerLS++; _mes["EventsProcessedPerLS"].Fill(_mi.evsPerLS);
-			_mi.currentLS = e.luminosityBlock();
-	
 			this->extractCalibType(e);
 			if (this->isAllowedCalibType()==false)
 				return;
 
 			this->debug_(_mi.name + " doing work");
+			//	Update event counters;
+			_mi.evsTotal++; _mes["EventsProcessed"].Fill(_mi.evsTotal);
+			_mi.evsGood++;
+			_mi.evsPerLS++; _mes["EventsProcessedPerLS"].Fill(_mi.evsPerLS);
+			_mi.currentLS = e.luminosityBlock();
 			this->doWork(e, es);
 		}
 		catch (cms::Exception& exc)
@@ -57,7 +62,8 @@ namespace hcaldqm
 	/* virtual */ void HcalDQSource::bookHistograms(DQMStore::IBooker &ib,
 			edm::Run const& r, edm::EventSetup const& es)
 	{
-		_mes.book(ib);
+		if (this->shouldBook())
+			_mes.book(ib);
 	}
 
 	/* virtual */ void HcalDQSource::dqmBeginRun(edm::Run const& r,

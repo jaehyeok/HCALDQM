@@ -53,6 +53,7 @@ namespace hcaldqm
 		std::string			name;
 		int					debug;
 		bool				isGlobal;
+		bool				isApplicable;
 
 		int					currentCalibType;
 		int					evsTotal;
@@ -113,6 +114,10 @@ namespace hcaldqm
 				std::cout << "%MSG-d HcalDQM::" << _mi.name << "::" << msg;
 				std::cout << std::endl;
 			}
+
+			//	To be reimplemented by Tasks. isApplicable is true by default
+			virtual bool isApplicable() const {return _mi.isApplicable;}
+			virtual bool shouldBook() const {return _mi.isApplicable;}
 
 		protected:
 			ModuleInfo		_mi;

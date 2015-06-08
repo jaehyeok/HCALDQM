@@ -125,7 +125,16 @@ void HcalPedestalTask::specialize(Hit const& hit, std::string const& nameRes,
 			"PedestalsMap"].Fill(ieta, iphi, aveP);
 }
 
+/* virtual bool isApplicable()
+{
+	return !_mi.isGlobal;
+}
 
+virtual  bool shouldBook()
+{
+	return !_mi.isGlobal;
+}
+*/
 
 DEFINE_FWK_MODULE(HcalPedestalTask);
 

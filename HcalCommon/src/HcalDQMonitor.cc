@@ -21,6 +21,7 @@ namespace hcaldqm
 		_mi.evsGood				= 0;
 		_mi.evsPerLS			= 0;
 		_mi.currentLS			= 0;
+		_mi.isApplicable		= true;
 	}
 
 	//	Destructor

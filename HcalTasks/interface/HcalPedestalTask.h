@@ -25,6 +25,8 @@ class HcalPedestalTask : public hcaldqm::HcalDQSource
 				edm::EventSetup const&);
 
 		virtual void reset(int const);
+//		virtual bool isApplicable();
+//		virtual bool shouldBook();
 
 	private:
 		//	MEs Collection come from the base class
