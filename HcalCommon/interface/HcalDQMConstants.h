@@ -1,6 +1,8 @@
 #ifndef HCALDQMCONSTANTS_H
 #define HCALDQMCONSTANTS_H
 
+#include "DQM/HcalCommon/interface/HcalCommonHeaders.h"
+
 namespace hcaldqm
 {
 	namespace constants
@@ -12,6 +14,13 @@ namespace hcaldqm
 		int const MIN_FIBER_IDLEOFFSET				=-7;
 		int const MAX_FIBER_IDLEOFFSET				=	7;
 		int const INVALID_FIBER_IDLEOFFSET			=	-1000;
+		int const CT_NORMAL							= hc_Null;
+		int const CT_PED							= hc_Pedestal;
+		int const CT_RADDAM							= hc_RADDAM;
+		int const CT_HBHEHPD						= hc_HBHEHPD;
+		int const CT_HOSIPM							= hc_HBHEHPD;
+		int const CT_HFPMT							= hc_HFPMT;
+		
 	
 		//	Hcal Specific Constants (not SubSystem specific)
 		int const STD_NUMSUBS						=		4;

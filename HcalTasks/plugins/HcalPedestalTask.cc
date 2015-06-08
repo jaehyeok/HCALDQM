@@ -125,11 +125,27 @@ void HcalPedestalTask::specialize(Hit const& hit, std::string const& nameRes,
 			"_PedestalsMap"].Fill(ieta, iphi, aveP);
 }
 
-/* virtual bool isApplicable()
+//	Important!
+/* virtual */ bool isApplicable(edm::Event const& e)
 {
-	return !_mi.isGlobal;
+
+	if (!_mi.isGlobal)
+	{
+		//	For Local
+		edm::Handle<HcalTBTriggerData>		ctbt;
+		INITCOLL(_labels["HCALTBTrigger"], ctbt);
+		return ctbt->wasSpillIgnorantPedestalTrigger();
+	}
+	else
+	{
+		//	For Global
+		return _mi.currentCalibType==hcaldqm::constants::CT_PED;
+	}
+
+	return false;
 }
 
+/*
 virtual  bool shouldBook()
 {
 	return !_mi.isGlobal;

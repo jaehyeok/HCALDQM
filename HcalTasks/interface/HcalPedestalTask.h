@@ -25,7 +25,7 @@ class HcalPedestalTask : public hcaldqm::HcalDQSource
 				edm::EventSetup const&);
 
 		virtual void reset(int const);
-//		virtual bool isApplicable();
+		virtual bool isApplicable(edm::Event const&);
 //		virtual bool shouldBook();
 
 	private:

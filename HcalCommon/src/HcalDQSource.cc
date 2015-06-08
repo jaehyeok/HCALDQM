@@ -22,15 +22,15 @@ namespace hcaldqm
 	{
 		try
 		{
-			//	Virtual Method that determines if we have to run this module 
-			//	for this event
-			if (!(this->isApplicable()))
-				return;
-
 			//	Do event Reset and extract calibtype
 			this->reset(0);
 			this->extractCalibType(e);
 			if (this->isAllowedCalibType()==false)
+				return;
+
+			//	Virtual Method that determines if we have to run this module 
+			//	for this event, after extracting calibration type
+			if (!(this->isApplicable(e)))
 				return;
 
 			this->debug_(_mi.name + " doing work");

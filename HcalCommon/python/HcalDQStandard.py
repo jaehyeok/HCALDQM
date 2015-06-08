@@ -28,7 +28,8 @@ StandardSet		= cms.untracked.PSet(
 		L1GT			= cms.untracked.InputTag("l1GtUnpack"),
 		HLTResults		= cms.untracked.InputTag("TriggerResults"),
 		DCS				= cms.untracked.InputTag("scalersRawToDigi"),
-		UnpackerReport	= cms.untracked.InputTag("hcalDigis")
+		UnpackerReport	= cms.untracked.InputTag("hcalDigis"),
+		HCALTBTrigger	= cms.untracked.InputTag("tbunpack")
 	),
 
 	EventsProcessed		= cms.untracked.PSet(
