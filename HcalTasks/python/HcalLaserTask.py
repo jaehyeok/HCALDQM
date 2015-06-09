@@ -340,10 +340,10 @@ hcalLaserTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("TS")
 			)
 		),
-		HB_TimingMeans_Summary				= cms.untracked.PSet(
+		HB_TimingRMSs_Summary				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
-			desc	= cms.untracked.string("HB Laser Timing Means Summary" 
+			desc	= cms.untracked.string("HB Laser Timing RMSs Summary" 
 				+ strdesc_nocuts),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
@@ -392,10 +392,10 @@ hcalLaserTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("TS")
 			)
 		),
-		HE_TimingMeans_Summary				= cms.untracked.PSet(
+		HE_TimingRMSs_Summary				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
-			desc	= cms.untracked.string("HE Laser Timing Means Summary" 
+			desc	= cms.untracked.string("HE Laser Timing RMSs Summary" 
 				+ strdesc_nocuts),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
@@ -444,10 +444,10 @@ hcalLaserTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("TS")
 			)
 		),
-		HO_TimingMeans_Summary				= cms.untracked.PSet(
+		HO_TimingRMSs_Summary				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
-			desc	= cms.untracked.string("HO Laser Timing Means Summary" 
+			desc	= cms.untracked.string("HO Laser Timing RMSs Summary" 
 				+ strdesc_nocuts),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
@@ -496,10 +496,10 @@ hcalLaserTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("TS")
 			)
 		),
-		HF_TimingMeans_Summary				= cms.untracked.PSet(
+		HF_TimingRMSs_Summary				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
-			desc	= cms.untracked.string("HF Laser Timing Means Summary" 
+			desc	= cms.untracked.string("HF Laser Timing RMSs Summary" 
 				+ strdesc_nocuts),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),

@@ -62,28 +62,27 @@ void HcalLEDTask::publish()
 		for (int iieta=0; iieta<hcaldqm::constants::STD_NUMIETAS; iieta++)
 			for (int iiphi=0; iiphi<hcaldqm::constants::STD_NUMIPHIS; iiphi++)
 				for (int id=0; id<hcaldqm::constants::STD_NUMDEPTHS; id++)
-					for (int ic=0; ic<hcaldqm::constants::STD_NUMCAPS; ic++)
-					{
-						std::pair<double, double> smeanrms = 
-							_ledData[i][iieta][iiphi][id][ic].average();
-						std::pair<double, double> tmeanrms = 
-							_ledData[i][iieta][iiphi][id][ic].averageTiming();
-						double smean = smeanrms.first;
-						double srms = smeanrms.second;
-						double tmean = tmeanrms.first;
-						double trms = tmeanrms.second;
-						if (smean==-1 || srms==-1 || tmean==-1 || trms==-1)
-							continue;
+				{
+					std::pair<double, double> smeanrms = 
+						_ledData[i][iieta][iiphi][id].average();
+					std::pair<double, double> tmeanrms = 
+						_ledData[i][iieta][iiphi][id].averageTiming();
+					double smean = smeanrms.first;
+					double srms = smeanrms.second;
+					double tmean = tmeanrms.first;
+					double trms = tmeanrms.second;
+					if (smean==-1 || srms==-1 || tmean==-1 || trms==-1)
+						continue;
 
-						_mes[hcaldqm::constants::SUBNAMES[i] + 
-							"_SignalMeans_Summary"].Fill(smean);
-						_mes[hcaldqm::constants::SUBNAMES[i] + 
-							"_SignalRMSs_Summary"].Fill(srms);
-						_mes[hcaldqm::constants::SUBNAMES[i] + 
-							"_TimingMeans_Summary"].Fill(tmean);
-						_mes[hcaldqm::constants::SUBNAMES[i] + 
-							"_TimingRMSs_Summary"].Fill(trms);
-					}
+					_mes[hcaldqm::constants::SUBNAMES[i] + 
+						"_SignalMeans_Summary"].Fill(smean);
+					_mes[hcaldqm::constants::SUBNAMES[i] + 
+						"_SignalRMSs_Summary"].Fill(srms);
+					_mes[hcaldqm::constants::SUBNAMES[i] + 
+						"_TimingMeans_Summary"].Fill(tmean);
+					_mes[hcaldqm::constants::SUBNAMES[i] + 
+						"_TimingRMSs_Summary"].Fill(trms);
+				}
 }
 
 /* virtual */ void HcalLEDTask::beginLuminosityBlock(
@@ -151,12 +150,12 @@ void HcalLEDTask::specialize(Hit const& hit, std::string const& nameRes,
 	{
 		_ledData[subdet][_packager[subdet].iieta(ieta)]
 			[_packager[subdet].iiphi(iphi)]
-			[_packager[subdet].idepth(depth)]
-			[hit.sample(i).capid()].push(hit.sample(i).nominal_fC(),
-					hcaldqm::constants::PEDESTALS[subdet]);
+			[_packager[subdet].idepth(depth)].push(hit,
+					hcaldqm::constants::PEDESTALS[subdet],
+					digisize>4 ? 2 : 1);
 
 		_mes[nameRes + "_Shape"].Fill(i, 
-			hit.sampel(i).nominal_fC()-hcaldqm::constans::PEDESTALS[subdet]);
+			hit.sample(i).nominal_fC()-hcaldqm::constants::PEDESTALS[subdet]);
 	}
 
 	_mes[nameRes + "_Signal"].Fill(sigQ);
@@ -190,8 +189,8 @@ void HcalLEDTask::specialize(Hit const& hit, std::string const& nameRes,
 	{
 		//	for Global
 		return (_mi.currentCalibType==hcaldqm::constants::CT_HBHEHPD
-				|| _mi.currentCalibTypes==hcaldqm::constants::CT_HOSIPM
-				|| _mi.currentCalibTypes==hcaldqm::constants::CT_HFPMT);
+				|| _mi.currentCalibType==hcaldqm::constants::CT_HOSIPM
+				|| _mi.currentCalibType==hcaldqm::constants::CT_HFPMT);
 	}
 
 	return false;

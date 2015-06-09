@@ -274,12 +274,13 @@ namespace hcaldqm
 			}
 
 			template<typename Hit>
-			void push(Hit const& hit, double ped=0)
+			void push(Hit const& hit, double ped=0,
+					int tstogo=1)
 			{
 				double aveT = hcaldqm::math::aveT(hit, ped);
 				double sumQ = hcaldqm::math::sum(hit, 
-						hcaldqm::math::maxTS(hit, ped)-1, 
-						hcaldqm::math::maxTS(hit, ped)+1, ped);
+						hcaldqm::math::maxTS(hit, ped)-tstogo, 
+						hcaldqm::math::maxTS(hit, ped)+tstogo, ped);
 
 				if (sumQ<hcaldqm::constants::STD_MINLEDQ)
 					_underflow++;

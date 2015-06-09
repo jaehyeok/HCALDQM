@@ -32,7 +32,10 @@ namespace hcaldqm
 	void HcalMECollection::book(DQMStore::IBooker &ib)
 	{
 		if (_wasBooked==true)
+		{
+			this->debug("Trying to Do Double Booking!!!");
 			return;
+		}
 
 		std::vector<std::string> const& meNames(_ps.getParameterNames());
 		for (std::vector<std::string>::const_iterator it=meNames.begin();

@@ -42,7 +42,7 @@ class HcalLaserTask : public hcaldqm::HcalDQSource
 
 		hcaldqm::HcalDQLedData _laserData[hcaldqm::constants::STD_NUMSUBS]
 			[hcaldqm::constants::STD_NUMIETAS][hcaldqm::constants::STD_NUMIPHIS]
-			[hcaldqm::constants::STD_NUMDEPTHS][hcaldqm::constants::STD_NUMCAPS];
+			[hcaldqm::constants::STD_NUMDEPTHS];
 		hcaldqm::packaging::Packager _packager[hcaldqm::constants::STD_NUMSUBS];
 };
 

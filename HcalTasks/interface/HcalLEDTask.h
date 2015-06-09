@@ -25,7 +25,7 @@ class HcalLEDTask : public hcaldqm::HcalDQSource
 		virtual void endRun(edm::Run const& r, edm::EventSetup const& es);
 
 		virtual void reset(int const);
-		virtual bool isApplicable(edm::Event cosnt&);
+		virtual bool isApplicable(edm::Event const&);
 
 	private:
 		//	MEs Collection come from the base class
@@ -41,7 +41,7 @@ class HcalLEDTask : public hcaldqm::HcalDQSource
 
 		hcaldqm::HcalDQLedData _ledData[hcaldqm::constants::STD_NUMSUBS]
 			[hcaldqm::constants::STD_NUMIETAS][hcaldqm::constants::STD_NUMIPHIS]
-			[hcaldqm::constants::STD_NUMDEPTHS][hcaldqm::constants::STD_NUMCAPS];
+			[hcaldqm::constants::STD_NUMDEPTHS];
 		hcaldqm::packaging::Packager _packager[hcaldqm::constants::STD_NUMSUBS];
 };
 
