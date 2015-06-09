@@ -20,6 +20,7 @@ StandardSet.Standard2DMap.desc			= cms.untracked.string(
 
 strdesc = " Recorded Per Event " 
 strdesc_summary = " Summary of All Events "
+subsystem = "Hcal"
 
 #	Main Task Description
 hcalPedestalTask = cms.EDAnalyzer(
@@ -33,7 +34,8 @@ hcalPedestalTask = cms.EDAnalyzer(
 		#	TH1D Pedestals recorded per each event. For Online Mon
 		#--------------------------------------------------------
 		HB_Pedestals			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s/HB" % (
+				subsystem, moduleName)),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string(
 				"HB 4Caps-averaged Pedestals." + strdesc),
@@ -46,7 +48,8 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 		HE_Pedestals			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s/HE" % (
+				subsystem, moduleName)),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string(
 				"HE 4Caps-averaged Pedestals." + strdesc),
@@ -59,7 +62,8 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 		HO_Pedestals			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s/HO" % (
+				subsystem, moduleName)),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string(
 				"HO 4Caps-averaged Pedestals." + strdesc),
@@ -72,7 +76,8 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 		HF_Pedestals			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s/HF" % (
+				subsystem, moduleName)),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string(
 				"HF 4Caps-averaged Pedestals." + strdesc),
@@ -90,7 +95,8 @@ hcalPedestalTask = cms.EDAnalyzer(
 		#	to the values we obtain using HcalDQPedClass
 		#--------------------------------------------------------
 		HBHEHFD1_PedestalsMap		= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s" % (
+				subsystem, moduleName)),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D1 4Caps-averaged Pedestals" + strdesc),
@@ -103,7 +109,8 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD2_PedestalsMap		= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s" % (
+				subsystem, moduleName)),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D2 4Caps-averaged Pedestals" + strdesc),
@@ -116,7 +123,8 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD3_PedestalsMap		= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s" % (
+				subsystem, moduleName)),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D3 4Caps-averaged Pedestals" + strdesc),
@@ -129,7 +137,8 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 		HOD4_PedestalsMap		= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s" % (
+				subsystem, moduleName)),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HO D4 4Caps-averaged Pedestals" + strdesc),
@@ -152,7 +161,8 @@ hcalPedestalTask = cms.EDAnalyzer(
 		#	1D Histos of Pedestal Means/RMSs as Obtained from HcalDQPedData
 		#--------------------------------------------------------
 		HB_PedMeans_Summary			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s/HB" % (
+				subsystem, moduleName)),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string(
 				"HB Pedestal Means. All 4 CAPS Separately " + strdesc_summary),
@@ -165,7 +175,8 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 		HE_PedMeans_Summary			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s/HE" % (
+				subsystem, moduleName)),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string(
 				"HE Pedestal Means. All 4 CAPS Separately " + strdesc_summary),
@@ -178,7 +189,8 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 		HF_PedMeans_Summary			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s/HF" % (
+				subsystem, moduleName)),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string(
 				"HF Pedestal Means. All 4 CAPS Separately " + strdesc_summary),
@@ -191,7 +203,8 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 		HO_PedMeans_Summary			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s/HO" % (
+				subsystem, moduleName)),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string(
 				"HO Pedestal Means. All 4 CAPS Separately " + strdesc_summary),
@@ -204,7 +217,8 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 		HB_PedRMSs_Summary			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s/HB" % (
+				subsystem, moduleName)),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string(
 				"HB Pedestal RMSs. All 4 CAPS Separately " + strdesc_summary),
@@ -217,7 +231,8 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 		HE_PedRMSs_Summary			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s/HE" % (
+				subsystem, moduleName)),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string(
 				"HE Pedestal RMSs. All 4 CAPS Separately " + strdesc_summary),
@@ -230,7 +245,8 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 		HF_PedRMSs_Summary			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s/HF" % (
+				subsystem, moduleName)),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string(
 				"HF Pedestal RMSs. All 4 CAPS Separately " + strdesc_summary),
@@ -243,7 +259,8 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 		HO_PedRMSs_Summary			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s/HO" % (
+				subsystem, moduleName)),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string(
 				"HO Pedestal RMSs. All 4 CAPS Separately " + strdesc_summary),

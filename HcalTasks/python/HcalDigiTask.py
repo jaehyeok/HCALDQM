@@ -3,6 +3,7 @@ import FWCore.ParameterSet.Config as cms
 #	import standard cfg and clone the parameters
 import DQM.HcalCommon.HcalDQStandard as standard
 StandardSet = standard.StandardSet.clone()
+subsystem = standard.subsystem
 
 #	List of FEDs
 lFEDs = [x+700 for x in range(32)] + [929, 1118, 1120, 1122]
@@ -11,29 +12,29 @@ moduleName = "HcalDigiTask"
 #	Modify whatever is in standard importing
 StandardSet.moduleParameters.name		= cms.untracked.string(moduleName)
 StandardSet.EventsProcessed.path		= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/%s/" % (subsystem, moduleName))
 StandardSet.EventsProcessedPerLS.path	= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/%s/" % (subsystem, moduleName))
 
 HcalDigiSizeCheck	= StandardSet.Standard2DSubSystem.clone()
 HcalDigiSizeCheck.desc = cms.untracked.string("Digi Size Check")
 HcalDigiSizeCheck.yaxis.title = cms.untracked.string("Digi Size")
-HcalDigiSizeCheck.path = cms.untracked.string("Hcal/%s" % moduleName)
+HcalDigiSizeCheck.path = cms.untracked.string("%s/%s" % (subsystem, moduleName))
 
 HcalDigiSizeExp		= StandardSet.Standard2DSubSystem.clone()
 HcalDigiSizeExp.desc =	cms.untracked.string("Digi Size Expected(from RAW)")
 HcalDigiSizeExp.yaxis.title	= cms.untracked.string("Digi Size")
-HcalDigiSizeExp.path = cms.untracked.string("Hcal/%s" % moduleName)
+HcalDigiSizeExp.path = cms.untracked.string("%s/%s" % (subsystem, moduleName))
 
 HcalMap = [StandardSet.Standard2DMap.clone() for x in range(3)]
 for i in range(3):
-	HcalMap[i].path						= cms.untracked.string("Hcal/%s/" %
-			moduleName)
+	HcalMap[i].path						= cms.untracked.string("%s/%s/" % (
+			subsystem, moduleName))
 	HcalMap[i].desc						= cms.untracked.string(
 	"HB HE HF Depth%d Occupancy" % (i+1))
 
 HcalProblemsMap = StandardSet.Standard2DMap.clone()
-HcalProblemsMap.path = cms.untracked.string("Hcal/%s/" % moduleName)
+HcalProblemsMap.path = cms.untracked.string("%s/%s/" % (subsystem, moduleName))
 HcalProblemsMap.desc = cms.untracked.string(
 		"Hcal Problems Rate per LS for Digis")
 
@@ -51,7 +52,7 @@ hcalDigiTask = cms.EDAnalyzer(
 
 		#	Digi Shape Histograms
 		HB_DigiShape			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			path	= cms.untracked.string("%s/%s/HB" % (subsystem, moduleName)),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HB Digi Shape." + noCutsStr),
 			xaxis	= cms.untracked.PSet(
@@ -63,7 +64,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)
 		),
 		HB_DigiShape_ZSCut			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			path	= cms.untracked.string("%s/%s/HB" % (subsystem, moduleName)),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HB Digi Shape." + 
 				ZSCutStr),
@@ -76,7 +77,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)
 		),
 		HE_DigiShape			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			path	= cms.untracked.string("%s/%s/HE" % (subsystem, moduleName)),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE Digi Shape." + noCutsStr),
 			xaxis	= cms.untracked.PSet(
@@ -88,7 +89,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)
 		),
 		HE_DigiShape_ZSCut			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			path	= cms.untracked.string("%s/%s/HE" % (subsystem, moduleName)),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE Digi Shape." + 
 				ZSCutStr),
@@ -101,7 +102,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)
 		),
 		HF_DigiShape				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/%s/HF" % (subsystem, moduleName)),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF Digi Shape." + noCutsStr),
 			xaxis	= cms.untracked.PSet(

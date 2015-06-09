@@ -3,6 +3,7 @@ import FWCore.ParameterSet.Config as cms
 #	import standard cfg and clone the parameters
 import DQM.HcalCommon.HcalDQStandard as standard
 StandardSet = standard.StandardSet.clone()
+subsystem = standard.subsystem
 
 #	List of FEDs
 lFEDs = [x+700 for x in range(32)] + [929, 1118, 1120, 1122]
@@ -11,11 +12,11 @@ moduleName = "HcalBeamTask"
 #	Modify whatever is in standard importing
 StandardSet.moduleParameters.name		= cms.untracked.string(moduleName)
 StandardSet.EventsProcessed.path		= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/%s/" % (subsystem, moduleName))
 StandardSet.EventsProcessedPerLS.path	= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/%s/" % (subsystem, moduleName))
 StandardSet.Standard2DMap.path			= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/%s/" % (subsystem, moduleName))
 StandardSet.Standard2DMap.desc			= cms.untracked.string(
 	"Some Beam Task 2D Map")
 
@@ -28,7 +29,7 @@ hcalBeamTask = cms.EDAnalyzer(
 		EventsProcessedPerLS	= StandardSet.EventsProcessedPerLS,
 		
 		HEBeamShape				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			path	= cms.untracked.string("%s/%s/HE" % (subsystem, moduleName)),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE Beam Shape"),
 			xaxis	= cms.untracked.PSet(
@@ -40,7 +41,7 @@ hcalBeamTask = cms.EDAnalyzer(
 			)
 		),
 		HFBeamShape				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/%s/HF" % (subsystem, moduleName)),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF Beam Shape"),
 			xaxis	= cms.untracked.PSet(
@@ -52,7 +53,7 @@ hcalBeamTask = cms.EDAnalyzer(
 			)
 		),
 		HOBeamShape				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			path	= cms.untracked.string("%s/%s/HO" % (subsystem, moduleName)),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HO Beam Shape"),
 			xaxis	= cms.untracked.PSet(
