@@ -158,7 +158,7 @@ process.tasksSequence = cms.Sequence(
 		*process.hcalLEDTask
 		*process.hcalLaserTask
 		*process.hcalNoiseTask
-#		*process.hcalPedestalTask
+		*process.hcalPedestalTask
 		*process.hcalRawTask
 		*process.hcalRecHitTask
 		*process.hcalTPTask
