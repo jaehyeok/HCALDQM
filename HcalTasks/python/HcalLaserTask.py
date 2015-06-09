@@ -18,6 +18,8 @@ StandardSet.Standard2DMap.path			= cms.untracked.string(
 StandardSet.Standard2DMap.desc			= cms.untracked.string(
 	"Some Laser Task 2D Map")
 
+strdesc_nocuts = " 3TS Integral, No Cuts Applied"
+
 #	Main Task Description
 hcalLaserTask = cms.EDAnalyzer(
 	moduleName,
@@ -26,7 +28,22 @@ hcalLaserTask = cms.EDAnalyzer(
 		EventsProcessed			= StandardSet.EventsProcessed,
 		EventsProcessedPerLS	= StandardSet.EventsProcessedPerLS,
 		
-		HELaserShape				= cms.untracked.PSet(
+		#---------------------------------------------------------
+		#	1D Shapes
+		#---------------------------------------------------------
+		HB_Shape				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HB Laser Shape"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(10),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10.),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HE_Shape				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE Laser Shape"),
@@ -38,7 +55,19 @@ hcalLaserTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("TS")
 			)
 		),
-		HFLaserShape				= cms.untracked.PSet(
+		HO_Shape				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HO Laser Shape"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(10),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10.),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HF_Shape				= cms.untracked.PSet(
 			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF Laser Shape"),
@@ -50,37 +79,436 @@ hcalLaserTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("TS")
 			)
 		),
-		HOLaserShape				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+
+		#---------------------------------------------------------
+		#	TH1D signals recorded per each event. For Online Monitring
+		#---------------------------------------------------------
+		HB_Signal				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
-			desc	= cms.untracked.string("HO Laser Shape"),
+			desc	= cms.untracked.string("HB Laser Signals" + strdesc_nocuts),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
-				nbins	= cms.untracked.int32(10),
+				nbins	= cms.untracked.int32(500),
 				min		= cms.untracked.double(0.),
-				max		= cms.untracked.double(10.),
-				title	= cms.untracked.string("TS")
-			)	
+				max		= cms.untracked.double(3000),
+				title	= cms.untracked.string("Nominal fC")
+			)
 		),
-		LaserSizeCheck			= StandardSet.Standard2DMap 
-#		me4			= cms.untracked.PSet(
-#			path	= cms.untracked.string("Hcal/%s/" % moduleName),
-#			kind	= cms.untracked.string("PROF"),
-#			desc	= cms.untracked.string("Example ME4"),
-#			xaxis	= cms.untracked.PSet(
-#				edges	= cms.untracked.bool(False),
-#				nbins	= cms.untracked.int32(200),
-#				min		= cms.untracked.double(-100),
-#				max		= cms.untracked.double(100),
-#				title	= cms.untracked.string("me4-X")
-#			),
-#			yaxis	= cms.untracked.PSet(
-#				wnbins	= cms.untracked.bool(True),
-#				nbins	= cms.untracked.int32(100),
-#				min		= cms.untracked.double(-50),
-#				max		= cms.untracked.double(50),
-#				title	= cms.untracked.string("me4-Y")
-#			)
-#		)
+		HE_Signal				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HE Laser Signals " + strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(500),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(3000),
+				title	= cms.untracked.string("Nominal fC")
+			)
+		),
+		HO_Signal				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HO Laser Signals " + strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(500),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(3000),
+				title	= cms.untracked.string("Nominal fC")
+			)
+		),
+		HF_Signal				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HF Laser Signals " + strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(500),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(3000),
+				title	= cms.untracked.string("Nominal fC")
+			)
+		),
+		HB_Timing				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HB Laser Timing " + strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(100),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HE_Timing				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HE Laser Timing " + strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(100),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HO_Timing				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HO Laser Timing " + strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(100),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HF_Timing				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HF Laser Timing " + strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(100),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10),
+				title	= cms.untracked.string("TS")
+			)
+		),
+
+		#---------------------------------------------------------
+		#	2D Profiles. Recorded each Event. Means/RMSs to be
+		#	close to the values we obtain using HcalDQLedClass
+		#---------------------------------------------------------
+		HBHEHFD1_SignalMap			= cms.untracked.PSet(
+			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			kind		= cms.untracked.string("PROF2D"),
+			desc		= cms.untracked.string(
+				"HBHEHF D1 Laser Signal Map " + strdesc_nocuts
+			),
+			xaxis		= StandardSet.ietaAxis.clone(),
+			yaxis		= StandardSet.iphiAxis.clone(),
+			zaxis		= cms.untracked.PSet(
+				wnbins	= cms.untracked.bool(False),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(4000)
+			)
+		),
+		HBHEHFD2_SignalMap			= cms.untracked.PSet(
+			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			kind		= cms.untracked.string("PROF2D"),
+			desc		= cms.untracked.string(
+				"HBHEHF D2 Laser Signal Map " + strdesc_nocuts
+			),
+			xaxis		= StandardSet.ietaAxis.clone(),
+			yaxis		= StandardSet.iphiAxis.clone(),
+			zaxis		= cms.untracked.PSet(
+				wnbins	= cms.untracked.bool(False),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(4000)
+			)
+		),
+		HBHEHFD3_SignalMap			= cms.untracked.PSet(
+			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			kind		= cms.untracked.string("PROF2D"),
+			desc		= cms.untracked.string(
+				"HBHEHF D3 Laser Signal Map " + strdesc_nocuts
+			),
+			xaxis		= StandardSet.ietaAxis.clone(),
+			yaxis		= StandardSet.iphiAxis.clone(),
+			zaxis		= cms.untracked.PSet(
+				wnbins	= cms.untracked.bool(False),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(4000)
+			)
+		),
+		HOD4_SignalMap			= cms.untracked.PSet(
+			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			kind		= cms.untracked.string("PROF2D"),
+			desc		= cms.untracked.string(
+				"HO D4 Laser Signal Map " + strdesc_nocuts
+			),
+			xaxis		= StandardSet.ietaAxis.clone(),
+			yaxis		= StandardSet.iphiAxis.clone(),
+			zaxis		= cms.untracked.PSet(
+				wnbins	= cms.untracked.bool(False),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(4000)
+			)
+		),
+		HBHEHFD1_TimingMap			= cms.untracked.PSet(
+			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			kind		= cms.untracked.string("PROF2D"),
+			desc		= cms.untracked.string(
+				"HBHEHF D1 Laser Timing Map " + strdesc_nocuts
+			),
+			xaxis		= StandardSet.ietaAxis.clone(),
+			yaxis		= StandardSet.iphiAxis.clone(),
+			zaxis		= cms.untracked.PSet(
+				wnbins	= cms.untracked.bool(False),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(10)
+			)
+		),
+		HBHEHFD2_TimingMap			= cms.untracked.PSet(
+			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			kind		= cms.untracked.string("PROF2D"),
+			desc		= cms.untracked.string(
+				"HBHEHF D2 Laser Timing Map " + strdesc_nocuts
+			),
+			xaxis		= StandardSet.ietaAxis.clone(),
+			yaxis		= StandardSet.iphiAxis.clone(),
+			zaxis		= cms.untracked.PSet(
+				wnbins	= cms.untracked.bool(False),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(10)
+			)
+		),
+		HBHEHFD3_TimingMap			= cms.untracked.PSet(
+			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			kind		= cms.untracked.string("PROF2D"),
+			desc		= cms.untracked.string(
+				"HBHEHF D3 Laser Timing Map " + strdesc_nocuts
+			),
+			xaxis		= StandardSet.ietaAxis.clone(),
+			yaxis		= StandardSet.iphiAxis.clone(),
+			zaxis		= cms.untracked.PSet(
+				wnbins	= cms.untracked.bool(False),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(10)
+			)
+		),
+		HOD4_TimingMap			= cms.untracked.PSet(
+			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			kind		= cms.untracked.string("PROF2D"),
+			desc		= cms.untracked.string(
+				"HO D4 Laser Timing Map " + strdesc_nocuts
+			),
+			xaxis		= StandardSet.ietaAxis.clone(),
+			yaxis		= StandardSet.iphiAxis.clone(),
+			zaxis		= cms.untracked.PSet(
+				wnbins	= cms.untracked.bool(False),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(10)
+			)
+		),
+
+		#---------------------------------------------------------
+		#	1D Histos of Laser Signal/Timing Means/RMSs as obtained
+		#	from HcalDQLedData
+		#---------------------------------------------------------
+		HB_SignalMeans_Summary				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HB Laser Signal Means Summary" 
+				+ strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(500),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(3000),
+				title	= cms.untracked.string("Nominal fC")
+			)
+		),
+		HB_SignalRMSs_Summary				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HB Laser Signal RMSs Summary" 
+				+ strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(200),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(1000),
+				title	= cms.untracked.string("Nominal fC")
+			)
+		),
+		HB_TimingMeans_Summary				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HB Laser Timing Means Summary" 
+				+ strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(100),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HB_TimingMeans_Summary				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HB Laser Timing Means Summary" 
+				+ strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(50),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(5),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HE_SignalMeans_Summary				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HE Laser Signal Means Summary" 
+				+ strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(500),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(3000),
+				title	= cms.untracked.string("Nominal fC")
+			)
+		),
+		HE_SignalRMSs_Summary				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HE Laser Signal RMSs Summary" 
+				+ strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(200),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(1000),
+				title	= cms.untracked.string("Nominal fC")
+			)
+		),
+		HE_TimingMeans_Summary				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HE Laser Timing Means Summary" 
+				+ strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(100),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HE_TimingMeans_Summary				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HE Laser Timing Means Summary" 
+				+ strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(50),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(5),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HO_SignalMeans_Summary				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HO Laser Signal Means Summary" 
+				+ strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(500),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(3000),
+				title	= cms.untracked.string("Nominal fC")
+			)
+		),
+		HO_SignalRMSs_Summary				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HO Laser Signal RMSs Summary" 
+				+ strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(200),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(1000),
+				title	= cms.untracked.string("Nominal fC")
+			)
+		),
+		HO_TimingMeans_Summary				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HO Laser Timing Means Summary" 
+				+ strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(100),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HO_TimingMeans_Summary				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HO Laser Timing Means Summary" 
+				+ strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(50),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(5),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HF_SignalMeans_Summary				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HF Laser Signal Means Summary" 
+				+ strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(500),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(3000),
+				title	= cms.untracked.string("Nominal fC")
+			)
+		),
+		HF_SignalRMSs_Summary				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HF Laser Signal RMSs Summary" 
+				+ strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(200),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(1000),
+				title	= cms.untracked.string("Nominal fC")
+			)
+		),
+		HF_TimingMeans_Summary				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HF Laser Timing Means Summary" 
+				+ strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(100),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HF_TimingMeans_Summary				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HF Laser Timing Means Summary" 
+				+ strdesc_nocuts),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(50),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(5),
+				title	= cms.untracked.string("TS")
+			)
+		),
+
 	)
 )

@@ -22,8 +22,10 @@ class HcalLEDTask : public hcaldqm::HcalDQSource
 				edm::EventSetup const&);
 		virtual void endLuminosityBlock(edm::LuminosityBlock const&,
 				edm::EventSetup const&);
+		virtual void endRun(edm::Run const& r, edm::EventSetup const& es);
 
 		virtual void reset(int const);
+		virtual bool isApplicable(edm::Event cosnt&);
 
 	private:
 		//	MEs Collection come from the base class
@@ -31,6 +33,7 @@ class HcalLEDTask : public hcaldqm::HcalDQSource
 		template<typename Hit>
 		void specialize(Hit const& hit, std::string const&,
 				int const wtw=1);
+		void publish();
 
 		DEFPROCESSOR(HBHEDigiCollection, HBHEDataFrame);
 		DEFPROCESSOR(HODigiCollection, HODataFrame);

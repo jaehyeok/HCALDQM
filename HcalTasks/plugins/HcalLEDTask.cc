@@ -50,6 +50,42 @@ HcalLEDTask::HcalLEDTask(edm::ParameterSet const&ps):
 {
 }
 
+/* virtual */ void HcalLEDTask::endRun(edm::Run const& r,
+		edm::EventSetup const& es)
+{
+	this->publish();
+}
+
+void HcalLEDTask::publish()
+{
+	for (int i=0; i<hcaldqm::constants::STD_NUMSUBS; i++)
+		for (int iieta=0; iieta<hcaldqm::constants::STD_NUMIETAS; iieta++)
+			for (int iiphi=0; iiphi<hcaldqm::constants::STD_NUMIPHIS; iiphi++)
+				for (int id=0; id<hcaldqm::constants::STD_NUMDEPTHS; id++)
+					for (int ic=0; ic<hcaldqm::constants::STD_NUMCAPS; ic++)
+					{
+						std::pair<double, double> smeanrms = 
+							_ledData[i][iieta][iiphi][id][ic].average();
+						std::pair<double, double> tmeanrms = 
+							_ledData[i][iieta][iiphi][id][ic].averageTiming();
+						double smean = smeanrms.first;
+						double srms = smeanrms.second;
+						double tmean = tmeanrms.first;
+						double trms = tmeanrms.second;
+						if (smean==-1 || srms==-1 || tmean==-1 || trms==-1)
+							continue;
+
+						_mes[hcaldqm::constants::SUBNAMES[i] + 
+							"_SignalMeans_Summary"].Fill(smean);
+						_mes[hcaldqm::constants::SUBNAMES[i] + 
+							"_SignalRMSs_Summary"].Fill(srms);
+						_mes[hcaldqm::constants::SUBNAMES[i] + 
+							"_TimingMeans_Summary"].Fill(tmean);
+						_mes[hcaldqm::constants::SUBNAMES[i] + 
+							"_TimingRMSs_Summary"].Fill(trms);
+					}
+}
+
 /* virtual */ void HcalLEDTask::beginLuminosityBlock(
 		edm::LuminosityBlock const& lb, edm::EventSetup const& es)
 {
@@ -95,12 +131,20 @@ HcalLEDTask::HcalLEDTask(edm::ParameterSet const&ps):
 template<typename Hit>
 void HcalLEDTask::specialize(Hit const& hit, std::string const& nameRes,
 		int const wtw)
-{/*
+{
+	//	Get the Info you need
 	int iphi = hit.id().iphi();
 	int ieta = hit.id().ieta();
 	int depth = hit.id().depth();
 	int subdet = hit.id().subdet()-1;
 	int digisize = hit.size();
+
+	double maxTS = hcaldqm::math::maxTS(hit,
+			hcaldqm::constants::PEDESTALS[subdet]);
+	double aveT = hcaldqm::math::aveT(hit,
+			hcaldqm::constants::PEDESTALS[subdet]);
+	double sigQ = hcaldqm::math::sum(hit,
+			maxTS-1, maxTS+1, hcaldqm::constants::PEDESTALS[subdet]);
 
 	//	Fills up Prioprietary Class for LED Monitoring
 	for (int i=0; i<digisize; i++)
@@ -108,9 +152,49 @@ void HcalLEDTask::specialize(Hit const& hit, std::string const& nameRes,
 		_ledData[subdet][_packager[subdet].iieta(ieta)]
 			[_packager[subdet].iiphi(iphi)]
 			[_packager[subdet].idepth(depth)]
-			[hit.sample(i).capid()].push(hit.sample(i).adc());
+			[hit.sample(i).capid()].push(hit.sample(i).nominal_fC(),
+					hcaldqm::constants::PEDESTALS[subdet]);
+
+		_mes[nameRes + "_Shape"].Fill(i, 
+			hit.sampel(i).nominal_fC()-hcaldqm::constans::PEDESTALS[subdet]);
 	}
-	*/
+
+	_mes[nameRes + "_Signal"].Fill(sigQ);
+	_mes[nameRes + "_Timing"].Fill(aveT);
+	if (subdet==hcaldqm::constants::STD_SUBDET_HO)
+	{
+		_mes["HOD4_SignalMap"].Fill(ieta, iphi, sigQ);
+		_mes["HOD4_TimingMap"].Fill(ieta, iphi, aveT);
+	}
+	else
+	{
+		_mes["HBHEHFD" + 
+			boost::lexical_cast<std::string>(depth) +
+			"_SignalMap"].Fill(ieta, iphi, sigQ);
+		_mes["HBHEHFD" + 
+			boost::lexical_cast<std::string>(depth) +
+			"_TimingMap"].Fill(ieta, iphi, aveT);
+	}
+}
+
+/* virtual */ bool HcalLEDTask::isApplicable(edm::Event const& e)
+{
+	if (!_mi.isGlobal)
+	{
+		//	For Local
+		edm::Handle<HcalTBTriggerData>			ctbt;
+		INITCOLL(_labels["HCALTBTrigger"], ctbt);
+		return ctbt->wasLEDTrigger();
+	}
+	else
+	{
+		//	for Global
+		return (_mi.currentCalibType==hcaldqm::constants::CT_HBHEHPD
+				|| _mi.currentCalibTypes==hcaldqm::constants::CT_HOSIPM
+				|| _mi.currentCalibTypes==hcaldqm::constants::CT_HFPMT);
+	}
+
+	return false;
 }
 
 DEFINE_FWK_MODULE(HcalLEDTask);
