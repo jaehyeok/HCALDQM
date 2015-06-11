@@ -41,10 +41,27 @@ namespace hcaldqm
 		for (std::vector<std::string>::const_iterator it=meNames.begin();
 				it!=meNames.end(); ++it)
 		{
-			std::string meName = *it;
-			MEInfo meinfo(_ps.getUntrackedParameterSet(*it)); 
-			meinfo.setName(meName);
-			doBook(ib, meinfo);
+	 		std::string meName = *it;
+
+			//	parse VPSet differently
+			if (this->isVPSet(meName))
+			{
+				edm::VParameterSet const& psv = _ps.getUntrackedParameterSetVector(*it);
+				for (edm::VParameterSet::const_iterator jt=psv.begin();
+						jt!=psv.end(); ++jt)
+				{
+					MEInfo meinfo(*jt);
+					std::string name = jt->getUntrackedParameter<std::string>("name");
+					meinfo.setName(name);
+					doBook(ib, meinfo);
+				}
+			}
+			else
+			{
+				MEInfo meinfo(_ps.getUntrackedParameterSet(*it)); 
+				meinfo.setName(meName);
+				doBook(ib, meinfo);
+			}
 		}
 
 		_wasBooked = true;

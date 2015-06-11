@@ -337,6 +337,54 @@ hcalDigiTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("Unlin. ADC")
 			)	
 		),
+		HB_fCPerTS		= cms.untracked.PSet(
+			path	= cms.untracked.string("%s/%s/HB" % (subsystem, moduleName)),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HB fC per 1TS." + noCutsStr),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(100),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(10000),
+				title	= cms.untracked.string("Nominal fC")
+			)	
+		),
+		HE_fCPerTS		= cms.untracked.PSet(
+			path	= cms.untracked.string("%s/%s/HE" % (subsystem, moduleName)),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HE fC per 1TS." + noCutsStr),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(100),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(10000),
+				title	= cms.untracked.string("Nominal fC")
+			)	
+		),
+		HO_fCPerTS		= cms.untracked.PSet(
+			path	= cms.untracked.string("%s/%s/HO" % (subsystem, moduleName)),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HO fC per 1TS." + noCutsStr),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(100),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(10000),
+				title	= cms.untracked.string("Nominal fC")
+			)	
+		),
+		HF_fCPerTS		= cms.untracked.PSet(
+			path	= cms.untracked.string("%s/%s/HF" % (subsystem, moduleName)),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HF fC per 1TS." + noCutsStr),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(100),
+				min		= cms.untracked.double(0),
+				max		= cms.untracked.double(10000),
+				title	= cms.untracked.string("Nominal fC")
+			)	
+		),
 
 		#	Diagnostic Plots
 		HB_Presamples		= cms.untracked.PSet(

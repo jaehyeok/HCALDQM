@@ -135,7 +135,6 @@ void HcalTPTask::specialize(Hit const& hit1, Hit const& hit2,
 		bool fg_2 = hit2.sample(i).fineGrain();
 		bool matched_nonSOI_Et = abs(cEt_1-cEt_2)==0 ? true : false;
 		bool matched_nonSOI_FG = fg_1==fg_2;
-//		int diff = abs(cEt_1-cEt_2);
 
 		_mes[nameRes + "_EtShape_Data"].Fill(i, cEt_1);
 		_mes[nameRes + "_EtShape_Emul"].Fill(i, cEt_2);

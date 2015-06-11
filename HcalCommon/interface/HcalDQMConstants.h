@@ -20,6 +20,8 @@ namespace hcaldqm
 		int const CT_HBHEHPD						= hc_HBHEHPD;
 		int const CT_HOSIPM							= hc_HBHEHPD;
 		int const CT_HFPMT							= hc_HFPMT;
+		int const UTCA_DATAFLAVOR					= 0x5;
+		int const VME_DCC_OFFSET					= 700;
 		
 	
 		//	Hcal Specific Constants (not SubSystem specific)

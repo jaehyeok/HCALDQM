@@ -18,6 +18,8 @@ StandardSet.Standard2DMap.path			= cms.untracked.string(
 StandardSet.Standard2DMap.desc			= cms.untracked.string(
 	"TP Digi Size")
 
+cutstr_ZS = " DQM Et ZS Cut Applied(Et) "
+
 #	Main Task Description
 hcalTPTask = cms.EDAnalyzer(
 	moduleName,
@@ -69,6 +71,58 @@ hcalTPTask = cms.EDAnalyzer(
 			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF Compressed Et Shape Emulator"),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(10),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10.),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HBHE_EtShape_Data_ZS				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HBHE Compressed Et Shape Data" + 
+				cutstr_ZS),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(10),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10.),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HBHE_EtShape_Emul_ZS				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HBHE Compressed Et Shape Emul" + 
+				cutstr_ZS),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(10),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10.),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HF_EtShape_Data_ZS				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HF Compressed Et Shape Data" + 
+				cutstr_ZS),
+			xaxis	= cms.untracked.PSet(
+				edges	= cms.untracked.bool(False),
+				nbins	= cms.untracked.int32(10),
+				min		= cms.untracked.double(0.),
+				max		= cms.untracked.double(10.),
+				title	= cms.untracked.string("TS")
+			)
+		),
+		HF_EtShape_Emul_ZS				= cms.untracked.PSet(
+			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			kind	= cms.untracked.string("TH1D"),
+			desc	= cms.untracked.string("HF Compressed Et Shape Emul" + 
+				cutstr_ZS),
 			xaxis	= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
 				nbins	= cms.untracked.int32(10),

@@ -33,10 +33,15 @@ class HcalRawTask : public hcaldqm::HcalDQSource
 		
 		//	declare the raw specializer
 		void specialize(FEDRawData const&, int ifed);
+		
+		bool isuTCA(int const ifed) const;
+		//	For AMC13/uTCA Cards
+		void amc13(hcal::AMC13Header const*, unsigned int const, int const);
+		//	For DCC/VME Cards
+		void dcc(HcalDCCHeader const*, unsigned int const, int const);
 
-//	private:
-		//	MEs Collection come from the base class
-		//	Here, we only need module specific parameters
+		//	Some Members
+		int				_numFEDsUnpackedPerEvent;
 };
 
 #endif

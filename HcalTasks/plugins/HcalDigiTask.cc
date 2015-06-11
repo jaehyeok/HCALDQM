@@ -107,6 +107,10 @@ void HcalDigiTask::specialize(Hit const& hit, std::string const& nameRes,
 	double sumQ_3TS = hcaldqm::math::sum(hit, maxTS-1, maxTS+1, (subdet<4) ? 
 			hcaldqm::constants::PEDESTALS[subdet]:0);
 
+//	std::cout << nameRes << "  " << maxTS << "  " << aveT << "  " 
+//		<< sumQ_3TS << "  " << hit.size()
+//		<< std::endl;
+
 	_mes["DigiSize"].Fill(subdet, hit.size());
 	_mes["DigiSizeExp"].Fill(subdet, digisize);
 	if (subdet<4)
@@ -119,15 +123,18 @@ void HcalDigiTask::specialize(Hit const& hit, std::string const& nameRes,
 				(subdet<4) ? hit.sample(i).nominal_fC() - 
 				hcaldqm::constants::PEDESTALS[subdet]: 0);
 		_mes[nameRes+"_ADCCountPerTS"].Fill(hit.sample(i).adc());
+		_mes[nameRes+"_fCPerTS"].Fill(hit.sample(i).nominal_fC());
 		_mes[nameRes+"_Presamples"].Fill(hit.presamples());
 		_mes[nameRes+"_CapId"].Fill(hit.sample(i).capid());
+//		std::cout << hit.sample(i).adc() << "  ";
 
 
-		if (sumQ_3TS>hcaldqm::constants::DIGI_ZSCUT[(subdet<4)?subdet:0])
+		if (sumQ_3TS>hcaldqm::constants::DIGI_ZSCUT[(subdet<4) ? subdet : 0])
 			_mes[nameRes+"_DigiShape_ZSCut"].Fill(i, 
 				(subdet<4) ? hit.sample(i).nominal_fC() - 
 				hcaldqm::constants::PEDESTALS[subdet]: 0);
 	}
+//	std::cout << std::endl;
 
 	//	Fill Plots if > ZSCut
 	if (sumQ_3TS<hcaldqm::constants::DIGI_ZSCUT[(subdet<4)?subdet:0])

@@ -151,7 +151,9 @@ namespace hcaldqm
 					|| (nameRes=="HBHE" &&	\
 						!hcaldqm::packaging::isHBHETrigTower(hit1.id().ietaAbs())))	\
 				continue;	\
-			COLLECTIONTYPE::const_iterator it2=c2.find(hit1.id());	\
+			COLLECTIONTYPE::const_iterator it2=c2.find(	\
+					HcalTrigTowerDetId(hit1.id().ieta(), hit1.id().iphi(),	\
+						hit1.id().depth()==1 ? 0 : 1));	\
 			if (it2==c2.end())	\
 			{	\
 				check<HITTYPE>(hit1, nameRes, wtw);	\

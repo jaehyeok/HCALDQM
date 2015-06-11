@@ -25,6 +25,8 @@
 #include "DQM/HcalCommon/interface/HcalDQMConstants.h"
 #include "EventFilter/HcalRawToDigi/interface/HcalDCCHeader.h"
 #include "EventFilter/HcalRawToDigi/interface/HcalHTRData.h"
+#include "EventFilter/HcalRawToDigi/interface/HcalUHTRData.h"
+#include "EventFilter/HcalRawToDigi/interface/AMC13Header.h"
 #include "DataFormats/FEDRawData/interface/FEDNumbering.h"
 #include "TBDataFormats/HcalTBObjects/interface/HcalTBTriggerData.h"
 

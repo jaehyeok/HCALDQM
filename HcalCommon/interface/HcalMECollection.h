@@ -88,6 +88,10 @@ namespace hcaldqm
 				std::cout << "%MSG-d HCALDQM::" << "HcalMECollection::" << msg;
 				std::cout << std::endl;
 			}
+			inline bool isVPSet(std::string const& name)
+			{
+				return name[0]=='v';
+			}
 
 		private:
 			//	do the actual Booking
