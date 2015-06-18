@@ -186,8 +186,10 @@ namespace hcaldqm
 		template<typename Hit>
 		double sum(Hit const& hit, int i, int j, double ped=0)
 		{
-			if (i<0 || j>=hit.size())
-				return -1;
+			if (i<0 && j<hit.size())
+				i=0;
+			else if (i>=0 && j>=hit.size())
+				j=hit.size()-1;
 
 			double sumQ = 0;
 			for (int ii=i; ii<=j; ii++)
