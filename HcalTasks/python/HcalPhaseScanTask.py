@@ -1,7 +1,7 @@
 import FWCore.ParameterSet.Config as cms 
 
 #	import standard cfg and clone the parameters
-import DQM.HcalCommon.HcalDQStandard as standard
+import DQM.%sCommon.%sDQStandard as standard
 StandardSet = standard.StandardSet.clone()
 
 #	List of FEDs
@@ -11,11 +11,11 @@ moduleName = "HcalPhaseScanTask"
 #	Modify whatever is in standard importing
 StandardSet.moduleParameters.name		= cms.untracked.string(moduleName)
 StandardSet.EventsProcessed.path		= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/" % moduleName)
 StandardSet.EventsProcessedPerLS.path	= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/" % moduleName)
 StandardSet.Standard2DMap.path			= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/" % moduleName)
 StandardSet.Standard2DMap.desc			= cms.untracked.string(
 	"Some PhaseScan Task 2D Map")
 
@@ -30,7 +30,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 		
 		#	Source-specific
 		HFP_Shape				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HFP Signal Shape. Nominal fC are on the Y-axis"),
@@ -43,7 +43,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFM_Shape				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HFM Signal Shape. Nominal fC are on the Y-axis"),
@@ -56,7 +56,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFP_Shape_3TSQg20		= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HFP Signal Shape (Using Sum NomfC of 3TS>%d). Nominal fC are on the Y-axis" % 20),
@@ -69,7 +69,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFM_Shape_3TSQg20		= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HFM Signal Shape (Using Sum NomfC of 3TS>%d). Nominal fC are on the Y-axis" % 20),
@@ -82,7 +82,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFP_Timing				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HFP Timing (Nominal fC-weighted time average). After the Cut"),
@@ -95,7 +95,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFM_Timing				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HFM Timing (Nominal fC-weighted time average). After the Cut"),
@@ -108,7 +108,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HF_TimingVSieta			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("PROF"),
 			desc	= cms.untracked.string(
 				"HF Timing (Nominal fC-weighted time average). After the Cut vs ieta"),
@@ -128,7 +128,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HF_TimingVSieta2D		= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"HF Timing (Nominal fC-weighted time average). After the Cut vs ieta"),
@@ -148,7 +148,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFP_TimingVSls			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("PROF"),
 			desc	= cms.untracked.string(
 				"HFP Timing (Nominal fC-weighted time average). After the Cut vs LS"),
@@ -168,7 +168,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFM_TimingVSls			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("PROF"),
 			desc	= cms.untracked.string(
 				"HFM Timing (Nominal fC-weighted time average). After the Cut vs LS"),
@@ -188,7 +188,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFP_TimingVSls2D			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"HFP Timing (Nominal fC-weighted time average). After the Cut vs LS"),
@@ -208,7 +208,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFM_TimingVSls2D			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"HFM Timing (Nominal fC-weighted time average). After the Cut vs LS"),
@@ -228,7 +228,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		SumQ_3TS				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("3TS nominal fC Sum"),
 			xaxis	= cms.untracked.PSet(
@@ -240,7 +240,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFP_QTS2QTS12				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HFP Ratio Q(TS=2)/sum(Q(TS=1-2)), SumQ > 20 linADC"),
@@ -253,7 +253,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFM_QTS2QTS12				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HFM Ratio Q(TS=2)/sum(Q(TS=1-2)), SumQ > 20 linADC"),
@@ -266,7 +266,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFP_QTS2QTS23				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HFP Ratio Q(TS=2)/sum(Q(TS=2-3)), SumQ > 20 linADC"),
@@ -279,7 +279,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFM_QTS2QTS23				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HFM Ratio Q(TS=2)/sum(Q(TS=2-3)), SumQ > 20 linADC"),
@@ -292,7 +292,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFP_QTS2QTS12vsLS			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("PROF"),
 			desc	= cms.untracked.string(
 				"HFP Ratio Q(TS=2)/sum(Q(TS=1-2)), SumQ > 20 linADC vs LS"),
@@ -312,7 +312,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFM_QTS2QTS12vsLS			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("PROF"),
 			desc	= cms.untracked.string(
 				"HFM Ratio Q(TS=2)/sum(Q(TS=1-2)), SumQ > 20 linADC vs LS"),
@@ -332,7 +332,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFP_QTS2QTS23vsLS			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("PROF"),
 			desc	= cms.untracked.string(
 				"HFP Ratio Q(TS=2)/sum(Q(TS=2-3)), SumQ > 20 linADC vs LS"),
@@ -352,7 +352,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFM_QTS2QTS23vsLS			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("PROF"),
 			desc	= cms.untracked.string(
 				"HFM Ratio Q(TS=2)/sum(Q(TS=2-3)), SumQ > 20 linADC vs LS"),
@@ -372,7 +372,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFMiphi43_QTS2QTS23vsLS			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("PROF"),
 			desc	= cms.untracked.string(
 				"HFM iphi43 Ratio Q(TS=2)/sum(Q(TS=2-3)), SumQ > 20 linADC vs LS"),
@@ -392,7 +392,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFMiphi43_QTS2QTS12vsLS			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("PROF"),
 			desc	= cms.untracked.string(
 				"HFM iphi43 Ratio Q(TS=2)/sum(Q(TS=1-2)), SumQ > 20 linADC vs LS"),
@@ -412,7 +412,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFP_QTS2QTS12vsLS2D			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"HFP Ratio Q(TS=2)/sum(Q(TS=1-2)), SumQ > 20 linADC vs LS"),
@@ -432,7 +432,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFM_QTS2QTS12vsLS2D			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"HFM Ratio Q(TS=2)/sum(Q(TS=1-2)), SumQ > 20 linADC vs LS"),
@@ -452,7 +452,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFP_QTS2QTS23vsLS2D			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"HFP Ratio Q(TS=2)/sum(Q(TS=2-3)), SumQ > 20 linADC vs LS"),
@@ -472,7 +472,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFM_QTS2QTS23vsLS2D			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"HFM Ratio Q(TS=2)/sum(Q(TS=2-3)), SumQ > 20 linADC vs LS"),
@@ -492,7 +492,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFM_OccupancyietavsLS		= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(	"HFM Occupancy [ieta vs LS]"),
 			xaxis	= cms.untracked.PSet(
@@ -511,7 +511,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HFP_OccupancyietavsLS		= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(	"HFP Occupancy [ieta vs LS]"),
 			xaxis	= cms.untracked.PSet(
@@ -530,7 +530,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HF_OccupancyD1		= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(	"HF Occupancy D1"),
 			xaxis	= cms.untracked.PSet(
@@ -549,7 +549,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HF_OccupancyD2		= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(	"HF Occupancy D2"),
 			xaxis	= cms.untracked.PSet(
@@ -568,7 +568,7 @@ hcalPhaseScanTask = cms.EDAnalyzer(
 			)
 		),
 		HF_OccupancyVSieta			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("PROF"),
 			desc	= cms.untracked.string(
 				"HF Occupancy VS ieta"),

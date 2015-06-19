@@ -3,7 +3,6 @@ import FWCore.ParameterSet.Config as cms
 #	import standard cfg and clone the parameters
 import DQM.HcalCommon.HcalDQStandard as standard
 StandardSet = standard.StandardSet.clone()
-subsystem = standard.subsystem
 
 #	List of FEDs
 lFEDs = [x+700 for x in range(32)] + [929, 1118, 1120, 1122]
@@ -12,29 +11,28 @@ moduleName = "HcalDigiTask"
 #	Modify whatever is in standard importing
 StandardSet.moduleParameters.name		= cms.untracked.string(moduleName)
 StandardSet.EventsProcessed.path		= cms.untracked.string(
-	"%s/%s/" % (subsystem, moduleName))
+	"%s/" % moduleName)
 StandardSet.EventsProcessedPerLS.path	= cms.untracked.string(
-	"%s/%s/" % (subsystem, moduleName))
+	"%s/" % moduleName)
 
 HcalDigiSizeCheck	= StandardSet.Standard2DSubSystem.clone()
 HcalDigiSizeCheck.desc = cms.untracked.string("Digi Size Check")
 HcalDigiSizeCheck.yaxis.title = cms.untracked.string("Digi Size")
-HcalDigiSizeCheck.path = cms.untracked.string("%s/%s" % (subsystem, moduleName))
+HcalDigiSizeCheck.path = cms.untracked.string("%s/%s" % moduleName)
 
 HcalDigiSizeExp		= StandardSet.Standard2DSubSystem.clone()
 HcalDigiSizeExp.desc =	cms.untracked.string("Digi Size Expected(from RAW)")
 HcalDigiSizeExp.yaxis.title	= cms.untracked.string("Digi Size")
-HcalDigiSizeExp.path = cms.untracked.string("%s/%s" % (subsystem, moduleName))
+HcalDigiSizeExp.path = cms.untracked.string("%s/%s" % moduleName)
 
 HcalMap = [StandardSet.Standard2DMap.clone() for x in range(3)]
 for i in range(3):
-	HcalMap[i].path						= cms.untracked.string("%s/%s/" % (
-			subsystem, moduleName))
-	HcalMap[i].desc						= cms.untracked.string(
+	HcalMap[i].path			= cms.untracked.string("%s/" % (moduleName)
+	HcalMap[i].desc			= cms.untracked.string(
 	"HB HE HF Depth%d Occupancy" % (i+1))
 
 HcalProblemsMap = StandardSet.Standard2DMap.clone()
-HcalProblemsMap.path = cms.untracked.string("%s/%s/" % (subsystem, moduleName))
+HcalProblemsMap.path = cms.untracked.string("%s/" % moduleName)
 HcalProblemsMap.desc = cms.untracked.string(
 		"Hcal Problems Rate per LS for Digis")
 
@@ -52,7 +50,7 @@ hcalDigiTask = cms.EDAnalyzer(
 
 		#	Digi Shape Histograms
 		HB_DigiShape			= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HB" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HB Digi Shape." + noCutsStr),
 			xaxis	= cms.untracked.PSet(
@@ -64,7 +62,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)
 		),
 		HB_DigiShape_ZSCut			= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HB" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HB Digi Shape." + 
 				ZSCutStr),
@@ -77,7 +75,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)
 		),
 		HE_DigiShape			= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HE" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE Digi Shape." + noCutsStr),
 			xaxis	= cms.untracked.PSet(
@@ -89,7 +87,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)
 		),
 		HE_DigiShape_ZSCut			= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HE" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE Digi Shape." + 
 				ZSCutStr),
@@ -102,7 +100,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)
 		),
 		HF_DigiShape				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HF" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF Digi Shape." + noCutsStr),
 			xaxis	= cms.untracked.PSet(
@@ -114,7 +112,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)
 		),
 		HF_DigiShape_ZSCut				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HF" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF Digi Shape." + ZSCutStr),
 			xaxis	= cms.untracked.PSet(
@@ -126,7 +124,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)
 		),
 		HO_DigiShape				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HO" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HO Digi Shape." + noCutsStr),
 			xaxis	= cms.untracked.PSet(
@@ -138,7 +136,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HO_DigiShape_ZSCut				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HO" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HO Digi Shape." + ZSCutStr),
 			xaxis	= cms.untracked.PSet(
@@ -152,7 +150,7 @@ hcalDigiTask = cms.EDAnalyzer(
 
 		#	Timing Plots
 		HB_Timing				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HB" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HB Timing (Nominal fC-weighted average)." + ZSCutStr),
@@ -165,7 +163,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HE_Timing				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HE" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HE Timing (Nominal fC-weighted average)." + ZSCutStr),
@@ -178,7 +176,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HF_Timing				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HF" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HF Timing (Nominal fC-weighted average)." + ZSCutStr),
@@ -191,7 +189,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HO_Timing				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HO" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HO Timing (Nominal fC-weighted average)." + ZSCutStr),
@@ -204,7 +202,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HB_TimingVSieta				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HB" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HB" % moduleName),
 			kind	= cms.untracked.string("PROF"),
 			desc	= cms.untracked.string(
 				"HB Timing (Nominal fC-weighted average). vs ieta" + 
@@ -225,7 +223,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)
 		),
 		HE_TimingVSieta				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HE" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("PROF"),
 			desc	= cms.untracked.string(
 				"HE Timing (Nominal fC-weighted average). vs ieta" + 
@@ -246,7 +244,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)
 		),
 		HF_TimingVSieta				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HF" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("PROF"),
 			desc	= cms.untracked.string(
 				"HF Timing (Nominal fC-weighted average). vs ieta" + 
@@ -267,7 +265,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)
 		),
 		HO_TimingVSieta				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HO" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("PROF"),
 			desc	= cms.untracked.string(
 				"HO Timing (Nominal fC-weighted average). vs ieta" + 
@@ -290,7 +288,7 @@ hcalDigiTask = cms.EDAnalyzer(
 
 		#	ADC Counts Per TS Histos
 		HB_ADCCountPerTS		= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HB" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HB ADC Counts per 1TS." + noCutsStr),
 			xaxis	= cms.untracked.PSet(
@@ -302,7 +300,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HE_ADCCountPerTS		= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HE" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE ADC Counts per 1TS" + noCutsStr),
 			xaxis	= cms.untracked.PSet(
@@ -314,7 +312,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HO_ADCCountPerTS		= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HO" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HO ADC Counts per 1TS" + noCutsStr),
 			xaxis	= cms.untracked.PSet(
@@ -326,7 +324,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HF_ADCCountPerTS		= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HF" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF ADC Counts per 1TS" + noCutsStr),
 			xaxis	= cms.untracked.PSet(
@@ -338,7 +336,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HB_fCPerTS		= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HB" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HB fC per 1TS." + noCutsStr),
 			xaxis	= cms.untracked.PSet(
@@ -350,7 +348,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HE_fCPerTS		= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HE" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE fC per 1TS." + noCutsStr),
 			xaxis	= cms.untracked.PSet(
@@ -362,7 +360,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HO_fCPerTS		= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HO" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HO fC per 1TS." + noCutsStr),
 			xaxis	= cms.untracked.PSet(
@@ -374,7 +372,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HF_fCPerTS		= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HF" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF fC per 1TS." + noCutsStr),
 			xaxis	= cms.untracked.PSet(
@@ -388,7 +386,7 @@ hcalDigiTask = cms.EDAnalyzer(
 
 		#	Diagnostic Plots
 		HB_Presamples		= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HB" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HB Number of Presamples"),
 			xaxis	= cms.untracked.PSet(
@@ -400,7 +398,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HE_Presamples		= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HE" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE Number of Presamples"),
 			xaxis	= cms.untracked.PSet(
@@ -412,7 +410,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HO_Presamples		= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s/HO" % (subsystem, moduleName)),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HO Number of Presamples"),
 			xaxis	= cms.untracked.PSet(
@@ -424,7 +422,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HF_Presamples		= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF Number of Presamples"),
 			xaxis	= cms.untracked.PSet(
@@ -436,7 +434,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HB_CapId		= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			path	= cms.untracked.string("%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HB Cap ID"),
 			xaxis	= cms.untracked.PSet(
@@ -448,7 +446,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HE_CapId		= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE Cap ID"),
 			xaxis	= cms.untracked.PSet(
@@ -460,7 +458,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HO_CapId		= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HO Cap ID"),
 			xaxis	= cms.untracked.PSet(
@@ -472,7 +470,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HF_CapId		= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF Cap ID"),
 			xaxis	= cms.untracked.PSet(
@@ -484,7 +482,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HB_bcnOffset	= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			path	= cms.untracked.string("%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HB Fiber Idle BCN Offset"),
 			xaxis	= cms.untracked.PSet(
@@ -496,7 +494,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HE_bcnOffset	= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE Fiber Idle BCN Offset"),
 			xaxis	= cms.untracked.PSet(
@@ -508,7 +506,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HO_bcnOffset	= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HO Fiber Idle BCN Offset"),
 			xaxis	= cms.untracked.PSet(
@@ -520,7 +518,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)	
 		),
 		HF_bcnOffset	= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF Fiber Idle BCN Offset"),
 			xaxis	= cms.untracked.PSet(
@@ -536,7 +534,7 @@ hcalDigiTask = cms.EDAnalyzer(
 
 		#	Timing 2D Profiles
 		HBHEHFD1_TimingMap          = cms.untracked.PSet(
-			path    = cms.untracked.string("Hcal/%s" % moduleName),
+			path    = cms.untracked.string("%s/%s" % moduleName),
             kind    = cms.untracked.string("PROF2D"),
             desc    = cms.untracked.string( "HBHEHF D1 Average Timing Map" + 
 				ZSCutStr),
@@ -549,7 +547,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)
         ),
 		HBHEHFD2_TimingMap          = cms.untracked.PSet(
-			path    = cms.untracked.string("Hcal/%s" % moduleName),
+			path    = cms.untracked.string("%s/%s" % moduleName),
             kind    = cms.untracked.string("PROF2D"),
             desc    = cms.untracked.string( "HBHEHF D2 Average Timing Map" + 
 				ZSCutStr),
@@ -562,7 +560,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)
         ),
 		HBHEHFD3_TimingMap          = cms.untracked.PSet(
-			path    = cms.untracked.string("Hcal/%s" % moduleName),
+			path    = cms.untracked.string("%s/%s" % moduleName),
             kind    = cms.untracked.string("PROF2D"),
             desc    = cms.untracked.string( "HBHEHF D3 Average Timing Map" + 
 				ZSCutStr),
@@ -575,7 +573,7 @@ hcalDigiTask = cms.EDAnalyzer(
 			)
         ),
 		HOD4_TimingMap          = cms.untracked.PSet(
-			path    = cms.untracked.string("Hcal/%s" % moduleName),
+			path    = cms.untracked.string("%s/%s" % moduleName),
             kind    = cms.untracked.string("PROF2D"),
             desc    = cms.untracked.string( "HO D4 Average Timing Map" + 
 				ZSCutStr),
@@ -596,7 +594,7 @@ hcalDigiTask = cms.EDAnalyzer(
 
 		#	Occupancy Plots
 		HBHEHF_OccupancyMapD1          = cms.untracked.PSet(
-			path    = cms.untracked.string("Hcal/%s" % moduleName),
+			path    = cms.untracked.string("%s/%s" % moduleName),
             kind    = cms.untracked.string("TH2D"),
             desc    = cms.untracked.string( "HBHEHF Occupancy D1" + 
 				ZSCutStr),
@@ -616,7 +614,7 @@ hcalDigiTask = cms.EDAnalyzer(
             )
         ),
 		HBHEHF_OccupancyMapD2          = cms.untracked.PSet(
-			path    = cms.untracked.string("Hcal/%s" % moduleName),
+			path    = cms.untracked.string("%s/%s" % moduleName),
             kind    = cms.untracked.string("TH2D"),
             desc    = cms.untracked.string( "HBHEHF Occupancy D2" + 
 				ZSCutStr),
@@ -636,7 +634,7 @@ hcalDigiTask = cms.EDAnalyzer(
             )
         ),
 		HBHEHF_OccupancyMapD3          = cms.untracked.PSet(
-			path    = cms.untracked.string("Hcal/%s" % moduleName),
+			path    = cms.untracked.string("%s/%s" % moduleName),
             kind    = cms.untracked.string("TH2D"),
             desc    = cms.untracked.string( "HBHEHF Occupancy D3" + 
 				ZSCutStr),
@@ -656,7 +654,7 @@ hcalDigiTask = cms.EDAnalyzer(
             )
         ),
 		HO_OccupancyMapD4          = cms.untracked.PSet(
-			path    = cms.untracked.string("Hcal/%s" % moduleName),
+			path    = cms.untracked.string("%s/%s" % moduleName),
             kind    = cms.untracked.string("TH2D"),
             desc    = cms.untracked.string( "HO Occupancy D4" + 
 				ZSCutStr),
@@ -676,7 +674,7 @@ hcalDigiTask = cms.EDAnalyzer(
             )
         ),
 		HB_OccupancyVSls_wZSCut          = cms.untracked.PSet(
-			path    = cms.untracked.string("Hcal/%s/HB" % moduleName),
+			path    = cms.untracked.string("%s/HB" % moduleName),
             kind    = cms.untracked.string("PROF"),
             desc    = cms.untracked.string( "HB Occupancy vs LS" + 
 				ZSCutStr),
@@ -696,7 +694,7 @@ hcalDigiTask = cms.EDAnalyzer(
             )
         ),
 		HE_OccupancyVSls_wZSCut          = cms.untracked.PSet(
-			path    = cms.untracked.string("Hcal/%s/HE" % moduleName),
+			path    = cms.untracked.string("%s/HE" % moduleName),
             kind    = cms.untracked.string("PROF"),
             desc    = cms.untracked.string( "HE Occupancy vs LS" + 
 				ZSCutStr),
@@ -716,7 +714,7 @@ hcalDigiTask = cms.EDAnalyzer(
             )
         ),
 		HF_OccupancyVSls_wZSCut          = cms.untracked.PSet(
-			path    = cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path    = cms.untracked.string("%s/HF" % moduleName),
             kind    = cms.untracked.string("PROF"),
             desc    = cms.untracked.string( "HF Occupancy vs LS" + 
 				ZSCutStr),
@@ -736,7 +734,7 @@ hcalDigiTask = cms.EDAnalyzer(
             )
         ),
 		HO_OccupancyVSls_wZSCut          = cms.untracked.PSet(
-			path    = cms.untracked.string("Hcal/%s/HO" % moduleName),
+			path    = cms.untracked.string("%s/HO" % moduleName),
             kind    = cms.untracked.string("PROF"),
             desc    = cms.untracked.string( "HO Occupancy vs LS" + 
 				ZSCutStr),
@@ -756,7 +754,7 @@ hcalDigiTask = cms.EDAnalyzer(
             )
         ),
 		HB_OccupancyVSls_NoZSCut          = cms.untracked.PSet(
-			path    = cms.untracked.string("Hcal/%s/HB" % moduleName),
+			path    = cms.untracked.string("%s/HB" % moduleName),
             kind    = cms.untracked.string("PROF"),
             desc    = cms.untracked.string( "HB Occupancy vs LS" + 
 				noCutsStr),
@@ -776,7 +774,7 @@ hcalDigiTask = cms.EDAnalyzer(
             )
 		),
 		HE_OccupancyVSls_NoZSCut          = cms.untracked.PSet(
-			path    = cms.untracked.string("Hcal/%s/HE" % moduleName),
+			path    = cms.untracked.string("%s/HE" % moduleName),
             kind    = cms.untracked.string("PROF"),
             desc    = cms.untracked.string( "HE Occupancy vs LS" + 
 				noCutsStr),
@@ -796,7 +794,7 @@ hcalDigiTask = cms.EDAnalyzer(
             )
 		),
 		HO_OccupancyVSls_NoZSCut          = cms.untracked.PSet(
-			path    = cms.untracked.string("Hcal/%s/HO" % moduleName),
+			path    = cms.untracked.string("%s/HO" % moduleName),
             kind    = cms.untracked.string("PROF"),
             desc    = cms.untracked.string( "HO Occupancy vs LS" + 
 				noCutsStr),
@@ -816,7 +814,7 @@ hcalDigiTask = cms.EDAnalyzer(
             )
 		),
 		HF_OccupancyVSls_NoZSCut          = cms.untracked.PSet(
-			path    = cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path    = cms.untracked.string("%s/HF" % moduleName),
             kind    = cms.untracked.string("PROF"),
             desc    = cms.untracked.string( "HF Occupancy vs LS" + 
 				noCutsStr),
@@ -838,7 +836,7 @@ hcalDigiTask = cms.EDAnalyzer(
 
 		#	Problem Maps and Valid/Invalid 
 		ValidInvalid			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			path	= cms.untracked.string("%s/%s" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("Valid (0) or Invalid Events(1)"),
 			xaxis	= cms.untracked.PSet(
@@ -851,7 +849,7 @@ hcalDigiTask = cms.EDAnalyzer(
 		),
 		ProblemsMap				= HcalProblemsMap,
 		ProblemsVsLS = cms.untracked.PSet(
-				path	= cms.untracked.string("Hcal/%s" % moduleName),
+				path	= cms.untracked.string("%s/%s" % moduleName),
 				kind	= cms.untracked.string("TH1D"),
 				desc	= cms.untracked.string("Hcal Problems vs LS"),
 				xaxis	= cms.untracked.PSet(

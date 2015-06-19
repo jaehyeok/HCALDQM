@@ -10,11 +10,11 @@ moduleName = "HcalTPTask"
 #	Modify whatever is in StandardSet importing
 StandardSet.moduleParameters.name		= cms.untracked.string(moduleName)
 StandardSet.EventsProcessed.path		= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/" % moduleName)
 StandardSet.EventsProcessedPerLS.path	= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/" % moduleName)
 StandardSet.Standard2DMap.path			= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/" % moduleName)
 StandardSet.Standard2DMap.desc			= cms.untracked.string(
 	"TP Digi Size")
 
@@ -32,7 +32,7 @@ hcalTPTask = cms.EDAnalyzer(
 		#	Do we need these 2 histos???
 		#	???????????????????????????????????????????//
 		HBHE_EtShape_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			path	= cms.untracked.string("%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HBHE Compressed Et Shape Data"),
 			xaxis	= cms.untracked.PSet(
@@ -44,7 +44,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		),
 		HBHE_EtShape_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			path	= cms.untracked.string("%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HBHE Compressed Et Shape Emulator"),
 			xaxis	= cms.untracked.PSet(
@@ -56,7 +56,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		),
 		HF_EtShape_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF Compressed Et Shape Data"),
 			xaxis	= cms.untracked.PSet(
@@ -68,7 +68,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		),
 		HF_EtShape_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF Compressed Et Shape Emulator"),
 			xaxis	= cms.untracked.PSet(
@@ -80,7 +80,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		),
 		HBHE_EtShape_Data_ZS				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			path	= cms.untracked.string("%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HBHE Compressed Et Shape Data" + 
 				cutstr_ZS),
@@ -93,7 +93,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		),
 		HBHE_EtShape_Emul_ZS				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			path	= cms.untracked.string("%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HBHE Compressed Et Shape Emul" + 
 				cutstr_ZS),
@@ -106,7 +106,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		),
 		HF_EtShape_Data_ZS				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF Compressed Et Shape Data" + 
 				cutstr_ZS),
@@ -119,7 +119,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		),
 		HF_EtShape_Emul_ZS				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF Compressed Et Shape Emul" + 
 				cutstr_ZS),
@@ -136,7 +136,7 @@ hcalTPTask = cms.EDAnalyzer(
 		#	SOI Et and FG
 		#------------------------------------------------------
 		HBHE_SOI_Et_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			path	= cms.untracked.string("%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HBHE SOI Compressed Et Distribution Data"),
@@ -149,7 +149,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		),
 		HBHE_SOI_Et_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			path	= cms.untracked.string("%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HBHE SOI Compressed Et Distribution Emulator"),
@@ -162,7 +162,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		),
 		HF_SOI_Et_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HF SOI Compressed Et Distribution Data"),
@@ -175,7 +175,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		),
 		HF_SOI_Et_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HF SOI Compressed Et Distribution Emulator"),
@@ -192,7 +192,7 @@ hcalTPTask = cms.EDAnalyzer(
 		#	Number of Presamples
 		#------------------------------------------------------
 		HF_Presamples_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF Number of Presamples Data"),
 			xaxis	= cms.untracked.PSet(
@@ -204,7 +204,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		),
 		HBHE_Presamples_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			path	= cms.untracked.string("%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HBHE Number of Presamples Data"),
 			xaxis	= cms.untracked.PSet(
@@ -216,7 +216,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		),
 		HF_Presamples_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF Number of Presamples Emul"),
 			xaxis	= cms.untracked.PSet(
@@ -228,7 +228,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		),
 		HBHE_Presamples_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			path	= cms.untracked.string("%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HBHE Number of Presamples Emul"),
 			xaxis	= cms.untracked.PSet(
@@ -244,7 +244,7 @@ hcalTPTask = cms.EDAnalyzer(
 		#	Occupancy Maps Data
 		#------------------------------------------------------
 		HBHEHF_TPOccupancyVSieta_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			path	= cms.untracked.string("%s/%s" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HBHEHF TP Occupancy vs ieta Data"),
@@ -257,7 +257,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		), 
 		HBHEHF_TPOccupancyVSiphi_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			path	= cms.untracked.string("%s/%s" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HBHEHF TP Occupancy vs iphi Data"),
@@ -270,7 +270,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		), 
 		HF_TPOccupancyVSiphi_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF TP Occupancy vs iphi Data"),
 			xaxis	= cms.untracked.PSet(
@@ -282,7 +282,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		), 
 		HBHE_TPOccupancyVSiphi_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			path	= cms.untracked.string("%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HBHE TP Occupancy vs iphi Data"),
 			xaxis	= cms.untracked.PSet(
@@ -295,7 +295,7 @@ hcalTPTask = cms.EDAnalyzer(
 		), 
 		
 		HBHEHF_TPOccupancy_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			path	= cms.untracked.string("%s/%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string("HBHEHF TP Occupancy Data"),
 			xaxis	= cms.untracked.PSet(
@@ -318,7 +318,7 @@ hcalTPTask = cms.EDAnalyzer(
 		#	Occupancy Maps Emulator
 		#------------------------------------------------------
 		HBHEHF_TPOccupancyVSieta_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			path	= cms.untracked.string("%s/%s" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HBHEHF TP Occupancy vs ieta Emulator"),
@@ -331,7 +331,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		), 
 		HBHE_TPOccupancyVSieta_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			path	= cms.untracked.string("%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HBHE TP Occupancy vs ieta Data"),
@@ -344,7 +344,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		), 
 		HBHE_TPOccupancyVSieta_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			path	= cms.untracked.string("%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HBHE TP Occupancy vs ieta Emulator"),
@@ -357,7 +357,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		), 
 		HF_TPOccupancyVSieta_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HF TP Occupancy vs ieta Data"),
@@ -370,7 +370,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		), 
 		HF_TPOccupancyVSieta_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HF TP Occupancy vs ieta Emulator"),
@@ -383,7 +383,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		), 
 		HBHEHF_TPOccupancyVSiphi_Emul			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			path	= cms.untracked.string("%s/%s" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HBHEHF TP Occupancy vs iphi Emulator"),
@@ -396,7 +396,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		), 
 		HF_TPOccupancyVSiphi_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HF TP Occupancy vs iphi Emulator"),
@@ -409,7 +409,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		), 
 		HBHE_TPOccupancyVSiphi_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			path	= cms.untracked.string("%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HBHE TP Occupancy vs iphi Emulator"),
 			xaxis	= cms.untracked.PSet(
@@ -422,7 +422,7 @@ hcalTPTask = cms.EDAnalyzer(
 		), 
 		
 		HBHEHF_TPOccupancy_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			path	= cms.untracked.string("%s/%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string("HBHEHF TP Occupancy Emulator"),
 			xaxis	= cms.untracked.PSet(
@@ -442,7 +442,7 @@ hcalTPTask = cms.EDAnalyzer(
 		), 
 
 		HBHEHF_Missing_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			path	= cms.untracked.string("%s/%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string("HBHEHF TP Missing from Data"),
 			xaxis	= cms.untracked.PSet(
@@ -461,7 +461,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		), 
 		HBHEHF_Missing_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			path	= cms.untracked.string("%s/%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string("HBHEHF TP Missing from Emulator"),
 			xaxis	= cms.untracked.PSet(
@@ -484,7 +484,7 @@ hcalTPTask = cms.EDAnalyzer(
 		#	Compressed SOI Et Correlation
 		#------------------------------------------------------
 		HF_SOI_Et_Correlation				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"Correlation for HF SOI Compressed Et"),
@@ -504,7 +504,7 @@ hcalTPTask = cms.EDAnalyzer(
 			),
 		),
 		HBHE_SOI_Et_Correlation				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			path	= cms.untracked.string("%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"Correlation for HBHE SOI Compressed Et"),
@@ -524,7 +524,7 @@ hcalTPTask = cms.EDAnalyzer(
 			),
 		),
 		HF_SOI_FG_Correlation				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"Correlation for HF SOI Fine Grain Bit"),
@@ -544,7 +544,7 @@ hcalTPTask = cms.EDAnalyzer(
 			),
 		),
 		HBHE_SOI_FG_Correlation				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			path	= cms.untracked.string("%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"Correlation for HBHE SOI Fine Grain Bit"),
@@ -564,7 +564,7 @@ hcalTPTask = cms.EDAnalyzer(
 			),
 		),
 		HF_nonSOI_Et_Correlation				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"Correlation for HF nonSOI Compressed Et"),
@@ -584,7 +584,7 @@ hcalTPTask = cms.EDAnalyzer(
 			),
 		),
 		HBHE_nonSOI_Et_Correlation				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			path	= cms.untracked.string("%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"Correlation for HBHE nonSOI Compressed Et"),
@@ -604,7 +604,7 @@ hcalTPTask = cms.EDAnalyzer(
 			),
 		),
 		HF_nonSOI_FG_Correlation				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"Correlation for HF nonSOI FG"),
@@ -624,7 +624,7 @@ hcalTPTask = cms.EDAnalyzer(
 			),
 		),
 		HBHE_nonSOI_FG_Correlation				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HBHE" % moduleName),
+			path	= cms.untracked.string("%s/HBHE" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"Correlation for HBHE nonSOI FG"),
@@ -648,7 +648,7 @@ hcalTPTask = cms.EDAnalyzer(
 		#	TP Digi Sizes
 		#------------------------------------------------------
 		HBHEHF_TPDigiSize_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			path	= cms.untracked.string("%s/%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"TP Digi Size Data"),
@@ -668,7 +668,7 @@ hcalTPTask = cms.EDAnalyzer(
 			),
 		),
 		HBHEHF_TPDigiSize_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			path	= cms.untracked.string("%s/%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"TP Digi Size Emulator"),
@@ -692,7 +692,7 @@ hcalTPTask = cms.EDAnalyzer(
 		#	Flag Maps	
 		#------------------------------------------------------
 		HBHEHF_ErrorFlags				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			path	= cms.untracked.string("%s/%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"Error Flags"),
@@ -712,7 +712,7 @@ hcalTPTask = cms.EDAnalyzer(
 			),
 		),
 		HBHEHF_nonSOI_ErrorFlags				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s" % moduleName),
+			path	= cms.untracked.string("%s/%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"nonSOI Error Flags"),

@@ -10,11 +10,11 @@ moduleName = "HcaluTCATask"
 #	Modify whatever is in StandardSet importing
 StandardSet.moduleParameters.name		= cms.untracked.string(moduleName)
 StandardSet.EventsProcessed.path		= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/" % moduleName)
 StandardSet.EventsProcessedPerLS.path	= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/" % moduleName)
 StandardSet.Standard2DMap.path			= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/" % moduleName)
 StandardSet.Standard2DMap.desc			= cms.untracked.string(
 	"Some uTCA Task 2D Map")
 
@@ -31,7 +31,7 @@ hcaluTCATask = cms.EDAnalyzer(
 
 		#	Plots to compare uTCA vs VME
 		HF_ADC			= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" %moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string("ADC Comparison"),
 			xaxis	= cms.untracked.PSet(

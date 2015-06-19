@@ -2,7 +2,6 @@ import FWCore.ParameterSet.Config as cms
 
 import DQM.HcalCommon.HcalDQStandard as standard
 StandardSet = standard.StandardSet.clone()
-subsystem = "Hcal"
 
 #	List of FEDs
 lFEDs = [x+700 for x in range(32)] + [929, 1118, 1120, 1122]
@@ -11,16 +10,16 @@ moduleName = "HcalRawTask"
 #	Modify whatever is in StandardSet importing
 StandardSet.moduleParameters.name		= cms.untracked.string(moduleName)
 StandardSet.EventsProcessed.path		= cms.untracked.string(
-	"%s/%s/" % (subsystem, moduleName))
+	"%s/" % moduleName)
 StandardSet.EventsProcessedPerLS.path	= cms.untracked.string(
-	"%s/%s/" % (subsystem, moduleName))
+	"%s/" % moduleName)
 StandardSet.Standard2DMap.path			= cms.untracked.string(
-	"%s/%s/" % (subsystem, moduleName))
+	"%s/" % moduleName)
 StandardSet.Standard2DMap.desc			= cms.untracked.string(
 	"Some Raw Task 2D Map")
 
 HcalProblems = StandardSet.Standard2DMap.clone()
-HcalProblems.path = cms.untracked.string("%s/%s" % (subsystem, moduleName))
+HcalProblems.path = cms.untracked.string("%s/%s" % moduleName)
 HcalProblems.desc = cms.untracked.string(
 		"Hcal Problems Rate per LS for RecHits")
 HcalProblems2 = StandardSet.Standard2DMap.clone()
@@ -33,8 +32,7 @@ vMEs = [HcalProblems, HcalProblems2]
 vecuTCA = [
 	cms.untracked.PSet(
 		name	= cms.untracked.string("uTCA_C%dS%d_Channels" % (x, y)),
-		path	= cms.untracked.string("%s/%s/uTCA/C%dS%d" % (subsystem, 
-			moduleName, x, y)),
+		path	= cms.untracked.string("%s/uTCA/C%dS%d" % (moduleName, x, y)),
 		kind	= cms.untracked.string("TH2D"),
 		desc	= cms.untracked.string("uTCA Crate %d Slot %d Channels" % (x, y)),
 		xaxis		= cms.untracked.PSet(
@@ -56,8 +54,7 @@ vecuTCA = [
 vecuTCA_EvNComp = [
 	cms.untracked.PSet(
 		name	= cms.untracked.string("uTCA_C%dS%d_EvNComp" % (x, y)),
-		path	= cms.untracked.string("%s/%s/uTCA/C%dS%d" % (subsystem, 
-			moduleName, x, y)),
+		path	= cms.untracked.string("%s/uTCA/C%dS%d" % (moduleName, x, y)),
 		kind	= cms.untracked.string("TH1D"),
 		desc	= cms.untracked.string("uTCA Crate %d Slot %d EvN Comparison" % (
 			x, y)),
@@ -73,8 +70,7 @@ vecuTCA_EvNComp = [
 vecuTCA_ORNComp = [
 	cms.untracked.PSet(
 		name	= cms.untracked.string("uTCA_C%dS%d_ORNComp" % (x, y)),
-		path	= cms.untracked.string("%s/%s/uTCA/C%dS%d" % (subsystem, 
-			moduleName, x, y)),
+		path	= cms.untracked.string("%s/uTCA/C%dS%d" % (moduleName, x, y)),
 		kind	= cms.untracked.string("TH1D"),
 		desc	= cms.untracked.string("uTCA Crate %d Slot %d ORN Comparison" % (
 			x, y)),
@@ -90,8 +86,7 @@ vecuTCA_ORNComp = [
 vecuTCA_BcNComp = [
 	cms.untracked.PSet(
 		name	= cms.untracked.string("uTCA_C%dS%d_BcNComp" % (x, y)),
-		path	= cms.untracked.string("%s/%s/uTCA/C%dS%d" % (subsystem, 
-			moduleName, x, y)),
+		path	= cms.untracked.string("%s/uTCA/C%dS%d" % (moduleName, x, y)),
 		kind	= cms.untracked.string("TH1D"),
 		desc	= cms.untracked.string("uTCA Crate %d Slot %d BcN Comparison" % (
 			x, y)),
@@ -107,8 +102,7 @@ vecuTCA_BcNComp = [
 vecVME = [
 	cms.untracked.PSet(
 		name	= cms.untracked.string("VME_D%dS%d_Channels" % (x, y)),
-		path	= cms.untracked.string("%s/%s/VME/D%dS%d" % (subsystem, 
-			moduleName, x, y)),
+		path	= cms.untracked.string("%s/VME/D%dS%d" % (moduleName, x, y)),
 		kind	= cms.untracked.string("TH2D"),
 		desc	= cms.untracked.string("VME DCC %d Spigot %d Channels" % (x, y)),
 		xaxis		= cms.untracked.PSet(
@@ -142,7 +136,7 @@ hcalRawTask = cms.EDAnalyzer(
 		#	Default Plots to show, which and how many feds are unpacked
 		#---------------------------------------------------------------
 		uTCA_FEDsUnpacked		= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % (subsystem, moduleName)),
+			path		= cms.untracked.string("%s/%s" % moduleName),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string("Unpacked AMC13/uTCA FEDs"),
 			xaxis		= cms.untracked.PSet(
@@ -154,7 +148,7 @@ hcalRawTask = cms.EDAnalyzer(
 			)
 		),
 		VME_FEDsUnpacked		= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % (subsystem, moduleName)),
+			path		= cms.untracked.string("%s/%s" % moduleName),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string("Unpacked DCC/VME FEDs"),
 			xaxis		= cms.untracked.PSet(
@@ -166,7 +160,7 @@ hcalRawTask = cms.EDAnalyzer(
 			)
 		),
 		NumFEDsUnpackedvsLS		= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % (subsystem, moduleName)),
+			path		= cms.untracked.string("%s/%s" % moduleName),
 			kind		= cms.untracked.string("PROF"),
 			desc		= cms.untracked.string(
 				"Number of FEDs Unpacked Total. Should be constant vs LS"),
@@ -189,8 +183,7 @@ hcalRawTask = cms.EDAnalyzer(
 		#	For DCC/VME Specifically
 		#---------------------------------------------------------------
 		VME_DCCvsSpigots		= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s/VME" % (
-				subsystem, moduleName)),
+			path		= cms.untracked.string("%s/VME" % (moduleName)),
 			kind		= cms.untracked.string("TH2D"),
 			desc		= cms.untracked.string("VME DCC vs Spigots"),
 			xaxis		= cms.untracked.PSet(
@@ -214,8 +207,7 @@ hcalRawTask = cms.EDAnalyzer(
 		#	For AMC13/uTCA specifically
 		#---------------------------------------------------------------
 		uTCA_CratesVSslots		= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s/uTCA" % (
-				subsystem, moduleName)),
+			path		= cms.untracked.string("%s/uTCA" % (moduleName)),
 			kind		= cms.untracked.string("TH2D"),
 			desc		= cms.untracked.string("uTCA Crates vs Slots"),
 			xaxis		= cms.untracked.PSet(
@@ -238,7 +230,7 @@ hcalRawTask = cms.EDAnalyzer(
 		vuTCA_ORNComp		= cms.untracked.VPSet(vecuTCA_ORNComp), 
 		vuTCA_BcNComp		= cms.untracked.VPSet(vecuTCA_BcNComp), 
 		uTCA_DataSize		= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % (subsystem, moduleName)),
+			path		= cms.untracked.string("%s/%s" % moduleName),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string("uHTR Data Size"),
 			xaxis		= cms.untracked.PSet(

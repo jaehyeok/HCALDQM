@@ -1,6 +1,6 @@
 import FWCore.ParameterSet.Config as cms 
 
-import DQM.HcalCommon.HcalDQStandard as standard
+import DQM.%sCommon.%sDQStandard as standard
 StandardSet = standard.StandardSet.clone()
 
 #	List of FEDs
@@ -10,11 +10,11 @@ moduleName = "HcalNoiseTask"
 #	Modify whatever is in StandardSet importing
 StandardSet.moduleParameters.name		= cms.untracked.string(moduleName)
 StandardSet.EventsProcessed.path		= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/" % moduleName)
 StandardSet.EventsProcessedPerLS.path	= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/" % moduleName)
 StandardSet.Standard2DMap.path			= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/" % moduleName)
 StandardSet.Standard2DMap.desc			= cms.untracked.string(
 	"Some Noise Task 2D Map")
 
@@ -27,7 +27,7 @@ hcalNoiseTask = cms.EDAnalyzer(
 		EventsProcessedPerLS	= StandardSet.EventsProcessedPerLS,
 		
 		HENoiseShape				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE Noise Shape"),
 			xaxis	= cms.untracked.PSet(
@@ -39,7 +39,7 @@ hcalNoiseTask = cms.EDAnalyzer(
 			)
 		),
 		HFNoiseShape				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF Noise Shape"),
 			xaxis	= cms.untracked.PSet(
@@ -51,7 +51,7 @@ hcalNoiseTask = cms.EDAnalyzer(
 			)
 		),
 		HONoiseShape				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HO Noise Shape"),
 			xaxis	= cms.untracked.PSet(
@@ -64,7 +64,7 @@ hcalNoiseTask = cms.EDAnalyzer(
 		),
 		NoiseSizeCheck			= StandardSet.Standard2DMap 
 #		me4			= cms.untracked.PSet(
-#			path	= cms.untracked.string("Hcal/%s/" % moduleName),
+#			path	= cms.untracked.string("%s/" % moduleName),
 #			kind	= cms.untracked.string("PROF"),
 #			desc	= cms.untracked.string("Example ME4"),
 #			xaxis	= cms.untracked.PSet(

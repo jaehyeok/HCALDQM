@@ -1,3 +1,11 @@
+#-------------------------------------------------------------------
+#	Standard Configuration File for HCAL DQM for both 
+#	Local/Globla(Calib vs. Normal).
+#	This file is configured as is for Global
+#	All the modifications needed for either Local or Calib must be 
+#	done in the actual cfg.
+#-------------------------------------------------------------------
+
 import FWCore.ParameterSet.Config as cms
 
 #	Generate a list of FEDs
@@ -6,6 +14,7 @@ lFEDs = [x+700 for x in range(32)] + [1118, 1120, 1122]
 subsystem = "Hcal"
 StandardSet		= cms.untracked.PSet(
 	moduleParameters	= cms.untracked.PSet(
+		subsystem		= cms.untracked.string(subsystem),
 		name			= cms.untracked.string("HcalDQStandard"),
 		debug			= cms.untracked.int32(0),
 		calibTypes		= cms.untracked.vint32(0),
@@ -34,19 +43,19 @@ StandardSet		= cms.untracked.PSet(
 	),
 
 	EventsProcessed		= cms.untracked.PSet(
-		path			= cms.untracked.string("%s/HcalDQStandard/" % subsystem),
+		path			= cms.untracked.string("HcalDQStandard/"),
 		kind			= cms.untracked.string("INT"),
 	#	desc			= cms.untracked.string("Processed Events Total"),
 	),
 
 	EventsProcessedPerLS = cms.untracked.PSet(
-		path			= cms.untracked.string("%s/HcalDQStandard/" % subsystem),
+		path			= cms.untracked.string("HcalDQStandard/"),
 		kind			= cms.untracked.string("INT"),
 	#	desc			= cms.untracked.
 	),
 
 	Standard2DMap		= cms.untracked.PSet(
-		path			= cms.untracked.string("%s/HcalDQStandard/" % subsystem),
+		path			= cms.untracked.string("HcalDQStandard/"),
 		kind			= cms.untracked.string("TH2D"),
 		desc			= cms.untracked.string("Standard 2D Map"),
 		xaxis			= cms.untracked.PSet(
@@ -66,7 +75,7 @@ StandardSet		= cms.untracked.PSet(
 	),
 
 	Standard2DSubSystem = cms.untracked.PSet(
-		path			= cms.untracked.string("%s/HcalDQStandard/" % subsystem),
+		path			= cms.untracked.string("HcalDQStandard/"),
 		kind			= cms.untracked.string("TH2D"),
 		desc			= cms.untracked.string("Standard 2D SubSystem Map"),
 		xaxis			= cms.untracked.PSet(
@@ -86,7 +95,7 @@ StandardSet		= cms.untracked.PSet(
 	),
 
 	Standard2DProf		= cms.untracked.PSet(
-		path			= cms.untracked.string("%s/HcalDQStandard/" % subsystem),
+		path			= cms.untracked.string("HcalDQStandard/"),
 		kind			= cms.untracked.string("PROF2D"),
 		desc			= cms.untracked.string("Standard 2D Profile"),
 		xaxis			= cms.untracked.PSet(
@@ -106,7 +115,7 @@ StandardSet		= cms.untracked.PSet(
 	),
 
 	StandardPhiProf		= cms.untracked.PSet(
-		path			= cms.untracked.string("%s/HcalDQStandard/" % subsystem),
+		path			= cms.untracked.string("HcalDQStandard/"),
 		kind			= cms.untracked.string("PROF"),
 		desc			= cms.untracked.string("Standard Phi Profile"),
 		xaxis			= cms.untracked.PSet(
@@ -119,7 +128,7 @@ StandardSet		= cms.untracked.PSet(
 	),
 
 	StandardEtaProf		= cms.untracked.PSet(
-		path			= cms.untracked.string("%s/HcalDQStandard/" % subsystem),
+		path			= cms.untracked.string("HcalDQStandard/" ),
 		kind			= cms.untracked.string("PROF"),
 		desc			= cms.untracked.string("Standard Eta Profile"),
 		xaxis			= cms.untracked.PSet(

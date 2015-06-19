@@ -8,7 +8,8 @@ namespace hcaldqm
 	{}
 
 	HcalMECollection::HcalMECollection(edm::ParameterSet const& ps, int debug)
-		: _ps(ps), _debug(debug), _wasRetr(false), _wasBooked(false)
+		: _ps(ps), _debug(debug), _wasRetr(false), _wasBooked(false),
+		_subsystem("NONE")
 	{}
 
 	HcalMECollection::~HcalMECollection()
@@ -29,7 +30,7 @@ namespace hcaldqm
 	}
 
 	//	for booking Monitor Elements based on PSet
-	void HcalMECollection::book(DQMStore::IBooker &ib)
+	void HcalMECollection::book(DQMStore::IBooker &ib, std::string& subsystem)
 	{
 		if (_wasBooked==true)
 		{
@@ -38,6 +39,7 @@ namespace hcaldqm
 		}
 
 		std::vector<std::string> const& meNames(_ps.getParameterNames());
+		_subsystem = subsystem;
 		for (std::vector<std::string>::const_iterator it=meNames.begin();
 				it!=meNames.end(); ++it)
 		{
@@ -70,7 +72,8 @@ namespace hcaldqm
 	void HcalMECollection::doBook(DQMStore::IBooker &ib,
 			MEInfo const& info)
 	{
-		std::string path = info.getPS().getUntrackedParameter<std::string>(
+		std::string path = _subsystem + "/" + 
+			info.getPS().getUntrackedParameter<std::string>(
 				"path");
 		std::string kind = info.getPS().getUntrackedParameter<std::string>(
 				"kind");

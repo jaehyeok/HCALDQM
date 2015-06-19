@@ -27,7 +27,7 @@ useMap		= False
 from DQM.Integration.test.online_customizations_cfi import *
 if useOfflineGT:
 	process.load('DQM.Integration.test.FrontierCondition_GT_Offline_cfi')
-	process.GlobalTag.globaltag = 'GR_E_V42::All'
+	process.GlobalTag.globaltag = 'GR_P_V56::All'
 else:
 	process.load('DQM.Integration.test.FrontierCondition_GT_cfi')
 if useFileInput:
@@ -38,7 +38,7 @@ process.load('DQMServices.Components.DQMEnvironment_cfi')
 process.load('DQM.Integration.test.environment_cfi')
 
 #-------------------------------------
-#	DQM Customization
+#	Central DQM Customization
 #-------------------------------------
 process.dqmEnv.subSystemFolder = subsystem
 referenceFileName = '/dqmdata/dqm/reference/hcal_reference.root'
@@ -138,15 +138,25 @@ if useMap:
 	process.es_prefer_es_pool = cms.ESPrefer('PoolDBESSource', 'es_pool')
 
 #-------------------------------------
-#	To have vme Digis as a separate collection
-#-------------------------------------
-process.vmeDigis = process.hcalDigis.clone()
-process.vmeDigis.FEDs = cms.untracked.vint32(719, 720)
-
-#-------------------------------------
 #	For Debugginb
 #-------------------------------------
-process.hcalTPTask.moduleParameters.debug = 0
+#process.hcalTPTask.moduleParameters.debug = 0
+
+#-------------------------------------
+#	Some Settings before Finishing up
+#-------------------------------------
+process.hcalDigiTask.moduleParameters.subsystem = subsystem
+process.hcalDeadCellTask.moduleParameters.subsystem = subsystem
+process.hcalHotCellTask.moduleParameters.subsystem = subsystem
+process.hcalLEDTask.moduleParameters.subsystem = subsystem
+process.hcalLaserTask.moduleParameters.subsystem = subsystem
+process.hcalNoiseTask.moduleParameters.subsystem = subsystem
+process.hcalPedestalTask.moduleParameters.subsystem = subsystem
+process.hcalRawTask.moduleParameters.subsystem = subsystem
+process.hcalRecHitTask.moduleParameters.subsystem = subsystem
+process.hcalTPTask.moduleParameters.subsystem = subsystem
+process.hcalTimingTask.moduleParameters.subsystem = subsystem
+process.hcalPhaseScanTask.moduleParameters.subsystem = subsystem
 
 #-------------------------------------
 #	Hcal DQM Tasks Sequence Definition

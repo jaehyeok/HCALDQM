@@ -63,7 +63,7 @@ namespace hcaldqm
 			~HcalMECollection();
 
 			//	Book MEs based on the PSet
-			void book(DQMStore::IBooker&);
+			void book(DQMStore::IBooker&, std::string&);
 
 			//	Retrieve MEs based on PSet
 			void retrieve(DQMStore::IGetter&);
@@ -118,6 +118,7 @@ namespace hcaldqm
 			int												_debug;
 			bool											_wasRetr;
 			bool											_wasBooked;
+			std::string										_subsystem;
 	};
 
 }

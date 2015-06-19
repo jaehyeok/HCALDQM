@@ -1,6 +1,6 @@
 import FWCore.ParameterSet.Config as cms 
 
-import DQM.HcalCommon.HcalDQStandard as standard
+import DQM.%sCommon.%sDQStandard as standard
 StandardSet = standard.StandardSet.clone()
 
 #	List of FEDs
@@ -10,11 +10,11 @@ moduleName = "HcalLEDTask"
 #	Modify whatever is in StandardSet importing
 StandardSet.moduleParameters.name		= cms.untracked.string(moduleName)
 StandardSet.EventsProcessed.path		= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/" % moduleName)
 StandardSet.EventsProcessedPerLS.path	= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/" % moduleName)
 StandardSet.Standard2DMap.path			= cms.untracked.string(
-	"Hcal/%s/" % moduleName)
+	"%s/" % moduleName)
 StandardSet.Standard2DMap.desc			= cms.untracked.string(
 	"Some LED Task 2D Map")
 
@@ -32,7 +32,7 @@ hcalLEDTask = cms.EDAnalyzer(
 		#	1D Shapes
 		#---------------------------------------------------------
 		HB_Shape				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			path	= cms.untracked.string("%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HB LED Shape"),
 			xaxis	= cms.untracked.PSet(
@@ -44,7 +44,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HE_Shape				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE LED Shape"),
 			xaxis	= cms.untracked.PSet(
@@ -56,7 +56,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HO_Shape				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HO LED Shape"),
 			xaxis	= cms.untracked.PSet(
@@ -68,7 +68,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HF_Shape				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF LED Shape"),
 			xaxis	= cms.untracked.PSet(
@@ -84,7 +84,7 @@ hcalLEDTask = cms.EDAnalyzer(
 		#	TH1D signals recorded per each event. For Online Monitring
 		#---------------------------------------------------------
 		HB_Signal				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			path	= cms.untracked.string("%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HB LED Signals" + strdesc_nocuts),
 			xaxis	= cms.untracked.PSet(
@@ -96,7 +96,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HE_Signal				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE LED Signals " + strdesc_nocuts),
 			xaxis	= cms.untracked.PSet(
@@ -108,7 +108,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HO_Signal				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HO LED Signals " + strdesc_nocuts),
 			xaxis	= cms.untracked.PSet(
@@ -120,7 +120,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HF_Signal				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF LED Signals " + strdesc_nocuts),
 			xaxis	= cms.untracked.PSet(
@@ -132,7 +132,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HB_Timing				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			path	= cms.untracked.string("%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HB LED Timing " + strdesc_nocuts),
 			xaxis	= cms.untracked.PSet(
@@ -144,7 +144,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HE_Timing				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE LED Timing " + strdesc_nocuts),
 			xaxis	= cms.untracked.PSet(
@@ -156,7 +156,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HO_Timing				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HO LED Timing " + strdesc_nocuts),
 			xaxis	= cms.untracked.PSet(
@@ -168,7 +168,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HF_Timing				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF LED Timing " + strdesc_nocuts),
 			xaxis	= cms.untracked.PSet(
@@ -182,10 +182,10 @@ hcalLEDTask = cms.EDAnalyzer(
 
 		#---------------------------------------------------------
 		#	2D Profiles. Recorded each Event. Means/RMSs to be
-		#	close to the values we obtain using HcalDQLedClass
+		#	close to the values we obtain using %sDQLedClass
 		#---------------------------------------------------------
 		HBHEHFD1_SignalMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D1 LED Signal Map " + strdesc_nocuts
@@ -199,7 +199,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD2_SignalMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D2 LED Signal Map " + strdesc_nocuts
@@ -213,7 +213,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD3_SignalMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D3 LED Signal Map " + strdesc_nocuts
@@ -227,7 +227,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HOD4_SignalMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HO D4 LED Signal Map " + strdesc_nocuts
@@ -241,7 +241,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD1_TimingMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D1 LED Timing Map " + strdesc_nocuts
@@ -255,7 +255,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD2_TimingMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D2 LED Timing Map " + strdesc_nocuts
@@ -269,7 +269,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD3_TimingMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D3 LED Timing Map " + strdesc_nocuts
@@ -283,7 +283,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HOD4_TimingMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("Hcal/%s" % moduleName),
+			path		= cms.untracked.string("%s/%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HO D4 LED Timing Map " + strdesc_nocuts
@@ -299,10 +299,10 @@ hcalLEDTask = cms.EDAnalyzer(
 
 		#---------------------------------------------------------
 		#	1D Histos of LED Signal/Timing Means/RMSs as obtained
-		#	from HcalDQLedData
+		#	from %sDQLedData
 		#---------------------------------------------------------
 		HB_SignalMeans_Summary				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			path	= cms.untracked.string("%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HB LED Signal Means Summary" 
 				+ strdesc_nocuts),
@@ -315,7 +315,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HB_SignalRMSs_Summary				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			path	= cms.untracked.string("%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HB LED Signal RMSs Summary" 
 				+ strdesc_nocuts),
@@ -328,7 +328,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HB_TimingMeans_Summary				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			path	= cms.untracked.string("%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HB LED Timing Means Summary" 
 				+ strdesc_nocuts),
@@ -341,7 +341,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HB_TimingRMSs_Summary				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HB" % moduleName),
+			path	= cms.untracked.string("%s/HB" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HB LED Timing RMSs Summary" 
 				+ strdesc_nocuts),
@@ -354,7 +354,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HE_SignalMeans_Summary				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE LED Signal Means Summary" 
 				+ strdesc_nocuts),
@@ -367,7 +367,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HE_SignalRMSs_Summary				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE LED Signal RMSs Summary" 
 				+ strdesc_nocuts),
@@ -380,7 +380,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HE_TimingMeans_Summary				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE LED Timing Means Summary" 
 				+ strdesc_nocuts),
@@ -393,7 +393,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HE_TimingRMSs_Summary				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HE" % moduleName),
+			path	= cms.untracked.string("%s/HE" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HE LED Timing RMSs Summary" 
 				+ strdesc_nocuts),
@@ -406,7 +406,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HO_SignalMeans_Summary				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HO LED Signal Means Summary" 
 				+ strdesc_nocuts),
@@ -419,7 +419,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HO_SignalRMSs_Summary				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HO LED Signal RMSs Summary" 
 				+ strdesc_nocuts),
@@ -432,7 +432,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HO_TimingMeans_Summary				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HO LED Timing Means Summary" 
 				+ strdesc_nocuts),
@@ -445,7 +445,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HO_TimingRMSs_Summary				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HO" % moduleName),
+			path	= cms.untracked.string("%s/HO" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HO LED Timing RMSs Summary" 
 				+ strdesc_nocuts),
@@ -458,7 +458,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HF_SignalMeans_Summary				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF LED Signal Means Summary" 
 				+ strdesc_nocuts),
@@ -471,7 +471,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HF_SignalRMSs_Summary				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF LED Signal RMSs Summary" 
 				+ strdesc_nocuts),
@@ -484,7 +484,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HF_TimingMeans_Summary				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF LED Timing Means Summary" 
 				+ strdesc_nocuts),
@@ -497,7 +497,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HF_TimingRMSs_Summary				= cms.untracked.PSet(
-			path	= cms.untracked.string("Hcal/%s/HF" % moduleName),
+			path	= cms.untracked.string("%s/HF" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string("HF LED Timing RMSs Summary" 
 				+ strdesc_nocuts),

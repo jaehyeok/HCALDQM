@@ -54,6 +54,7 @@ namespace hcaldqm
 		int					debug;
 		bool				isGlobal;
 		bool				isApplicable;
+		std::string			subsystem;
 
 		int					currentCalibType;
 		int					evsTotal;

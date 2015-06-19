@@ -63,7 +63,7 @@ namespace hcaldqm
 			edm::Run const& r, edm::EventSetup const& es)
 	{
 		if (this->shouldBook())
-			_mes.book(ib);
+			_mes.book(ib, _mi.subsystem);
 	}
 
 	/* virtual */ void HcalDQSource::dqmBeginRun(edm::Run const& r,

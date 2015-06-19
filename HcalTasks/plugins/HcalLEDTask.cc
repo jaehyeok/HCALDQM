@@ -59,6 +59,15 @@ HcalLEDTask::HcalLEDTask(edm::ParameterSet const&ps):
 void HcalLEDTask::publish()
 {
 	for (int i=0; i<hcaldqm::constants::STD_NUMSUBS; i++)
+	{
+		_mes[hcaldqm::constants::SUBNAMES[i] + 
+			"_SignalMeans_Summary"].Reset();
+		_mes[hcaldqm::constants::SUBNAMES[i] + 
+			"_SignalRMSs_Summary"].Reset();
+		_mes[hcaldqm::constants::SUBNAMES[i] + 
+			"_TimingMeans_Summary"].Reset();
+		_mes[hcaldqm::constants::SUBNAMES[i] + 
+			"_TimingRMSs_Summary"].Reset();
 		for (int iieta=0; iieta<hcaldqm::constants::STD_NUMIETAS; iieta++)
 			for (int iiphi=0; iiphi<hcaldqm::constants::STD_NUMIPHIS; iiphi++)
 				for (int id=0; id<hcaldqm::constants::STD_NUMDEPTHS; id++)
@@ -83,12 +92,19 @@ void HcalLEDTask::publish()
 					_mes[hcaldqm::constants::SUBNAMES[i] + 
 						"_TimingRMSs_Summary"].Fill(trms);
 				}
+	}
 }
 
 /* virtual */ void HcalLEDTask::beginLuminosityBlock(
 		edm::LuminosityBlock const& lb, edm::EventSetup const& es)
 {
 	HcalDQSource::beginLuminosityBlock(lb, es);
+
+	//	For Online-Only Calib Gap events
+	if (_mi.isGlobal &&
+		_mi.numEvsTotal>0 &&
+		_mi.numEvsTotal%hcaldqm::constants::PUBLISH_MIN_CALIBEVENTS==0)
+		this->publish();
 }
 
 /* virtual */ void HcalLEDTask::endLuminosityBlock(

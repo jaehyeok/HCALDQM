@@ -15,6 +15,7 @@ namespace hcaldqm
 		_mi.name		= ps.getUntrackedParameter<std::string>("name");
 		_mi.debug		= ps.getUntrackedParameter<int>("debug");
 		_mi.isGlobal	= ps.getUntrackedParameter<bool>("isGlobal");
+		_mi.subsystem	= ps.getUntrackedParameter<std::string>("subsystem");
 
 		_mi.currentCalibType	= -1;
 		_mi.evsTotal			= 0;

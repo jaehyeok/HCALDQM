@@ -22,7 +22,7 @@ namespace hcaldqm
 		int const CT_HFPMT							= hc_HFPMT;
 		int const UTCA_DATAFLAVOR					= 0x5;
 		int const VME_DCC_OFFSET					= 700;
-		
+		int const PUBLISH_MIN_CALIBEVENTS			= 500;
 	
 		//	Hcal Specific Constants (not SubSystem specific)
 		int const STD_NUMSUBS						=		4;
