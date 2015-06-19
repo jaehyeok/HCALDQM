@@ -1,6 +1,6 @@
 import FWCore.ParameterSet.Config as cms 
 
-import DQM.%sCommon.%sDQStandard as standard
+import DQM.HcalCommon.HcalDQStandard as standard
 StandardSet = standard.StandardSet.clone()
 
 #	List of FEDs
@@ -185,7 +185,7 @@ hcalLEDTask = cms.EDAnalyzer(
 		#	close to the values we obtain using %sDQLedClass
 		#---------------------------------------------------------
 		HBHEHFD1_SignalMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D1 LED Signal Map " + strdesc_nocuts
@@ -199,7 +199,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD2_SignalMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D2 LED Signal Map " + strdesc_nocuts
@@ -213,7 +213,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD3_SignalMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D3 LED Signal Map " + strdesc_nocuts
@@ -227,7 +227,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HOD4_SignalMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HO D4 LED Signal Map " + strdesc_nocuts
@@ -241,7 +241,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD1_TimingMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D1 LED Timing Map " + strdesc_nocuts
@@ -255,7 +255,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD2_TimingMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D2 LED Timing Map " + strdesc_nocuts
@@ -269,7 +269,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD3_TimingMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D3 LED Timing Map " + strdesc_nocuts
@@ -283,7 +283,7 @@ hcalLEDTask = cms.EDAnalyzer(
 			)
 		),
 		HOD4_TimingMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HO D4 LED Timing Map " + strdesc_nocuts

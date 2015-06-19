@@ -19,7 +19,7 @@ StandardSet.Standard2DMap.desc			= cms.untracked.string(
 	"Some Raw Task 2D Map")
 
 HcalProblems = StandardSet.Standard2DMap.clone()
-HcalProblems.path = cms.untracked.string("%s/%s" % moduleName)
+HcalProblems.path = cms.untracked.string("%s" % moduleName)
 HcalProblems.desc = cms.untracked.string(
 		"Hcal Problems Rate per LS for RecHits")
 HcalProblems2 = StandardSet.Standard2DMap.clone()
@@ -136,7 +136,7 @@ hcalRawTask = cms.EDAnalyzer(
 		#	Default Plots to show, which and how many feds are unpacked
 		#---------------------------------------------------------------
 		uTCA_FEDsUnpacked		= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string("Unpacked AMC13/uTCA FEDs"),
 			xaxis		= cms.untracked.PSet(
@@ -148,7 +148,7 @@ hcalRawTask = cms.EDAnalyzer(
 			)
 		),
 		VME_FEDsUnpacked		= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string("Unpacked DCC/VME FEDs"),
 			xaxis		= cms.untracked.PSet(
@@ -160,7 +160,7 @@ hcalRawTask = cms.EDAnalyzer(
 			)
 		),
 		NumFEDsUnpackedvsLS		= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF"),
 			desc		= cms.untracked.string(
 				"Number of FEDs Unpacked Total. Should be constant vs LS"),
@@ -230,7 +230,7 @@ hcalRawTask = cms.EDAnalyzer(
 		vuTCA_ORNComp		= cms.untracked.VPSet(vecuTCA_ORNComp), 
 		vuTCA_BcNComp		= cms.untracked.VPSet(vecuTCA_BcNComp), 
 		uTCA_DataSize		= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("TH1D"),
 			desc		= cms.untracked.string("uHTR Data Size"),
 			xaxis		= cms.untracked.PSet(

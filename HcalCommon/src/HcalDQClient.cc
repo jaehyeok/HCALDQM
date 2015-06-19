@@ -18,8 +18,8 @@ namespace hcaldqm
 	/* virtual */ void HcalDQClient::dqmEndJob(DQMStore::IBooker& ib,
 			DQMStore::IGetter& ig)
 	{
-		_bmes.book(ib);	
-		doWork(ib, ig);
+	//	_bmes.book(ib);	
+	//	doWork(ib, ig);
 	}
 
 	//	Function to be reimplemented from the DQMEDAnalyzer

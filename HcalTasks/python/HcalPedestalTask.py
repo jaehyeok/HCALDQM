@@ -90,7 +90,7 @@ hcalPedestalTask = cms.EDAnalyzer(
 		#	to the values we obtain using HcalDQPedClass
 		#--------------------------------------------------------
 		HBHEHFD1_PedestalsMap		= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % (moduleName)),
+			path		= cms.untracked.string("%s" % (moduleName)),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D1 4Caps-averaged Pedestals" + strdesc),
@@ -103,7 +103,7 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD2_PedestalsMap		= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % (moduleName)),
+			path		= cms.untracked.string("%s" % (moduleName)),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D2 4Caps-averaged Pedestals" + strdesc),
@@ -116,7 +116,7 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD3_PedestalsMap		= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % (moduleName)),
+			path		= cms.untracked.string("%s" % (moduleName)),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D3 4Caps-averaged Pedestals" + strdesc),
@@ -129,7 +129,7 @@ hcalPedestalTask = cms.EDAnalyzer(
 			)
 		),
 		HOD4_PedestalsMap		= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % (moduleName)),
+			path		= cms.untracked.string("%s" % (moduleName)),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HO D4 4Caps-averaged Pedestals" + strdesc),

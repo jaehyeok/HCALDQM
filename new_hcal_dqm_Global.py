@@ -112,7 +112,6 @@ process.load("DQM.HcalTasks.HcalTPTask")
 process.load("DQM.HcalTasks.HcalTimingTask")
 process.load("DQM.HcalTasks.HcaluTCATask")
 process.load("DQM.HcalTasks.HcalPhaseScanTask")
-
 #-------------------------------------
 #	To force using uTCA
 #	Will not be here for Online DQM
@@ -145,18 +144,24 @@ if useMap:
 #-------------------------------------
 #	Some Settings before Finishing up
 #-------------------------------------
-process.hcalDigiTask.moduleParameters.subsystem = subsystem
-process.hcalDeadCellTask.moduleParameters.subsystem = subsystem
-process.hcalHotCellTask.moduleParameters.subsystem = subsystem
-process.hcalLEDTask.moduleParameters.subsystem = subsystem
-process.hcalLaserTask.moduleParameters.subsystem = subsystem
-process.hcalNoiseTask.moduleParameters.subsystem = subsystem
-process.hcalPedestalTask.moduleParameters.subsystem = subsystem
-process.hcalRawTask.moduleParameters.subsystem = subsystem
-process.hcalRecHitTask.moduleParameters.subsystem = subsystem
-process.hcalTPTask.moduleParameters.subsystem = subsystem
-process.hcalTimingTask.moduleParameters.subsystem = subsystem
-process.hcalPhaseScanTask.moduleParameters.subsystem = subsystem
+process.hcalDigiTask.moduleParameters.subsystem = cms.untracked.string(subsystem)
+process.hcalDeadCellTask.moduleParameters.subsystem = cms.untracked.string(
+		subsystem)
+process.hcalHotCellTask.moduleParameters.subsystem = cms.untracked.string(
+		subsystem)
+process.hcalLEDTask.moduleParameters.subsystem = cms.untracked.string(subsystem)
+process.hcalLaserTask.moduleParameters.subsystem = cms.untracked.string(subsystem)
+process.hcalNoiseTask.moduleParameters.subsystem = cms.untracked.string(subsystem)
+process.hcalPedestalTask.moduleParameters.subsystem = cms.untracked.string(
+		subsystem)
+process.hcalRawTask.moduleParameters.subsystem = cms.untracked.string(subsystem)
+process.hcalRecHitTask.moduleParameters.subsystem = cms.untracked.string(
+		subsystem)
+process.hcalTPTask.moduleParameters.subsystem = cms.untracked.string(subsystem)
+process.hcalTimingTask.moduleParameters.subsystem = cms.untracked.string(
+		subsystem)
+process.hcalPhaseScanTask.moduleParameters.subsystem = cms.untracked.string(
+		subsystem)
 
 #-------------------------------------
 #	Hcal DQM Tasks Sequence Definition
@@ -165,10 +170,7 @@ process.tasksSequence = cms.Sequence(
 		process.hcalDigiTask
 		*process.hcalDeadCellTask
 		*process.hcalHotCellTask
-		*process.hcalLEDTask
-		*process.hcalLaserTask
 		*process.hcalNoiseTask
-		*process.hcalPedestalTask
 		*process.hcalRawTask
 		*process.hcalRecHitTask
 		*process.hcalTPTask
@@ -182,7 +184,6 @@ process.tasksSequence = cms.Sequence(
 #-------------------------------------
 process.p = cms.Path(
 					process.hcalDigis
-#					*process.vmeDigis
                     *process.emulTPDigis
                     *process.l1GtUnpack
                     *process.horeco

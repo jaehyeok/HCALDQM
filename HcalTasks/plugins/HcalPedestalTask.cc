@@ -57,6 +57,7 @@ HcalPedestalTask::HcalPedestalTask(edm::ParameterSet const&ps):
 
 void HcalPedestalTask::publish()
 {
+	std::cout << "publishing" << std::endl;
 	for (int i=0; i<hcaldqm::constants::STD_NUMSUBS; i++)
 	{
 		_mes[hcaldqm::constants::SUBNAMES[i] + 
@@ -87,12 +88,6 @@ void HcalPedestalTask::publish()
 		edm::LuminosityBlock const& lb, edm::EventSetup const& es)
 {
 	HcalDQSource::beginLuminosityBlock(lb, es);
-
-	//	For Online-Only Calib Gap events
-	if (_mi.isGlobal &&
-		_mi.numEvsTotal>0 && 
-		_mi.numEvsTotal%hcaldqm::constants::PUBLISH_MIN_CALIBEVENTS==0)
-		this->publish();
 }
 
 /* virtual */ void HcalPedestalTask::endLuminosityBlock(
@@ -129,6 +124,12 @@ void HcalPedestalTask::publish()
 	this->process(*chbhe, std::string("HE"));
 	this->process(*cho, std::string("HO"));
 	this->process(*chf, std::string("HF"));
+
+	//	For Online-Only Calib Gap events
+	if (_mi.isGlobal &&
+		_mi.evsTotal>0 && 
+		_mi.evsTotal%hcaldqm::constants::PUBLISH_MIN_CALIBEVENTS==0)
+		this->publish();
 }
 
 template<typename Hit>

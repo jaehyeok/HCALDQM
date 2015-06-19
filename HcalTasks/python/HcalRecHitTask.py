@@ -180,7 +180,7 @@ hcalRecHitTask = cms.EDAnalyzer(
 			yaxis	= enProfaxis
 		),
 		HBHEHFD1_EnergyMap			= cms.untracked.PSet(
-				path		= cms.untracked.string("%s/%s" % moduleName),
+				path		= cms.untracked.string("%s" % moduleName),
 				kind		= cms.untracked.string("PROF2D"),
 				desc		= cms.untracked.string("HBHEHF D1 Average Energy Map"
 					+ cutstr_eg2),
@@ -193,7 +193,7 @@ hcalRecHitTask = cms.EDAnalyzer(
 				)
 		),
 		HBHEHFD2_EnergyMap			= cms.untracked.PSet(
-				path		= cms.untracked.string("%s/%s" % moduleName),
+				path		= cms.untracked.string("%s" % moduleName),
 				kind		= cms.untracked.string("PROF2D"),
 				desc		= cms.untracked.string("HBHEHF D2 Average Energy Map"
 					+ cutstr_eg2),
@@ -206,7 +206,7 @@ hcalRecHitTask = cms.EDAnalyzer(
 				)
 		),
 		HBHEHFD3_EnergyMap			= cms.untracked.PSet(
-				path		= cms.untracked.string("%s/%s" % moduleName),
+				path		= cms.untracked.string("%s" % moduleName),
 				kind		= cms.untracked.string("PROF2D"),
 				desc		= cms.untracked.string("HBHEHF D3 Average Energy Map"
 					+ cutstr_eg2),
@@ -219,7 +219,7 @@ hcalRecHitTask = cms.EDAnalyzer(
 				)
 		),
 		HOD4_EnergyMap			= cms.untracked.PSet(
-				path		= cms.untracked.string("%s/%s" % moduleName),
+				path		= cms.untracked.string("%s" % moduleName),
 				kind		= cms.untracked.string("PROF2D"),
 				desc		= cms.untracked.string("HO D4 Average Energy Map"
 					+ cutstr_eg0),
@@ -451,7 +451,7 @@ hcalRecHitTask = cms.EDAnalyzer(
 		),
 
 		HBHEHFD1_RecHitOccupancy			= cms.untracked.PSet(
-				path	= cms.untracked.string("%s/%s" % moduleName),
+				path	= cms.untracked.string("%s" % moduleName),
 				kind	= cms.untracked.string("TH2D"),
 				desc	= cms.untracked.string("HBHEHF D1 RecHit Occupancy" + 
 					cutstr_no),
@@ -459,7 +459,7 @@ hcalRecHitTask = cms.EDAnalyzer(
 				yaxis	= StandardSet.iphiAxis.clone()
 		),
 		HBHEHFD2_RecHitOccupancy			= cms.untracked.PSet(
-				path	= cms.untracked.string("%s/%s" % moduleName),
+				path	= cms.untracked.string("%s" % moduleName),
 				kind	= cms.untracked.string("TH2D"),
 				desc	= cms.untracked.string("HBHEHF D2 RecHit Occupancy" + 
 					cutstr_no),
@@ -467,7 +467,7 @@ hcalRecHitTask = cms.EDAnalyzer(
 				yaxis	= StandardSet.iphiAxis.clone()
 		),
 		HBHEHFD3_RecHitOccupancy			= cms.untracked.PSet(
-				path	= cms.untracked.string("%s/%s" % moduleName),
+				path	= cms.untracked.string("%s" % moduleName),
 				kind	= cms.untracked.string("TH2D"),
 				desc	= cms.untracked.string("HBHEHF D3 RecHit Occupancy" + 
 					cutstr_no),
@@ -475,7 +475,7 @@ hcalRecHitTask = cms.EDAnalyzer(
 				yaxis	= StandardSet.iphiAxis.clone()
 		),
 		HOD4_RecHitOccupancy			= cms.untracked.PSet(
-				path	= cms.untracked.string("%s/%s" % moduleName),
+				path	= cms.untracked.string("%s" % moduleName),
 				kind	= cms.untracked.string("TH2D"),
 				desc	= cms.untracked.string("HO D4 RecHit Occupancy" + 
 					cutstr_no),
@@ -575,7 +575,7 @@ hcalRecHitTask = cms.EDAnalyzer(
 			yaxis	= enProfaxis
 		),
 		HBHEHFD1_TimingMap			= cms.untracked.PSet(
-				path		= cms.untracked.string("%s/%s" % moduleName),
+				path		= cms.untracked.string("%s" % moduleName),
 				kind		= cms.untracked.string("PROF2D"),
 				desc		= cms.untracked.string("HBHEHF D1 Average Timing Map"
 					+ cutstr_eg2),
@@ -588,7 +588,7 @@ hcalRecHitTask = cms.EDAnalyzer(
 				)
 		),
 		HBHEHFD2_TimingMap			= cms.untracked.PSet(
-				path		= cms.untracked.string("%s/%s" % moduleName),
+				path		= cms.untracked.string("%s" % moduleName),
 				kind		= cms.untracked.string("PROF2D"),
 				desc		= cms.untracked.string("HBHEHF D2 Average Timing Map"
 					+ cutstr_eg2),
@@ -601,7 +601,7 @@ hcalRecHitTask = cms.EDAnalyzer(
 				)
 		),
 		HBHEHFD3_TimingMap			= cms.untracked.PSet(
-				path		= cms.untracked.string("%s/%s" % moduleName),
+				path		= cms.untracked.string("%s" % moduleName),
 				kind		= cms.untracked.string("PROF2D"),
 				desc		= cms.untracked.string("HBHEHF D3 Average Timing Map"
 					+ cutstr_eg2),
@@ -614,7 +614,7 @@ hcalRecHitTask = cms.EDAnalyzer(
 				)
 		),
 		HOD4_TimingMap			= cms.untracked.PSet(
-				path		= cms.untracked.string("%s/%s" % moduleName),
+				path		= cms.untracked.string("%s" % moduleName),
 				kind		= cms.untracked.string("PROF2D"),
 				desc		= cms.untracked.string("HO D4 Average Timing Map"
 					+ cutstr_eg0),

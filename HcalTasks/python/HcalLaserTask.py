@@ -185,7 +185,7 @@ hcalLaserTask = cms.EDAnalyzer(
 		#	close to the values we obtain using %sDQLedClass
 		#---------------------------------------------------------
 		HBHEHFD1_SignalMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D1 Laser Signal Map " + strdesc_nocuts
@@ -199,7 +199,7 @@ hcalLaserTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD2_SignalMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D2 Laser Signal Map " + strdesc_nocuts
@@ -213,7 +213,7 @@ hcalLaserTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD3_SignalMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D3 Laser Signal Map " + strdesc_nocuts
@@ -227,7 +227,7 @@ hcalLaserTask = cms.EDAnalyzer(
 			)
 		),
 		HOD4_SignalMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HO D4 Laser Signal Map " + strdesc_nocuts
@@ -241,7 +241,7 @@ hcalLaserTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD1_TimingMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D1 Laser Timing Map " + strdesc_nocuts
@@ -255,7 +255,7 @@ hcalLaserTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD2_TimingMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D2 Laser Timing Map " + strdesc_nocuts
@@ -269,7 +269,7 @@ hcalLaserTask = cms.EDAnalyzer(
 			)
 		),
 		HBHEHFD3_TimingMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HBHEHF D3 Laser Timing Map " + strdesc_nocuts
@@ -283,7 +283,7 @@ hcalLaserTask = cms.EDAnalyzer(
 			)
 		),
 		HOD4_TimingMap			= cms.untracked.PSet(
-			path		= cms.untracked.string("%s/%s" % moduleName),
+			path		= cms.untracked.string("%s" % moduleName),
 			kind		= cms.untracked.string("PROF2D"),
 			desc		= cms.untracked.string(
 				"HO D4 Laser Timing Map " + strdesc_nocuts

@@ -40,6 +40,7 @@ process.load('DQM.Integration.test.environment_cfi')
 #-------------------------------------
 #	Central DQM Customization
 #-------------------------------------
+process.source.streamLabel = cms.untracked.string("streamDQMCalibration")
 process.dqmEnv.subSystemFolder = subsystem
 referenceFileName = '/dqmdata/dqm/reference/hcal_reference.root'
 process.DQMStore.referenceFileName = referenceFileName
@@ -139,13 +140,19 @@ process.hcalDigis.InputLabel = rawTag
 process.hcalLEDTask.moduleParameters.subsystem = cms.untracked.string(subsystem)
 process.hcalLEDTask.moduleParameters.calibTypes = cms.untracked.vint32(
 		1,2,3,4,5)
+process.hcalLEDTask.moduleParameters.Labels.RAW = cms.untracked.InputTag(
+		"hltHcalCalibrationRaw")
 process.hcalLaserTask.moduleParameters.subsystem = cms.untracked.string(subsystem)
 process.hcalLaserTask.moduleParameters.calibTypes = cms.untracked.vint32(
 		1,2,3,4,5)
+process.hcalLaserTask.moduleParameters.Labels.RAW = cms.untracked.InputTag(
+		"hltHcalCalibrationRaw")
 process.hcalPedestalTask.moduleParameters.subsystem = cms.untracked.string(
 		subsystem)
 process.hcalPedestalTask.moduleParameters.calibTypes = cms.untracked.vint32(
 		1,2,3,4,5)
+process.hcalPedestalTask.moduleParameters.Labels.RAW = cms.untracked.InputTag(
+		"hltHcalCalibrationRaw")
 
 #-------------------------------------
 #	Hcal DQM Tasks Sequence Definition
@@ -161,8 +168,6 @@ process.tasksSequence = cms.Sequence(
 #-------------------------------------
 process.p = cms.Path(
 					process.hcalDigis
-                    *process.emulTPDigis
-                    *process.l1GtUnpack
                     *process.horeco
                     *process.hfreco
                     *process.hbhereco
@@ -176,8 +181,11 @@ process.p = cms.Path(
 #-------------------------------------
 process.options = cms.untracked.PSet(
 		Rethrow = cms.untracked.vstring(
-			"ProductNotFound",
+#			"ProductNotFound",
 			"TooManyProducts",
 			"TooFewProducts"
+		),
+		SkipEvent = cms.untracked.vstring(
+			'ProductNotFound'
 		)
 )

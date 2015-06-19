@@ -1,7 +1,7 @@
 import FWCore.ParameterSet.Config as cms 
 
 #	import standard cfg and clone the parameters
-import DQM.%sCommon.%sDQStandard as standard
+import DQM.HcalCommon.HcalDQStandard as standard
 StandardSet = standard.StandardSet.clone()
 
 #	List of FEDs

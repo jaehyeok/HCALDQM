@@ -244,7 +244,7 @@ hcalTPTask = cms.EDAnalyzer(
 		#	Occupancy Maps Data
 		#------------------------------------------------------
 		HBHEHF_TPOccupancyVSieta_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s" % moduleName),
+			path	= cms.untracked.string("%s" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HBHEHF TP Occupancy vs ieta Data"),
@@ -257,7 +257,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		), 
 		HBHEHF_TPOccupancyVSiphi_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s" % moduleName),
+			path	= cms.untracked.string("%s" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HBHEHF TP Occupancy vs iphi Data"),
@@ -295,7 +295,7 @@ hcalTPTask = cms.EDAnalyzer(
 		), 
 		
 		HBHEHF_TPOccupancy_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s" % moduleName),
+			path	= cms.untracked.string("%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string("HBHEHF TP Occupancy Data"),
 			xaxis	= cms.untracked.PSet(
@@ -318,7 +318,7 @@ hcalTPTask = cms.EDAnalyzer(
 		#	Occupancy Maps Emulator
 		#------------------------------------------------------
 		HBHEHF_TPOccupancyVSieta_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s" % moduleName),
+			path	= cms.untracked.string("%s" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HBHEHF TP Occupancy vs ieta Emulator"),
@@ -383,7 +383,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		), 
 		HBHEHF_TPOccupancyVSiphi_Emul			= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s" % moduleName),
+			path	= cms.untracked.string("%s" % moduleName),
 			kind	= cms.untracked.string("TH1D"),
 			desc	= cms.untracked.string(
 				"HBHEHF TP Occupancy vs iphi Emulator"),
@@ -422,7 +422,7 @@ hcalTPTask = cms.EDAnalyzer(
 		), 
 		
 		HBHEHF_TPOccupancy_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s" % moduleName),
+			path	= cms.untracked.string("%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string("HBHEHF TP Occupancy Emulator"),
 			xaxis	= cms.untracked.PSet(
@@ -442,7 +442,7 @@ hcalTPTask = cms.EDAnalyzer(
 		), 
 
 		HBHEHF_Missing_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s" % moduleName),
+			path	= cms.untracked.string("%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string("HBHEHF TP Missing from Data"),
 			xaxis	= cms.untracked.PSet(
@@ -461,7 +461,7 @@ hcalTPTask = cms.EDAnalyzer(
 			)
 		), 
 		HBHEHF_Missing_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s" % moduleName),
+			path	= cms.untracked.string("%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string("HBHEHF TP Missing from Emulator"),
 			xaxis	= cms.untracked.PSet(
@@ -648,7 +648,7 @@ hcalTPTask = cms.EDAnalyzer(
 		#	TP Digi Sizes
 		#------------------------------------------------------
 		HBHEHF_TPDigiSize_Data				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s" % moduleName),
+			path	= cms.untracked.string("%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"TP Digi Size Data"),
@@ -668,7 +668,7 @@ hcalTPTask = cms.EDAnalyzer(
 			),
 		),
 		HBHEHF_TPDigiSize_Emul				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s" % moduleName),
+			path	= cms.untracked.string("%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"TP Digi Size Emulator"),
@@ -692,7 +692,7 @@ hcalTPTask = cms.EDAnalyzer(
 		#	Flag Maps	
 		#------------------------------------------------------
 		HBHEHF_ErrorFlags				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s" % moduleName),
+			path	= cms.untracked.string("%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"Error Flags"),
@@ -712,7 +712,7 @@ hcalTPTask = cms.EDAnalyzer(
 			),
 		),
 		HBHEHF_nonSOI_ErrorFlags				= cms.untracked.PSet(
-			path	= cms.untracked.string("%s/%s" % moduleName),
+			path	= cms.untracked.string("%s" % moduleName),
 			kind	= cms.untracked.string("TH2D"),
 			desc	= cms.untracked.string(
 				"nonSOI Error Flags"),
