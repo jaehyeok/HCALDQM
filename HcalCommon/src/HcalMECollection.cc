@@ -31,7 +31,7 @@ namespace hcaldqm
 
 	//	for booking Monitor Elements based on PSet
 	void HcalMECollection::book(DQMStore::IBooker &ib, std::string& subsystem)
-	{
+	{	
 		if (_wasBooked==true)
 		{
 			this->debug("Trying to Do Double Booking!!!");

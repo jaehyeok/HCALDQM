@@ -30,10 +30,15 @@ class HcaluTCATask : public hcaldqm::HcalDQSource
 		//	MEs Collection come from the base class
 		//	Here, we only need module specific parameters
 		template<typename Hit>
-		void specialize(Hit const& hit1, Hit const& hit2, std::string const&);
+		void specialize(Hit const& hit1, Hit const& hit2, std::string const&,
+			int const);
+
+		template<typename Hit>
+		void check(Hit const& hit, std::string const&, int const);
 
 		//	Define and Initialize Comparators
 		DEFCOMPARATOR(HFDigiCollection, HFDataFrame);
+		DEFCOMPARATOR(HBHEDigiCollection, HBHEDataFrame);
 };
 
 #endif

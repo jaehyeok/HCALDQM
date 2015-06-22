@@ -116,7 +116,7 @@ namespace hcaldqm
 //	Becaue the COLLECTIONTYPE and HITTYPE must go in accord with each other
 #define DEFCOMPARATOR(COLLECTIONTYPE, HITTYPE) \
 	void process(COLLECTIONTYPE const& c1, COLLECTIONTYPE const& c2, \
-			std::string const& nameRes) \
+			std::string const& nameRes, int const wtw) \
 	{	\
 		for (COLLECTIONTYPE::const_iterator it1=c1.begin();		\
 				it1!=c1.end(); ++it1)	\
@@ -124,12 +124,16 @@ namespace hcaldqm
 			const HITTYPE hit1 = (const HITTYPE)(*it1);	\
 			COLLECTIONTYPE::const_iterator it2=c2.find(hit1.id());	\
 			if (it2==c2.end())	\
+			{	\
+				check<HITTYPE>(hit1, nameRes, wtw);	\
+				this->debug_("Didn't find an id with such DetID");	\
 				continue;	\
+			}	\
 			const HITTYPE hit2 = (const HITTYPE)*it2;	\
 			if ((nameRes=="HB" && hit1.id().subdet()!=HcalBarrel)	\
 					|| (nameRes=="HE" && hit1.id().subdet()!=HcalEndcap))	\
 				continue;	\
-			specialize<HITTYPE>(hit1, hit2, nameRes);	\
+			specialize<HITTYPE>(hit1, hit2, nameRes, wtw);	\
 		}	\
 	}
 

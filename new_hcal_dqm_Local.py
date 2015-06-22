@@ -16,7 +16,7 @@ options = VarParsing.VarParsing()
 
 options.register(
 	'inputFiles',
-	"root://eoscms.cern.ch//eos/cms/store/group/dpg_hcal/comm_hcal/LS1/USC_244274.root", #default
+	"root://eoscms.cern.ch//eos/cms/store/group/dpg_hcal/comm_hcal/LS1/USC_248441.root", #default
 	VarParsing.VarParsing.multiplicity.list,
 	VarParsing.VarParsing.varType.string,
 	"Input Files"
@@ -37,13 +37,14 @@ options.parseArguments()
 #-------------------------------------
 import FWCore.ParameterSet.Config as cms
 process			= cms.Process('HCALDQM')
-subsystem		= 'Hcal-Local'
+subsystem		= 'Hcal'
 cmssw			= os.getenv("CMSSW_VERSION").split("_")
 debugstr		= "### HcalDQM::cfg::DEBUG: "
 warnstr			= "### HcalDQM::cfg::WARN: "
 errorstr		= "### HcalDQM::cfg::ERROR:"
 local			= True
-useMap			= False
+useMap			= True
+dbMap			= False
 
 print debugstr, "Input Files= ", options.inputFiles
 print debugstr, "Run over #events=", options.processEvents
@@ -81,13 +82,16 @@ process.dqmSaver.referenceHandling = 'all'
 process.dqmSaver.dirName = '.'
 process.dqmSaver.producer = 'DQM'
 process.dqmSaver.saveByLumiSection = 10
+process.dqmSaver.saveByRun = 1
+process.dqmSaver.saveAtJobEnd = False
 process.DQMStore.verbose = 0
-process.dqmEnv.subSystemFolder = 'Hcal'
+process.dqmEnv.subSystemFolder = subsystem
 
 #-------------------------------------
 #	CMSSW/Hcal non-DQM Related Module import
 #-------------------------------------
-process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
+#process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 process.load('Configuration.Geometry.GeometryIdeal_cff')
 process.load('FWCore.MessageLogger.MessageLogger_cfi')
 process.load("EventFilter.HcalRawToDigi.HcalRawToDigi_cfi")
@@ -150,7 +154,7 @@ process.load("DQM.HcalTasks.HcalPhaseScanTask")
 #	To force using uTCA
 #	Will not be here for Online DQM
 #-------------------------------------
-if useMap:
+if useMap==True and dbMap==True:
 	process.es_pool = cms.ESSource("PoolDBESSource",
 			process.CondDBSetup,
 			timetype = cms.string('runnumber'),
@@ -168,12 +172,29 @@ if useMap:
 			authenticationMethod = cms.untracked.uint32(0)
 	)	
 	process.es_prefer_es_pool = cms.ESPrefer('PoolDBESSource', 'es_pool')
+elif useMap==True and dbMap==False:
+	process.es_ascii = cms.ESSource(
+		'HcalTextCalibrations',
+		input = cms.VPSet(
+			cms.PSet(
+				object = cms.string('ElectronicsMap'),
+				file = cms.FileInPath('version_G_emap_2015_may_20')
+			)
+		)
+	)
+	process.es_prefer = cms.ESPrefer('HcalTextCalibrations', 'es_ascii')
 
 #-------------------------------------
 #	To have vme Digis as a separate collection
 #-------------------------------------
 process.vmeDigis = process.hcalDigis.clone()
+process.vmeDigis.InputLabel = rawTag
 process.vmeDigis.FEDs = cms.untracked.vint32(719, 720)
+
+process.utcaDigis = process.hcalDigis.clone()
+process.utcaDigis.InputLabel = rawTag
+process.utcaDigis.FEDs = cms.untracked.vint32(1100, 1102, 1104, 1106,
+	1108, 1110, 1112, 1114, 1116)
 
 #-------------------------------------
 #	Hcal DQM Tasks Sequence Definition
@@ -182,6 +203,8 @@ process.tasksSequence = cms.Sequence(
 		process.hcalLEDTask
 		*process.hcalLaserTask
 		*process.hcalPedestalTask
+		*process.hcaluTCATask
+		*process.hcalRawTask
 )
 
 #-------------------------------------
@@ -193,11 +216,24 @@ process.tasksSequence = cms.Sequence(
 process.hcalDigis.InputLabel = rawTag
 process.hcalLEDTask.moduleParameters.isGlobal = cms.untracked.bool(False)
 process.hcalLEDTask.moduleParameters.subsystem = cms.untracked.string(subsystem)
+process.hcalLEDTask.moduleParameters.Labels.RAW = cms.untracked.InputTag("source")
 process.hcalPedestalTask.moduleParameters.isGlobal = cms.untracked.bool(False)
 process.hcalPedestalTask.moduleParameters.subsystem = cms.untracked.string(
 		subsystem)
+process.hcalPedestalTask.moduleParameters.Labels.RAW = cms.untracked.InputTag(
+		"source")
 process.hcalLaserTask.moduleParameters.isGlobal = cms.untracked.bool(False)
 process.hcalLaserTask.moduleParameters.subsystem = cms.untracked.string(subsystem)
+process.hcalLaserTask.moduleParameters.Labels.RAW = cms.untracked.InputTag(
+		"source")
+process.hcaluTCATask.moduleParameters.isGlobal = cms.untracked.bool(False)
+process.hcaluTCATask.moduleParameters.subsystem = cms.untracked.string(subsystem)
+process.hcaluTCATask.moduleParameters.Labels.RAW = cms.untracked.InputTag(
+		"source")
+process.hcalRawTask.moduleParameters.isGlobal = cms.untracked.bool(False)
+process.hcalRawTask.moduleParameters.subsystem = cms.untracked.string(subsystem)
+process.hcalRawTask.moduleParameters.Labels.RAW = cms.untracked.InputTag(
+		"source")
 
 process.tbunpack = cms.EDProducer(
 	"HcalTBObjectUnpacker",
@@ -212,9 +248,18 @@ process.tbunpack.fedRawDataCollectionTag = rawTag
 process.p = cms.Path(
 					process.tbunpack
 					*process.hcalDigis
+					*process.vmeDigis
+					*process.utcaDigis
 					*process.tasksSequence
                     *process.dqmEnv
-                    *process.dqmSaver)
+                    *process.dqmSaver
+)
+
+process.Out = cms.OutputModule(
+	"PoolOutputModule",
+	fileName = cms.untracked.string("test.root")
+)
+process.finalize = cms.EndPath(process.Out)
 
 #-------------------------------------
 #	Scheduling
