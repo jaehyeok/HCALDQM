@@ -134,9 +134,6 @@ namespace hcaldqm
 	//	Right now done every time before retrieving MEs
 	void HcalMECollection::retrieve(DQMStore::IGetter &ig)
 	{
-		if (_wasRetr)
-			return;
-
 		std::vector<std::string> const& meNames(_ps.getParameterNames());
 		for (std::vector<std::string>::const_iterator it=meNames.begin();
 				it!=meNames.end(); ++it)
@@ -147,14 +144,14 @@ namespace hcaldqm
 			doRetrieve(ig, meinfo);
 		}
 		
-		_wasRetr = true;
 		return;
 	}
 
 	void HcalMECollection::doRetrieve(DQMStore::IGetter &ig, MEInfo const& info)
 	{
-		std::string path = info.getPS().getUntrackedParameter<std::string>(
-				"path");
+		std::string path = _subsystem + "/" +
+			info.getPS().getUntrackedParameter<std::string>(
+			"path");
 		MonitorElement *me = ig.get(path+info.getName());
 
 		std::string key = info.getName();

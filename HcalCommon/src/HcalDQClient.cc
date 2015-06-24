@@ -27,8 +27,33 @@ namespace hcaldqm
 	/* virtual */ void HcalDQClient::dqmEndLuminosityBlock(DQMStore::IGetter& ig,
 			edm::LuminosityBlock const& ls, edm::EventSetup const& es)
 	{
-		_rmes.retrieve(ig);
-		doWork(ig, ls, es);
+		try
+		{
+			//	Retriver Histos you need and apply Resets
+			_rmes.retrieve(ig);
+			this->reset(1);
+
+			//	Do the Work
+			this->debug_(_mi.name + " doing work");
+			_mi.currentLS = e.luminosityBlock();
+			doWork(ig, ls, es);
+		}
+		catch (cms::Exception &exc)
+		{
+			//	Catching cms Exceptions
+			this->warn_(std::string("We have cms::Exception Triggered. ") +
+					std::string(exc.what()));
+		}
+		catch (std::exception &exc)
+		{
+			//	Catching STD Exceptions
+			this->warn_("We have STD Exception Triggered. " +
+					std::string(exc.what()));
+		}
+		catch(...)
+		{
+			this->warn_("UNKNOWN Exception Triggered. ");
+		}
 	}
 
 	//	reset

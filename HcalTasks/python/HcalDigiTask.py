@@ -847,11 +847,14 @@ hcalDigiTask = cms.EDAnalyzer(
 				title	= cms.untracked.string("Criteria")
 			)
 		),
-		ProblemsMap				= HcalProblemsMap,
-		ProblemsVsLS = cms.untracked.PSet(
+
+		#------------------------------------------------------
+		#	Summary Plots
+		#------------------------------------------------------
+		Summary_ProblemsVsLS = cms.untracked.PSet(
 				path	= cms.untracked.string("%s" % moduleName),
 				kind	= cms.untracked.string("TH1D"),
-				desc	= cms.untracked.string("Hcal Problems vs LS"),
+				desc	= cms.untracked.string("Summary Hcal Problems vs LS"),
 				xaxis	= cms.untracked.PSet(
 					edges	= cms.untracked.bool(False),
 					nbins	= cms.untracked.int32(400),
@@ -859,6 +862,6 @@ hcalDigiTask = cms.EDAnalyzer(
 					max		= cms.untracked.double(400),
 					title	= cms.untracked.string("LS")
 				)
-		)
+		),
 	)
 )
