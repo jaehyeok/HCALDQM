@@ -31,6 +31,7 @@ StandardSet		= cms.untracked.PSet(
 		HCALTPD			= cms.untracked.InputTag("hcalDigis"),
 		HCALTPE			= cms.untracked.InputTag("emulTPDigis"),
 		HFDigiVME		= cms.untracked.InputTag("vmeDigis"),
+		HBHEDigiuTCA	= cms.untracked.InputTag("utcaDigis"),
 		RAW				= cms.untracked.InputTag("rawDataCollector"),
 		HBHERecHit		= cms.untracked.InputTag("hbhereco"),
 		HFRecHit		= cms.untracked.InputTag("hfreco"),

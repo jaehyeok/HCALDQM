@@ -5,6 +5,7 @@ StandardSet = standard.StandardSet.clone()
 
 #	List of FEDs
 lFEDs = [x+700 for x in range(32)] + [929, 1118, 1120, 1122]
+utcaCrates = [24, 20, 21, 25, 31, 35, 37, 34, 30, 22, 29, 32]
 
 moduleName = "HcalRawTask"
 #	Modify whatever is in StandardSet importing
@@ -49,7 +50,7 @@ vecuTCA = [
 			max		= cms.untracked.double(4.5),
 			title	= cms.untracked.string("Fiber Channels")
 		)
-	) for x in [22, 29, 32] for y in range(1, 13)
+	) for x in utcaCrates for y in range(1, 13)
 ]
 vecuTCA_EvNComp = [
 	cms.untracked.PSet(
@@ -65,7 +66,7 @@ vecuTCA_EvNComp = [
 			max		= cms.untracked.double(5.5),
 			title	= cms.untracked.string("uHTR EvN - AMC13 EvN")
 		)
-	) for x in [22, 29, 32] for y in range(1, 13)
+	) for x in utcaCrates for y in range(1, 13)
 ]
 vecuTCA_ORNComp = [
 	cms.untracked.PSet(
@@ -81,7 +82,7 @@ vecuTCA_ORNComp = [
 			max		= cms.untracked.double(5.5),
 			title	= cms.untracked.string("uHTR ORN - AMC13 ORN")
 		)
-	) for x in [22, 29, 32] for y in range(1, 13)
+	) for x in utcaCrates for y in range(1, 13)
 ]
 vecuTCA_BcNComp = [
 	cms.untracked.PSet(
@@ -97,7 +98,7 @@ vecuTCA_BcNComp = [
 			max		= cms.untracked.double(5.5),
 			title	= cms.untracked.string("uHTR BcN - AMC13 BcN")
 		)
-	) for x in [22, 29, 32] for y in range(1, 13)
+	) for x in utcaCrates for y in range(1, 13)
 ]
 vecVME = [
 	cms.untracked.PSet(
@@ -141,9 +142,9 @@ hcalRawTask = cms.EDAnalyzer(
 			desc		= cms.untracked.string("Unpacked AMC13/uTCA FEDs"),
 			xaxis		= cms.untracked.PSet(
 				edges	= cms.untracked.bool(False),
-				nbins	= cms.untracked.int32(10),
-				min		= cms.untracked.double(1117.5),
-				max		= cms.untracked.double(1127.5),
+				nbins	= cms.untracked.int32(30),
+				min		= cms.untracked.double(1099.5),
+				max		= cms.untracked.double(1129.5),
 				title	= cms.untracked.string("FEDs")
 			)
 		),
