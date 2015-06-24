@@ -7,11 +7,11 @@ namespace hcaldqm
 	HcalDQSource::HcalDQSource(edm::ParameterSet const& ps) :
 		HcalDQMonitor(ps.getUntrackedParameterSet("moduleParameters")), 
 		_mes(ps.getUntrackedParameterSet("MEs"), _mi.debug)
-	{}
+	{
+	}
 
 	/* virtual */HcalDQSource::~HcalDQSource() 
 	{
-		this->debug_("Calling Destructor...");
 	}
 
 	//	By design, all the Sources will have this function inherited

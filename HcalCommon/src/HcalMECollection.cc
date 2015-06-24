@@ -132,8 +132,13 @@ namespace hcaldqm
 
 	//	for retirieving Monitor Elements based on PSet
 	//	Right now done every time before retrieving MEs
-	void HcalMECollection::retrieve(DQMStore::IGetter &ig)
+	void HcalMECollection::retrieve(DQMStore::IGetter &ig, 
+			std::string const& subsystem)
 	{
+		if (_wasRetr)
+			return;
+
+		_subsystem = subsystem;
 		std::vector<std::string> const& meNames(_ps.getParameterNames());
 		for (std::vector<std::string>::const_iterator it=meNames.begin();
 				it!=meNames.end(); ++it)
@@ -144,6 +149,7 @@ namespace hcaldqm
 			doRetrieve(ig, meinfo);
 		}
 		
+		_wasRetr = true;
 		return;
 	}
 
@@ -156,6 +162,7 @@ namespace hcaldqm
 
 		std::string key = info.getName();
 		debug(key);
+		this->debug("Retrieving: " + path  + key);
 		std::pair<MEMap::iterator, bool> r = _meMap.insert(key, me);
 		if (r.second)
 			return;

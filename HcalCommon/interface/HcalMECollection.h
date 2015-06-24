@@ -66,7 +66,7 @@ namespace hcaldqm
 			void book(DQMStore::IBooker&, std::string&);
 
 			//	Retrieve MEs based on PSet
-			void retrieve(DQMStore::IGetter&);
+			void retrieve(DQMStore::IGetter&, std::string const&);
 
 			//	reset
 			void reset(int const periodflag);

@@ -6,11 +6,11 @@ namespace hcaldqm
 		: HcalDQMonitor(ps.getUntrackedParameterSet("moduleParameters")),
 		_bmes(ps.getUntrackedParameterSet("bookMEs"), _mi.debug),
 		_rmes(ps.getUntrackedParameterSet("retrieveMEs"), _mi.debug)
-	{}
+	{
+	}
 
 	/* virtual */HcalDQClient::~HcalDQClient()
 	{
-		this->debug_("Calling Destructor");
 	}
 
 	//	Function to be reimplemented from DQMEDAnalyzer
@@ -22,15 +22,22 @@ namespace hcaldqm
 	//	doWork(ib, ig);
 	}
 
+	//	beginJob
+	/* virtual */ void HcalDQClient::beginJob()
+	{
+		this->debug_(_mi.name + " Begins Job");
+	}
+
 	//	Function to be reimplemented from the DQMEDAnalyzer
 	//	Executed at the edn of LS
-	/* virtual */ void HcalDQClient::dqmEndLuminosityBlock(DQMStore::IGetter& ig,
+	/* virtual */ void HcalDQClient::dqmEndLuminosityBlock(DQMStore::IBooker& ib,
+			DQMStore::IGetter& ig,
 			edm::LuminosityBlock const& ls, edm::EventSetup const& es)
 	{
 		try
 		{
 			//	Retriver Histos you need and apply Resets
-			_rmes.retrieve(ig);
+			_rmes.retrieve(ig, _mi.subsystem);
 			this->reset(1);
 
 			//	Do the Work

@@ -26,11 +26,13 @@ namespace hcaldqm
 			//	per LS or per Run
 			virtual void doWork(DQMStore::IGetter&,
 					edm::LuminosityBlock const&, edm::EventSetup const&) = 0;
-			virtual void doWork(DQMStore::IBooker&, DQMStore::IGetter&) = 0;
+	//		virtual void doWork(DQMStore::IBooker&, DQMStore::IGetter&) = 0;
 
+			virtual void beginJob();
 			//	EndJob is mandatory and EndLumiBlock is optional
 			virtual void dqmEndJob(DQMStore::IBooker&, DQMStore::IGetter&);
-			virtual void dqmEndLuminosityBlock(DQMStore::IGetter&, 
+			virtual void dqmEndLuminosityBlock(DQMStore::IBooker&, 
+					DQMStore::IGetter&, 
 					edm::LuminosityBlock const&, edm::EventSetup const&);
 
 		protected:

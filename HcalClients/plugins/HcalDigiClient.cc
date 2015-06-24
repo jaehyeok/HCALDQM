@@ -26,10 +26,10 @@ HcalDigiClient::HcalDigiClient(edm::ParameterSet const& ps)
 /* virtual */ void HcalDigiClient::doWork(DQMStore::IGetter& ig,
 		edm::LuminosityBlock const& lb, edm::EventSetup const& es)
 {
-	std::cout << "### Generating Summary for this LS..." << std::endl;	
+
 }
 
-
+DEFINE_FWK_MODULE(HcalDigiClient);
 
 
 

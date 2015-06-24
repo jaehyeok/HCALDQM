@@ -9,7 +9,7 @@ StandardSet = standard.StandardSet.clone()
 subsystem = 'Hcal'
 tc = 'Client'
 mn = "HcalDigi"
-moduelName = mn + tc
+moduleName = mn + tc
 taskName = mn + "Task"
 StandardSet.moduleParameters.name = cms.untracked.string(moduleName)
 StandardSet.moduleParameters.subsystem = cms.untracked.string(subsystem)
@@ -28,7 +28,7 @@ hcalDigiClient = cms.EDAnalyzer(
 	),
 	retrieveMEs = cms.untracked.PSet(
 		EventsProcessed				= StandardSet.EventsProcessed,
-		EventsProcessesPerLS		= StandardSet.EventsProcessedPerLS
+		EventsProcessedPerLS		= StandardSet.EventsProcessedPerLS
 	)
 )
 

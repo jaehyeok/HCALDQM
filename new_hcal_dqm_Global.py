@@ -44,6 +44,7 @@ process.dqmEnv.subSystemFolder = subsystem
 referenceFileName = '/dqmdata/dqm/reference/hcal_reference.root'
 process.DQMStore.referenceFileName = referenceFileName
 process = customise(process)
+process.DQMStore.verbose = 0
 
 #	Note, runType is obtained after importing DQM-related modules
 #	=> DQM-dependent
@@ -112,6 +113,9 @@ process.load("DQM.HcalTasks.HcalTPTask")
 process.load("DQM.HcalTasks.HcalTimingTask")
 process.load("DQM.HcalTasks.HcaluTCATask")
 process.load("DQM.HcalTasks.HcalPhaseScanTask")
+
+process.load("DQM.HcalClients.HcalDigiClient")
+
 #-------------------------------------
 #	To force using uTCA
 #	Will not be here for Online DQM
@@ -139,7 +143,9 @@ if useMap:
 #-------------------------------------
 #	For Debugginb
 #-------------------------------------
-#process.hcalTPTask.moduleParameters.debug = 0
+#process.hcalDigiTask.moduleParameters.debug = 10
+#process.hcalPhaseScanTask.moduleParameters.debug = 10
+process.hcalDigiClient.moduleParameters.debug = cms.untracked.int32(10)
 
 #-------------------------------------
 #	Some Settings before Finishing up
@@ -163,36 +169,57 @@ process.hcalTimingTask.moduleParameters.subsystem = cms.untracked.string(
 process.hcalPhaseScanTask.moduleParameters.subsystem = cms.untracked.string(
 		subsystem)
 
+process.hcalDigiClient.moduleParameters.subsystem = cms.untracked.string(
+		subsystem)
+
 #-------------------------------------
-#	Hcal DQM Tasks Sequence Definition
+#	Hcal DQM Tasks/Clients Sequences Definition
 #-------------------------------------
 process.tasksSequence = cms.Sequence(
 		process.hcalDigiTask
-		*process.hcalDeadCellTask
-		*process.hcalHotCellTask
-		*process.hcalNoiseTask
-		*process.hcalRawTask
-		*process.hcalRecHitTask
-		*process.hcalTPTask
-		*process.hcalTimingTask
-#		*process.hcaluTCATask
-		*process.hcalPhaseScanTask
+		+process.hcalDeadCellTask
+		+process.hcalHotCellTask
+		+process.hcalNoiseTask
+		+process.hcalRawTask
+		+process.hcalRecHitTask
+		+process.hcalTPTask
+		+process.hcalTimingTask
+		+process.hcalPhaseScanTask
+)
+
+process.clientsSequence = cms.Sequence(
+		process.hcalDigiClient
 )
 
 #-------------------------------------
-#	Execution Sequence Definition
+#	Paths/Sequences Definitions
 #-------------------------------------
+process.preRecoSequence = cms.Sequence(
+		process.hcalDigis
+		*process.l1GtUnpack
+)
+
+process.recoSequence = cms.Sequence(
+		process.emulTPDigis
+		+process.hfreco
+		+process.hbhereco
+		+process.horeco
+)
+
+process.dqmSequence = cms.Sequence(
+		process.dqmEnv
+		*process.dqmSaver
+)
+
 process.p = cms.Path(
-					process.hcalDigis
-                    *process.emulTPDigis
-                    *process.l1GtUnpack
-                    *process.horeco
-                    *process.hfreco
-                    *process.hbhereco
-					*process.tasksSequence
-                    #*process.qTester
-                    *process.dqmEnv
-                    *process.dqmSaver)
+		process.preRecoSequence
+		*process.recoSequence
+		*process.tasksSequence
+		*process.clientsSequence
+		*process.dqmSequence
+)
+
+#process.schedule = cms.Schedule(process.p)
 
 #-------------------------------------
 #	Scheduling

@@ -23,9 +23,13 @@ namespace hcaldqm
 		_mi.evsPerLS			= 0;
 		_mi.currentLS			= 0;
 		_mi.isApplicable		= true;
+
+		this->debug_("Calling Constructor");
 	}
 
 	//	Destructor
 	/* virtual */ HcalDQMonitor::~HcalDQMonitor()
-	{}
+	{
+		this->debug_("Calling Destructor");
+	}
 }
