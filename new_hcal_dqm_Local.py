@@ -45,6 +45,7 @@ errorstr		= "### HcalDQM::cfg::ERROR:"
 local			= True
 useMap			= True
 dbMap			= False
+cmsnet			= True
 
 print debugstr, "Input Files= ", options.inputFiles
 print debugstr, "Run over #events=", options.processEvents
@@ -90,8 +91,7 @@ process.dqmEnv.subSystemFolder = subsystem
 #-------------------------------------
 #	CMSSW/Hcal non-DQM Related Module import
 #-------------------------------------
-#process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
-process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
+process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
 process.load('Configuration.Geometry.GeometryIdeal_cff')
 process.load('FWCore.MessageLogger.MessageLogger_cfi')
 process.load("EventFilter.HcalRawToDigi.HcalRawToDigi_cfi")
@@ -112,7 +112,9 @@ process.load("Configuration.StandardSequences.RawToDigi_Data_cff")
 #	-> L1 GT setting
 #	-> Rename the hbheprereco to hbhereco
 #-------------------------------------
-process.GlobalTag.globaltag = 'GR_P_V56::All'
+process.GlobalTag.globaltag = 'GR_P_V56'
+if cmsnet:
+	process.GlobalTag.connect = 'frontier://(serverurl=http://frontier1.cms:8000/FrontierOnProd)(serverurl=http://frontier2.cms:8000/FrontierOnProd)(retrieve-ziplevel=0)/CMS_CONDITIONS'
 cmssw			= os.getenv("CMSSW_VERSION").split("_")
 rawTag			= cms.InputTag("source")
 process.essourceSev = cms.ESSource(
@@ -132,6 +134,7 @@ process.HcalTPGCoderULUT.LUTGenerationMode = cms.bool(False)
 process.valHcalTriggerPrimitiveDigis.FG_threshold = cms.uint32(2)
 process.valHcalTriggerPrimitiveDigis.InputTagFEDRaw = rawTag
 process.hbhereco = process.hbheprereco.clone()
+process.MessageLogger.cerr.FwkReport.reportEvery = 100
 
 #-------------------------------------
 #	Hcal DQM Tasks and Clients import
@@ -255,11 +258,14 @@ process.p = cms.Path(
                     *process.dqmSaver
 )
 
-process.Out = cms.OutputModule(
-	"PoolOutputModule",
-	fileName = cms.untracked.string("test.root")
-)
-process.finalize = cms.EndPath(process.Out)
+#-------------------------------------
+#	Outputs the event Content for Debugging mostly
+#-------------------------------------
+#process.Out = cms.OutputModule(
+#	"PoolOutputModule",
+#	fileName = cms.untracked.string("test.root")
+#)
+#process.finalize = cms.EndPath(process.Out)
 
 #-------------------------------------
 #	Scheduling
