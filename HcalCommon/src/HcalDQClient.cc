@@ -35,7 +35,7 @@ namespace hcaldqm
 
 			//	Do the Work
 			this->debug_(_mi.name + " doing work");
-			_mi.currentLS = e.luminosityBlock();
+			_mi.currentLS = ls.luminosityBlock();
 			doWork(ig, ls, es);
 		}
 		catch (cms::Exception &exc)

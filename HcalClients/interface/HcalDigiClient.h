@@ -12,7 +12,7 @@
 /*
  *	HcalDigiClient class - Base class for the DigiClients
  */
-class HcalDigiClient : public HcalDQClient
+class HcalDigiClient : public hcaldqm::HcalDQClient
 {
 	public:
 		HcalDigiClient(edm::ParameterSet const&);

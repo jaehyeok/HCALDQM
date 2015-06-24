@@ -1,4 +1,4 @@
-#include "DigiM/HcalCommon/interface/HcalDQClient.h"
+#include "DQM/HcalClients/interface/HcalDigiClient.h"
 
 HcalDigiClient::HcalDigiClient(edm::ParameterSet const& ps)
 	: hcaldqm::HcalDQClient(ps)
