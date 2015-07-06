@@ -44,8 +44,8 @@ warnstr			= "### HcalDQM::cfg::WARN: "
 errorstr		= "### HcalDQM::cfg::ERROR:"
 local			= True
 useMap			= True
-dbMap			= False
-cmsnet			= True
+dbMap			= False 
+cmsnet			= True 
 
 print debugstr, "Input Files= ", options.inputFiles
 print debugstr, "Run over #events=", options.processEvents
@@ -113,6 +113,7 @@ process.load("Configuration.StandardSequences.RawToDigi_Data_cff")
 #	-> Rename the hbheprereco to hbhereco
 #-------------------------------------
 process.GlobalTag.globaltag = 'GR_P_V56'
+#process.GlobalTag.globaltag = 'GR_H_V58C'
 if cmsnet:
 	process.GlobalTag.connect = 'frontier://(serverurl=http://frontier1.cms:8000/FrontierOnProd)(serverurl=http://frontier2.cms:8000/FrontierOnProd)(retrieve-ziplevel=0)/CMS_CONDITIONS'
 cmssw			= os.getenv("CMSSW_VERSION").split("_")
@@ -181,6 +182,7 @@ elif useMap==True and dbMap==False:
 		input = cms.VPSet(
 			cms.PSet(
 				object = cms.string('ElectronicsMap'),
+				#file = cms.FileInPath('version_G_emap_2015_may_20')
 				file = cms.FileInPath('version_G_emap_2015_may_20')
 			)
 		)

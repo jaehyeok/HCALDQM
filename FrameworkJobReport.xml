@@ -1,0 +1,16 @@
+<FrameworkJobReport>
+<FrameworkError ExitStatus="7002" Type="Fatal Exception" >
+<![CDATA[
+An exception of category 'ConfigFileReadError' occurred while
+   [0] Processing the python configuration file named new_hcal_dqm_Local.py
+Exception Message:
+python encountered the error: <type 'exceptions.RuntimeError'>
+edm::FileInPath unable to find file version_G_emap_2015_may_20 anywhere in the search path.
+The search path is defined by: CMSSW_SEARCH_PATH
+${CMSSW_SEARCH_PATH} is: /afs/cern.ch/work/j/jaehyeok/HCAL/DQM/CMSSW_7_4_2/src:/afs/cern.ch/work/j/jaehyeok/HCAL/DQM/CMSSW_7_4_2/external/slc6_amd64_gcc491/data:/cvmfs/cms.cern.ch/slc6_amd64_gcc491/cms/cmssw/CMSSW_7_4_2/src:/cvmfs/cms.cern.ch/slc6_amd64_gcc491/cms/cmssw/CMSSW_7_4_2/external/slc6_amd64_gcc491/data
+Current directory is: /afs/cern.ch/work/j/jaehyeok/HCAL/DQM/CMSSW_7_4_2/src/HCALDQM
+
+
+]]>
+</FrameworkError>
+</FrameworkJobReport>
